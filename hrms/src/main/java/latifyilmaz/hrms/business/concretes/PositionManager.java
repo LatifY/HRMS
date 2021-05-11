@@ -6,7 +6,9 @@ import latifyilmaz.hrms.entities.concretes.Position;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PositionManager implements PositionService {
@@ -18,8 +20,23 @@ public class PositionManager implements PositionService {
         this.positionDao = positionDao;
     }
 
+    //Save
+    public void save(Position position) {
+        positionDao.save(position);
+    }
 
+    //Delete
+    public void delete(Position position){
+        positionDao.delete(position);
+    }
+
+
+    //Get
     public List<Position> getAll() {
         return positionDao.findAll();
+    }
+
+    public Optional<Position> getById(int id) {
+        return positionDao.findById(id);
     }
 }
