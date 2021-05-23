@@ -12,6 +12,9 @@ public interface PositionService {
     //Delete (DELETE)
     void delete(Position position);
 
+    //Update (PUT)
+    void update(Position position);
+
     List<Position> getAll();
     Optional<Position> getById(int id);
 }

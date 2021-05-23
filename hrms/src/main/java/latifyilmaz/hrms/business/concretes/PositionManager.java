@@ -31,6 +31,11 @@ public class PositionManager implements PositionService {
     }
 
 
+    public void update(Position position) {
+        positionDao.save(position);
+    }
+
+
     //Get
     public List<Position> getAll() {
         return positionDao.findAll();
