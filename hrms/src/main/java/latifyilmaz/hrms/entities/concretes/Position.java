@@ -1,12 +1,16 @@
 package latifyilmaz.hrms.entities.concretes;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Data
 @Entity
 @Table(name="Positions")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Position{
     @Id
     @GeneratedValue
@@ -15,12 +19,4 @@ public class Position{
 
     @Column(name="PositionName")
     private String positionName;
-
-    public Position(){}
-    public Position(int id, String positionName){
-        super();
-        this.id = id;
-        this.positionName = positionName;
-    }
-
 }

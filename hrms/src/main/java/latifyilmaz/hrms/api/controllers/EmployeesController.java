@@ -1,0 +1,34 @@
+package latifyilmaz.hrms.api.controllers;
+
+import latifyilmaz.hrms.business.abstracts.EmployeeService;
+import latifyilmaz.hrms.core.utilities.results.DataResult;
+import latifyilmaz.hrms.entities.concretes.Employee;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/employees")
+public class EmployeesController implements EmployeeService {
+    private EmployeeService employeeService;
+
+    @Autowired
+    public EmployeesController(EmployeeService employeeService){
+        this.employeeService = employeeService;
+    }
+
+    //Get
+    @GetMapping("")
+    public DataResult<List<Employee>> getAll() {
+        return this.employeeService.getAll();
+    }
+
+    @GetMapping("/{id}")
+    public DataResult<Employee> getById(@PathVariable(value = "id") int id) {
+        return this.employeeService.getById(id);
+    }
+}

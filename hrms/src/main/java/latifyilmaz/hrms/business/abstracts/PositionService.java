@@ -1,20 +1,22 @@
 package latifyilmaz.hrms.business.abstracts;
 
+import latifyilmaz.hrms.core.utilities.results.DataResult;
 import latifyilmaz.hrms.entities.concretes.Position;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface PositionService {
     //Save (POST)
-    void save(Position position);
+    DataResult<Position> save(Position position);
 
     //Delete (DELETE)
-    void delete(Position position);
+    DataResult<Position> delete(Position position);
+    DataResult<Integer> deleteById(int id);
 
     //Update (PUT)
-    void update(Position position);
+    DataResult<Position> update(Position position);
 
-    List<Position> getAll();
-    Optional<Position> getById(int id);
+    //Get (GET)
+    DataResult<List<Position>> getAll();
+    DataResult<Position> getById(int id);
 }

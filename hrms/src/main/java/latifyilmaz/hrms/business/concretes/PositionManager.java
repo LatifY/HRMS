@@ -1,14 +1,13 @@
 package latifyilmaz.hrms.business.concretes;
 
 import latifyilmaz.hrms.business.abstracts.PositionService;
+import latifyilmaz.hrms.core.utilities.results.DataResult;
+import latifyilmaz.hrms.core.utilities.results.SuccessDataResult;
 import latifyilmaz.hrms.dataAccess.abstracts.PositionDao;
 import latifyilmaz.hrms.entities.concretes.Position;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class PositionManager implements PositionService {
@@ -21,27 +20,35 @@ public class PositionManager implements PositionService {
     }
 
     //Save
-    public void save(Position position) {
+    public DataResult<Position> save(Position position) {
         positionDao.save(position);
+        return new SuccessDataResult<Position>(position, "Position added.");
     }
 
     //Delete
-    public void delete(Position position){
+    public DataResult<Position> delete(Position position){
         positionDao.delete(position);
+        return new SuccessDataResult<Position>(position,"Position deleted.");
     }
 
+    public DataResult<Integer> deleteById(int id){
+        positionDao.deleteById(id);
+        return new SuccessDataResult<Integer>(id,"Position deleted.");
+    }
 
-    public void update(Position position) {
+    //Update
+    public DataResult<Position> update(Position position) {
         positionDao.save(position);
+        return new SuccessDataResult<Position>(position, "Position updated.");
     }
 
 
     //Get
-    public List<Position> getAll() {
-        return positionDao.findAll();
+    public DataResult<List<Position>>  getAll() {
+        return new SuccessDataResult<List<Position>>(positionDao.findAll(), "All Position data listed");
     }
 
-    public Optional<Position> getById(int id) {
-        return positionDao.findById(id);
+    public DataResult<Position> getById(int id) {
+        return new SuccessDataResult<Position>(positionDao.findById(id).get(),"Position data listed.");
     }
 }
