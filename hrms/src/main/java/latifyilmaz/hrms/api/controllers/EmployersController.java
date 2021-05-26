@@ -2,6 +2,7 @@ package latifyilmaz.hrms.api.controllers;
 
 import latifyilmaz.hrms.business.abstracts.EmployerService;
 import latifyilmaz.hrms.core.utilities.results.DataResult;
+import latifyilmaz.hrms.core.utilities.results.Result;
 import latifyilmaz.hrms.entities.concretes.Employer;
 import latifyilmaz.hrms.entities.concretes.Personel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,5 +32,12 @@ public class EmployersController {
     @GetMapping("/{id}")
     public DataResult<Employer> getById(@PathVariable(value = "id") int id){
         return this.employerService.getById(id);
+    }
+
+    //Post
+    public Result save(@PathVariable(value = "companyName") String companyName, @PathVariable(value = "website") String website,
+                       @PathVariable(value = "phone") String phone, @PathVariable(value = "email") String email,
+                       @PathVariable(value = "password") String password, @PathVariable(value = "passwordRetry") String passwordRetry) {
+        return this.employerService.save(companyName, website, phone, email, password, passwordRetry);
     }
 }

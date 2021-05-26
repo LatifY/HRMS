@@ -1,18 +1,18 @@
 package latifyilmaz.hrms.entities.concretes;
 
+import latifyilmaz.hrms.entities.abstracts.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Data
 @Entity
 @Table(name="Employees")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Employee {
+public class Employee extends User {
     @Id
     @Column(name="UserId", nullable = false)
     private int userId;
@@ -25,24 +25,23 @@ public class Employee {
     @JoinColumn(name="PositionId", referencedColumnName = "id")
     private Position position;
 
-    @Column(name="CompanyName", nullable = false)
+    @Column(name="FirstName", nullable = false)
     private String firstName;
 
-    @Column(name="Website", nullable = false)
+    @Column(name="LastName", nullable = false)
     private String lastName;
 
-    @Column(name="Phone", nullable = false)
+    @Column(name="TCNo", nullable = false)
     private String tcNo;
 
-    @Column(name="VerifiedBySystem", nullable = false)
-    private Date dateOfBirth;
+    @Column(name="DateOfBirthYear", nullable = false)
+    private int dateOfBirthYear;
 
-
-    public Employee(int userId, String firstName, String lastName, String tcNo, Date dateOfBirth){
-        this.userId = userId;
+    public Employee(String firstName, String lastName, String tcNo, int dateOfBirthYear, String email, String password){
+        super(email,password, false);
         this.firstName = firstName;
         this.lastName = lastName;
         this.tcNo = tcNo;
-        this.dateOfBirth = dateOfBirth;
+        this.dateOfBirthYear = dateOfBirthYear;
     }
 }

@@ -30,7 +30,7 @@
 | FirstName   | Varying[] 30 |
 | LastName    | Varying[] 30 |
 | TCNo        | Varying[] 11 |
-| DateOfBirth | Date         |
+| DateOfBirthYear | Integer         |
 
 ### Employers
 | Name             | Type         |

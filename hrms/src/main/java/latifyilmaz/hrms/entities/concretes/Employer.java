@@ -1,5 +1,6 @@
 package latifyilmaz.hrms.entities.concretes;
 
+import latifyilmaz.hrms.entities.abstracts.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,7 +12,7 @@ import javax.persistence.*;
 @Table(name="Employers")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Employer{
+public class Employer extends User {
     @Id
     @Column(name="UserId", nullable = false)
     private int userId;
@@ -32,12 +33,11 @@ public class Employer{
     @Column(name="VerifiedBySystem", nullable = false)
     private boolean verifiedBySystem;
 
-    public Employer(int userId, String companyName, String website, String phone, boolean verifiedBySystem){
-        this.userId = userId;
+    public Employer(String companyName, String website, String phone, boolean verifiedBySystem, String email, String password){
+        super(email,password, false);
         this.companyName = companyName;
         this.website = website;
         this.phone = phone;
         this.verifiedBySystem = verifiedBySystem;
     }
-
 }

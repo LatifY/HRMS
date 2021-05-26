@@ -1,5 +1,6 @@
 package latifyilmaz.hrms.entities.concretes;
 
+import latifyilmaz.hrms.entities.abstracts.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,7 +12,7 @@ import javax.persistence.*;
 @Table(name = "Personels")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Personel {
+public class Personel extends User {
     @Id
     @Column(name = "UserId", nullable = false)
     private int userId;
@@ -20,19 +21,9 @@ public class Personel {
     @JoinColumn(name = "UserId")
     private User user;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name ="RoleId", referencedColumnName = "id")
-    private Role role;
-
     @Column(name = "FirstName", nullable = false)
     private String firstName;
 
     @Column(name = "LastName", nullable = false)
     private String lastName;
-
-    public Personel(int userId, String firstName, String lastName){
-        this.userId = userId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
 }

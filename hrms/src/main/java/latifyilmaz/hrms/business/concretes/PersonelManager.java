@@ -2,6 +2,7 @@ package latifyilmaz.hrms.business.concretes;
 
 
 import latifyilmaz.hrms.business.abstracts.PersonelService;
+import latifyilmaz.hrms.business.constants.MessageResults;
 import latifyilmaz.hrms.core.utilities.results.DataResult;
 import latifyilmaz.hrms.core.utilities.results.SuccessDataResult;
 import latifyilmaz.hrms.dataAccess.abstracts.PersonelDao;
@@ -14,6 +15,7 @@ import java.util.List;
 @Service
 public class PersonelManager implements PersonelService {
     private PersonelDao personelDao;
+    private String FIELD = "personel";
 
     @Autowired
     public PersonelManager(PersonelDao personelDao){
@@ -24,10 +26,10 @@ public class PersonelManager implements PersonelService {
 
     //Get
     public DataResult<List<Personel>> getAll() {
-        return new SuccessDataResult<List<Personel>>(this.personelDao.findAll(), "All Personel data listed.");
+        return new SuccessDataResult<List<Personel>>(this.personelDao.findAll(), MessageResults.allDataListed(FIELD));
     }
 
     public DataResult<Personel> getById(int id) {
-        return new SuccessDataResult<Personel>(this.personelDao.findById(id).get(), "Personel data listed.");
+        return new SuccessDataResult<Personel>(this.personelDao.findById(id).get(), MessageResults.dataListed(FIELD));
     }
 }

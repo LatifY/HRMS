@@ -2,13 +2,12 @@ package latifyilmaz.hrms.api.controllers;
 
 import latifyilmaz.hrms.business.abstracts.EmployeeService;
 import latifyilmaz.hrms.core.utilities.results.DataResult;
+import latifyilmaz.hrms.core.utilities.results.Result;
 import latifyilmaz.hrms.entities.concretes.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -30,5 +29,12 @@ public class EmployeesController implements EmployeeService {
     @GetMapping("/{id}")
     public DataResult<Employee> getById(@PathVariable(value = "id") int id) {
         return this.employeeService.getById(id);
+    }
+
+    //Post
+    public Result save(@PathVariable(value = "firstName") String firstName, @PathVariable(value = "lastName") String lastName,
+                       @PathVariable(value = "tcNo") String tcNo, @PathVariable(value = "dateOfBirthYear") int dateOfBirthYear,
+                       @PathVariable(value = "email") String email, @PathVariable(value = "password") String password, @PathVariable(value = "passwordRetry") String passwordRetry) {
+        return this.employeeService.save(firstName, lastName, tcNo, dateOfBirthYear, email, password, passwordRetry);
     }
 }

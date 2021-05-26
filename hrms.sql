@@ -9,8 +9,8 @@ CREATE TABLE public."Employees"
     "FirstName" character varying(30)[] NOT NULL,
     "LastName" character varying(30)[] NOT NULL,
     "TCNo" character varying(30)[] NOT NULL,
-    "DateOfBirth" date NOT NULL,
     "PositionId" integer NOT NULL,
+    "DateOfBirthYear" integer NOT NULL,
     PRIMARY KEY ("UserId")
 );
 
@@ -56,6 +56,59 @@ CREATE TABLE public."Users"
     PRIMARY KEY ("Id")
 );
 
+CREATE TABLE public.employees
+(
+    user_id integer NOT NULL,
+    verified_by_system timestamp without time zone NOT NULL,
+    company_name character varying(255) NOT NULL,
+    website character varying(255) NOT NULL,
+    phone character varying(255) NOT NULL,
+    position_id integer,
+    PRIMARY KEY (user_id)
+);
+
+CREATE TABLE public.employers
+(
+    user_id integer NOT NULL,
+    company_name character varying(255) NOT NULL,
+    phone character varying(255) NOT NULL,
+    verified_by_system boolean NOT NULL,
+    website character varying(255) NOT NULL,
+    PRIMARY KEY (user_id)
+);
+
+CREATE TABLE public.personels
+(
+    user_id integer NOT NULL,
+    first_name character varying(255) NOT NULL,
+    last_name character varying(255) NOT NULL,
+    role_id integer,
+    PRIMARY KEY (user_id)
+);
+
+CREATE TABLE public.positions
+(
+    id integer NOT NULL,
+    position_name character varying(255),
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE public.roles
+(
+    id integer NOT NULL,
+    role_name character varying(255),
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE public.users
+(
+    id integer NOT NULL,
+    email character varying(255) NOT NULL,
+    password character varying(255) NOT NULL,
+    verified boolean NOT NULL,
+    PRIMARY KEY (id)
+);
+
 ALTER TABLE public."Employees"
     ADD FOREIGN KEY ("UserId")
     REFERENCES public."Users" ("Id")
@@ -83,6 +136,18 @@ ALTER TABLE public."Personels"
 ALTER TABLE public."Personels"
     ADD FOREIGN KEY ("UserId")
     REFERENCES public."Users" ("Id")
+    NOT VALID;
+
+
+ALTER TABLE public.employees
+    ADD FOREIGN KEY (position_id)
+    REFERENCES public.positions (id)
+    NOT VALID;
+
+
+ALTER TABLE public.personels
+    ADD FOREIGN KEY (role_id)
+    REFERENCES public.roles (id)
     NOT VALID;
 
 END;

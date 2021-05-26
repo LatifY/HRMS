@@ -13,7 +13,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Position{
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="Id")
     private int id;
 
