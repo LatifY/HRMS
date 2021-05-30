@@ -1,53 +1,73 @@
-# HRMS Project Java Spring Boot
+![ERDiagram](https://github.com/LatifY/HRMS/blob/master/images/logo.png)
 
-## Features
-* Roles Api (Get All)
-* Positions Api (Get All)
+### Controllers
 
-## PostgreSQL Tables ✔️
+<details>
+<summary>Employees Controller</summary>
+<br>
+  
+- getAll
+- getById
+- getByEmail
+- getByIdentityNo
+- save
 
-### Users
-| Name     | Type         |
-|----------|--------------|
-| Id       | Integer      |
-| Email    | Varying[] 60 |
-| Password | Varying[] 60 |
-| Verified | Boolean      |
+</details>
 
-### Personels
-| Name      | Type         |
-|-----------|--------------|
-| UserId    | Integer      |
-| RoleId    | Integer      |
-| FirstName | Varying[] 30 |
-| LastName  | Varying[] 30 |
+<details>
+<summary>Employers Controller</summary>
+<br>
+  
+- getAll
+- getById
+- getByEmail
+- save
 
-### Employees
-| Name        | Type         |
-|-------------|--------------|
-| UserId      | Integer      |
-| PositionId  | Integer      |
-| FirstName   | Varying[] 30 |
-| LastName    | Varying[] 30 |
-| TCNo        | Varying[] 11 |
-| DateOfBirthYear | Integer         |
+</details>
 
-### Employers
-| Name             | Type         |
-|------------------|--------------|
-| UserId           | Integer      |
-| CompanyName      | Varying[] 60 |
-| Website          | Varying[] 10 |
-| VerifiedBySystem | Boolean      |
+<details>
+<summary>Personnels Controller</summary>
+<br>
+  
+- getAll
+- getById
 
-### Roles
-| Name     | Type         |
-|----------|--------------|
-| Id       | Integer      |
-| RoleName | Varying[] 60 |
+</details>
 
-### Positions
-| Name         | Type         |
-|--------------|--------------|
-| Id           | Integer      |
-| PositionName | Varying[] 60 |
+<details>
+<summary>Positions Controller</summary>
+<br>
+  
+- getAll
+- getById
+- save
+- delete
+- deleteById
+
+</details>
+
+<details>
+<summary>Job Advertisements Controller</summary>
+<br>
+  
+- getAll
+- getById
+- getByActiveTrue
+- getByActiveTrueOrderByReleaseDate
+- getByActiveTrueAndEmployerId
+- save
+- changeActive
+
+</details>
+
+<details>
+<summary>Cities Controller</summary>
+<br>
+  
+- getAll
+- getById
+
+</details>
+
+### Postgresql Diagram
+![ERDiagram](https://github.com/LatifY/HRMS/blob/master/images/ERDiagram.jpg)
