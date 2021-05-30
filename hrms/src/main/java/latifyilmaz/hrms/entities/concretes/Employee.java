@@ -9,39 +9,33 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name="Employees")
+@Table(name="employees")
 @AllArgsConstructor
 @NoArgsConstructor
+@PrimaryKeyJoinColumn(name = "user_id")
 public class Employee extends User {
-    @Id
-    @Column(name="UserId", nullable = false)
-    private int userId;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="UserId")
-    private User user;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="PositionId", referencedColumnName = "id")
+    @ManyToOne()
+    @JoinColumn(name = "position_id")
     private Position position;
 
-    @Column(name="FirstName", nullable = false)
+    @Column(name="first_name", nullable = false)
     private String firstName;
 
-    @Column(name="LastName", nullable = false)
+    @Column(name="last_name", nullable = false)
     private String lastName;
 
-    @Column(name="TCNo", nullable = false)
-    private String tcNo;
+    @Column(name="identity_no", nullable = false, unique = true)
+    private String identityNo;
 
-    @Column(name="DateOfBirthYear", nullable = false)
-    private int dateOfBirthYear;
+    @Column(name="birth_year", nullable = false)
+    private int birthYear;
 
-    public Employee(String firstName, String lastName, String tcNo, int dateOfBirthYear, String email, String password){
-        super(email,password, false);
+    public Employee(String email, String password, boolean verified, String firstName, String lastName, String identityNo, int birthYear) {
+        super(email, password, verified);
         this.firstName = firstName;
         this.lastName = lastName;
-        this.tcNo = tcNo;
-        this.dateOfBirthYear = dateOfBirthYear;
+        this.identityNo = identityNo;
+        this.birthYear = birthYear;
     }
 }

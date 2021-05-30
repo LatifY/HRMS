@@ -13,10 +13,8 @@ public interface PositionService {
     DataResult<Position> delete(Position position);
     DataResult<Integer> deleteById(int id);
 
-    //Update (PUT)
-    DataResult<Position> update(Position position);
-
     //Get (GET)
     DataResult<List<Position>> getAll();
     DataResult<Position> getById(int id);
+    DataResult<Position> getByPositionName(String positionName);
 }

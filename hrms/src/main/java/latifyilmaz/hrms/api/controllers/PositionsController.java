@@ -1,6 +1,5 @@
 package latifyilmaz.hrms.api.controllers;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import latifyilmaz.hrms.business.abstracts.PositionService;
 import latifyilmaz.hrms.core.utilities.results.DataResult;
 import latifyilmaz.hrms.entities.concretes.Position;
@@ -34,14 +33,8 @@ public class PositionsController {
 
     //Save
     @PostMapping("")
-    public DataResult<Position> save(@RequestBody Position position){
-        return this.positionService.save(position);
-    }
-
-    //Update
-    @PutMapping("")
-    public DataResult<Position> update(@RequestBody Position position){
-        return this.positionService.update(position);
+    public DataResult<Position> save(@RequestParam String positionName){
+        return this.positionService.save(new Position(positionName));
     }
 
     //Delete

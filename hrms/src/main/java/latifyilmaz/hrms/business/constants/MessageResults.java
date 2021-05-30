@@ -8,11 +8,13 @@ public class MessageResults {
 
     static {
         models.put("email", "E-Posta");
-        models.put("tcNo", "TC Kimlik NO");
-        models.put("personel", "Personel");
+        models.put("identityNo", "TC Kimlik NO");
+        models.put("personel", "Personnel");
         models.put("employer", "İşveren");
         models.put("employee", "Çalışan");
         models.put("position", "İş Pozisyonu");
+        models.put("city", "Şehir");
+        models.put("jobAdvertisement", "İş İlanı");
     }
 
     public static final String emptyField = "Lütfen bu alanı boş bırakmayın!";
@@ -28,11 +30,11 @@ public class MessageResults {
     }
 
     public static String allDataListed(String model){
-        return String.format("Tüm %s verileri listelendi.");
+        return String.format("Tüm %s verileri listelendi.", models.get(model));
     }
 
     public static String dataListed(String model){
-        return String.format("%s verisi listelendi.");
+        return String.format("%s verisi listelendi.", models.get(model));
     }
 
     public static String saved(String model){

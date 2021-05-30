@@ -9,32 +9,25 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name="Employers")
+@Table(name="employers")
 @AllArgsConstructor
 @NoArgsConstructor
+@PrimaryKeyJoinColumn(name = "user_id")
 public class Employer extends User {
-    @Id
-    @Column(name="UserId", nullable = false)
-    private int userId;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="UserId")
-    private User user;
-
-    @Column(name="CompanyName", nullable = false)
+    @Column(name="company_name", nullable = false)
     private String companyName;
 
-    @Column(name="Website", nullable = false)
+    @Column(name="website", nullable = false, unique = true)
     private String website;
 
-    @Column(name="Phone", nullable = false)
+    @Column(name="phone", nullable = false, unique = true)
     private String phone;
 
-    @Column(name="VerifiedBySystem", nullable = false)
+    @Column(name="verified_by_system", nullable = false)
     private boolean verifiedBySystem;
 
-    public Employer(String companyName, String website, String phone, boolean verifiedBySystem, String email, String password){
-        super(email,password, false);
+    public Employer(String email, String password, boolean verified, String companyName, String website, String phone, boolean verifiedBySystem) {
+        super(email, password, verified);
         this.companyName = companyName;
         this.website = website;
         this.phone = phone;

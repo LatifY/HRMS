@@ -3,141 +3,85 @@
 BEGIN;
 
 
-CREATE TABLE public."Employees"
+CREATE TABLE public.cities
 (
-    "UserId" integer NOT NULL,
-    "FirstName" character varying(30)[] NOT NULL,
-    "LastName" character varying(30)[] NOT NULL,
-    "TCNo" character varying(30)[] NOT NULL,
-    "PositionId" integer NOT NULL,
-    "DateOfBirthYear" integer NOT NULL,
-    PRIMARY KEY ("UserId")
-);
-
-CREATE TABLE public."Employers"
-(
-    "UserId" integer NOT NULL,
-    "CompanyName" character varying(60)[] NOT NULL,
-    "Website" character varying(100)[] NOT NULL,
-    "Phone" character varying(10)[] NOT NULL,
-    "VerifiedBySystem" boolean NOT NULL,
-    PRIMARY KEY ("UserId")
-);
-
-CREATE TABLE public."Personels"
-(
-    "UserId" integer NOT NULL,
-    "FirstName" character varying(30)[] NOT NULL,
-    "LastName" character varying(30)[] NOT NULL,
-    "RoleId" integer NOT NULL,
-    PRIMARY KEY ("UserId")
-);
-
-CREATE TABLE public."Positions"
-(
-    "Id" integer NOT NULL,
-    "PositionName" character varying(60)[] NOT NULL,
-    PRIMARY KEY ("Id")
-);
-
-CREATE TABLE public."Roles"
-(
-    "Id" integer NOT NULL,
-    "RoleName" character varying(60)[] NOT NULL,
-    PRIMARY KEY ("Id")
-);
-
-CREATE TABLE public."Users"
-(
-    "Id" integer NOT NULL,
-    "Email" character varying(60)[] NOT NULL,
-    "Password" character varying(60)[] NOT NULL,
-    "Verified" boolean NOT NULL,
-    PRIMARY KEY ("Id")
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 1000 CACHE 1 ),
+    city_name character varying(30) NOT NULL,
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE public.employees
 (
     user_id integer NOT NULL,
-    verified_by_system timestamp without time zone NOT NULL,
-    company_name character varying(255) NOT NULL,
-    website character varying(255) NOT NULL,
-    phone character varying(255) NOT NULL,
-    position_id integer,
+    first_name character varying(30) NOT NULL,
+    last_name character varying(30) NOT NULL,
+    identity_no character varying(11) NOT NULL,
+    birth_year integer NOT NULL,
+    position_id integer NOT NULL,
+    id integer NOT NULL,
+    email character varying(60) NOT NULL,
+    password character varying(60) NOT NULL,
+    verified boolean NOT NULL,
     PRIMARY KEY (user_id)
 );
 
 CREATE TABLE public.employers
 (
     user_id integer NOT NULL,
-    company_name character varying(255) NOT NULL,
-    phone character varying(255) NOT NULL,
+    company_name character varying(60) NOT NULL,
+    website character varying(30) NOT NULL,
+    phone character varying(10) NOT NULL,
     verified_by_system boolean NOT NULL,
-    website character varying(255) NOT NULL,
+    id integer NOT NULL,
+    email character varying(60) NOT NULL,
+    password character varying(60) NOT NULL,
+    verified boolean NOT NULL,
     PRIMARY KEY (user_id)
 );
 
-CREATE TABLE public.personels
+CREATE TABLE public.job_advertisements
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 100000 CACHE 1 ),
+    description character varying(500) NOT NULL,
+    city_id integer NOT NULL,
+    position_id integer NOT NULL,
+    employer_id integer NOT NULL,
+    release_date date NOT NULL,
+    deadline date NOT NULL,
+    min_salary integer,
+    max_salary integer,
+    open_positions_amount integer NOT NULL,
+    active boolean NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE public.personnels
 (
     user_id integer NOT NULL,
-    first_name character varying(255) NOT NULL,
-    last_name character varying(255) NOT NULL,
-    role_id integer,
+    first_name character varying(30) NOT NULL,
+    last_name character varying(30) NOT NULL,
+    id integer NOT NULL,
+    email character varying(60) NOT NULL,
+    password character varying(60) NOT NULL,
+    verified boolean NOT NULL,
     PRIMARY KEY (user_id)
 );
 
 CREATE TABLE public.positions
 (
-    id integer NOT NULL,
-    position_name character varying(255),
-    PRIMARY KEY (id)
-);
-
-CREATE TABLE public.roles
-(
-    id integer NOT NULL,
-    role_name character varying(255),
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 100000 CACHE 1 ),
+    position_name character varying(60) NOT NULL,
     PRIMARY KEY (id)
 );
 
 CREATE TABLE public.users
 (
-    id integer NOT NULL,
-    email character varying(255) NOT NULL,
-    password character varying(255) NOT NULL,
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 100000 CACHE 1 ),
+    email character varying(60) NOT NULL,
+    password character varying(60) NOT NULL,
     verified boolean NOT NULL,
     PRIMARY KEY (id)
 );
-
-ALTER TABLE public."Employees"
-    ADD FOREIGN KEY ("UserId")
-    REFERENCES public."Users" ("Id")
-    NOT VALID;
-
-
-ALTER TABLE public."Employees"
-    ADD FOREIGN KEY ("UserId")
-    REFERENCES public."Positions" ("Id")
-    NOT VALID;
-
-
-ALTER TABLE public."Employers"
-    ADD FOREIGN KEY ("UserId")
-    REFERENCES public."Users" ("Id")
-    NOT VALID;
-
-
-ALTER TABLE public."Personels"
-    ADD FOREIGN KEY ("UserId")
-    REFERENCES public."Roles" ("Id")
-    NOT VALID;
-
-
-ALTER TABLE public."Personels"
-    ADD FOREIGN KEY ("UserId")
-    REFERENCES public."Users" ("Id")
-    NOT VALID;
-
 
 ALTER TABLE public.employees
     ADD FOREIGN KEY (position_id)
@@ -145,9 +89,39 @@ ALTER TABLE public.employees
     NOT VALID;
 
 
-ALTER TABLE public.personels
-    ADD FOREIGN KEY (role_id)
-    REFERENCES public.roles (id)
+ALTER TABLE public.employees
+    ADD FOREIGN KEY (user_id)
+    REFERENCES public.users (id)
+    NOT VALID;
+
+
+ALTER TABLE public.employers
+    ADD FOREIGN KEY (user_id)
+    REFERENCES public.users (id)
+    NOT VALID;
+
+
+ALTER TABLE public.job_advertisements
+    ADD FOREIGN KEY (employer_id)
+    REFERENCES public.employers (user_id)
+    NOT VALID;
+
+
+ALTER TABLE public.job_advertisements
+    ADD FOREIGN KEY (city_id)
+    REFERENCES public.cities (id)
+    NOT VALID;
+
+
+ALTER TABLE public.job_advertisements
+    ADD FOREIGN KEY (position_id)
+    REFERENCES public.positions (id)
+    NOT VALID;
+
+
+ALTER TABLE public.personnels
+    ADD FOREIGN KEY (user_id)
+    REFERENCES public.users (id)
     NOT VALID;
 
 END;

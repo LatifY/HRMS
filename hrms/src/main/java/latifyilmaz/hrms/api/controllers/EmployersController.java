@@ -4,12 +4,9 @@ import latifyilmaz.hrms.business.abstracts.EmployerService;
 import latifyilmaz.hrms.core.utilities.results.DataResult;
 import latifyilmaz.hrms.core.utilities.results.Result;
 import latifyilmaz.hrms.entities.concretes.Employer;
-import latifyilmaz.hrms.entities.concretes.Personel;
+import latifyilmaz.hrms.entities.dtos.employer.EmployerSaveDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,10 +31,14 @@ public class EmployersController {
         return this.employerService.getById(id);
     }
 
+    @GetMapping("/getByEmail")
+    public DataResult<Employer> getByEmail(@RequestParam(value = "email") String email) {
+        return this.employerService.getByEmail(email);
+    }
+
     //Post
-    public Result save(@PathVariable(value = "companyName") String companyName, @PathVariable(value = "website") String website,
-                       @PathVariable(value = "phone") String phone, @PathVariable(value = "email") String email,
-                       @PathVariable(value = "password") String password, @PathVariable(value = "passwordRetry") String passwordRetry) {
-        return this.employerService.save(companyName, website, phone, email, password, passwordRetry);
+    @PostMapping("")
+    public Result save(@RequestBody EmployerSaveDto employer) {
+        return this.employerService.save(employer);
     }
 }

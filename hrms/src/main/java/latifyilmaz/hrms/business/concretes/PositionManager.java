@@ -24,7 +24,7 @@ public class PositionManager implements PositionService {
 
     //Save
     public DataResult<Position> save(Position position) {
-        if(this.positionDao.findByName(position.getPositionName()).isSuccess()){
+        if(getByPositionName(position.getPositionName()).getData() != null){
             return new ErrorDataResult<Position>(position, MessageResults.alreadyExists(FIELD));
         }
         positionDao.save(position);
@@ -42,15 +42,6 @@ public class PositionManager implements PositionService {
         return new SuccessDataResult<Integer>(id, MessageResults.deleted(FIELD));
     }
 
-    //Update
-    public DataResult<Position> update(Position position) {
-        if(this.positionDao.findByName(position.getPositionName()).isSuccess()){
-            return new ErrorDataResult<Position>(position, MessageResults.alreadyExists(FIELD));
-        }
-        positionDao.save(position);
-        return new SuccessDataResult<Position>(position, MessageResults.updated(FIELD));
-    }
-
 
     //Get
     public DataResult<List<Position>>  getAll() {
@@ -59,5 +50,9 @@ public class PositionManager implements PositionService {
 
     public DataResult<Position> getById(int id) {
         return new SuccessDataResult<Position>(positionDao.findById(id).get(), MessageResults.dataListed(FIELD));
+    }
+
+    public DataResult<Position> getByPositionName(String positionName) {
+        return new SuccessDataResult<Position>(positionDao.getByPositionName(positionName), MessageResults.dataListed(FIELD));
     }
 }

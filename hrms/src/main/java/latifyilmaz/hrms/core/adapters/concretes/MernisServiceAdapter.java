@@ -8,11 +8,11 @@ import java.util.Date;
 
 @Component
 public class MernisServiceAdapter implements UserCheckService {
-    public boolean isRealPerson(String tcNo, String firstName, String lastName, int dateOfBirthYear) {
+    public boolean isRealPerson(String identityNo, String firstName, String lastName, int birthYear) {
         OGJKPSPublicSoap soapClient = new OGJKPSPublicSoap();
         boolean checkResult = false;
         try{
-            checkResult = soapClient.TCKimlikNoDogrula(Long.parseLong(tcNo), firstName, lastName, dateOfBirthYear);
+            checkResult = soapClient.TCKimlikNoDogrula(Long.parseLong(identityNo), firstName, lastName, birthYear);
         }
         catch (Exception e){
             System.out.println("Mernis Error");

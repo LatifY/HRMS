@@ -7,24 +7,24 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Data
-@Entity
-@Table(name="Users")
-@Inheritance(strategy=InheritanceType.JOINED)
+@Table(name="users")
+@Inheritance(strategy = InheritanceType.JOINED)
 @AllArgsConstructor
 @NoArgsConstructor
-public abstract class User{
+@MappedSuperclass
+public class User{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="Id", nullable = false)
+    @Column(name="id", nullable = false, unique = true)
     private int id;
 
-    @Column(name="Email", unique = true, nullable = false)
+    @Column(name="email", nullable = false, unique = true, length = 60)
     private String email;
 
-    @Column(name="Password", nullable = false)
+    @Column(name="password", nullable = false, length = 60)
     private String password;
 
-    @Column(name="Verified", nullable = false)
+    @Column(name="verified", nullable = false)
     private boolean verified;
 
     public User(String email, String password, boolean verified){

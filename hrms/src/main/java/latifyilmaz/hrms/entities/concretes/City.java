@@ -10,27 +10,23 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name="positions")
+@Table(name="cities")
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "jobAdvertisements"})
-public class Position{
+public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id", nullable = false, unique = true)
     private int id;
 
-    @Column(name="position_name", nullable = false, unique = true)
-    private String positionName;
+    @Column(name="city_name",nullable=false)
+    private String cityName;
 
-    //@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "employees"})
-    @OneToMany(mappedBy = "position", fetch = FetchType.LAZY)
-    private List<Employee> employees;
-
-    @OneToMany(mappedBy = "position", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy="city",fetch = FetchType.LAZY)
     private List<JobAdvertisement> jobAdvertisements;
 
-    public Position(String positionName){
-        this.positionName = positionName;
+    public City(String cityName){
+        this.cityName = cityName;
     }
 }
