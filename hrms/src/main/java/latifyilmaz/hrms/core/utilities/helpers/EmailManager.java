@@ -4,7 +4,7 @@ import latifyilmaz.hrms.business.constants.MessageResults;
 import latifyilmaz.hrms.core.utilities.results.ErrorResult;
 import latifyilmaz.hrms.core.utilities.results.Result;
 import latifyilmaz.hrms.core.utilities.results.SuccessResult;
-import latifyilmaz.hrms.entities.abstracts.User;
+import latifyilmaz.hrms.entities.concretes.User;
 import org.springframework.stereotype.Component;
 
 import java.util.regex.Matcher;

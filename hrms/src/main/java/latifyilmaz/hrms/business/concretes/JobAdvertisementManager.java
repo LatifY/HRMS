@@ -83,7 +83,7 @@ public class JobAdvertisementManager implements JobAdvertisementService {
     }
 
     public DataResult<List<JobAdvertisement>> getByActiveTrueAndEmployerId(int employerId) {
-        return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getByActiveTrueAndEmployerId(employerId), MessageResults.allDataListed(FIELD));
+        return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getByActiveTrueAndEmployer_UserId(employerId), MessageResults.allDataListed(FIELD));
     }
 
     public DataResult<JobAdvertisement> getById(int id) {

@@ -1,4 +1,4 @@
-package latifyilmaz.hrms.entities.abstracts;
+package latifyilmaz.hrms.entities.concretes;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,11 +7,10 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Data
+@Entity
 @Table(name="users")
-@Inheritance(strategy = InheritanceType.JOINED)
 @AllArgsConstructor
 @NoArgsConstructor
-@MappedSuperclass
 public class User{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

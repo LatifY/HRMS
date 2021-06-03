@@ -1,13 +1,14 @@
 package latifyilmaz.hrms.business.concretes;
 
 import latifyilmaz.hrms.business.abstracts.EmployerService;
+import latifyilmaz.hrms.business.abstracts.UserService;
 import latifyilmaz.hrms.business.constants.MessageResults;
 import latifyilmaz.hrms.core.utilities.helpers.EmailService;
 import latifyilmaz.hrms.core.utilities.results.*;
 import latifyilmaz.hrms.core.utilities.tools.StringTools;
 import latifyilmaz.hrms.dataAccess.abstracts.EmployerDao;
-import latifyilmaz.hrms.entities.concretes.Employee;
 import latifyilmaz.hrms.entities.concretes.Employer;
+import latifyilmaz.hrms.entities.concretes.User;
 import latifyilmaz.hrms.entities.dtos.employer.EmployerSaveDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,14 +17,16 @@ import java.util.List;
 
 @Service
 public class EmployerManager implements EmployerService {
-    private EmployerDao employerDao;
-    private EmailService emailService;
-    private String FIELD = "employer";
+    private final EmployerDao employerDao;
+    private final UserService userService;
+    private final EmailService emailService;
+    private final String FIELD = "employer";
 
     @Autowired
-    public EmployerManager(EmployerDao employerDao, EmailService emailService){
+    public EmployerManager(EmployerDao employerDao, UserService userService, EmailService emailService){
         super();
         this.employerDao = employerDao;
+        this.userService = userService;
         this.emailService = emailService;
     }
 
@@ -36,7 +39,7 @@ public class EmployerManager implements EmployerService {
     }
 
     public DataResult<Employer> getByEmail(String email) {
-        return new SuccessDataResult<Employer>(this.employerDao.getByEmail(email), MessageResults.dataListed(FIELD));
+        return new SuccessDataResult<Employer>(this.employerDao.getByUser_Email(email), MessageResults.dataListed(FIELD));
     }
 
     public Result save(EmployerSaveDto employer) {
@@ -56,7 +59,7 @@ public class EmployerManager implements EmployerService {
         }
 
         //Check Email Format
-        boolean checkEmail = emailService.checkWithDomain(employer.getEmail(), employer.getEmail()).isSuccess();
+        boolean checkEmail = emailService.checkWithDomain(employer.getEmail(), employer.getWebsite()).isSuccess();
         if(!checkEmail){
             return new ErrorResult(MessageResults.isEmailFormatFalse);
         }
@@ -67,16 +70,20 @@ public class EmployerManager implements EmployerService {
             return new ErrorResult(MessageResults.alreadyExists("email"));
         }
 
-        Employer employerObject = new Employer(
+        User user = new User(
                 employer.getEmail(),
                 employer.getPassword(),
-                false,
+                false
+        );
+        userService.save(user);
+
+        Employer employerObject = new Employer(
+                user.getId(),
                 employer.getCompanyName(),
                 employer.getWebsite(),
                 employer.getPhone(),
                 false
         );
-
         this.employerDao.save(employerObject);
         return new SuccessResult(MessageResults.saved(FIELD, MessageResults.validateEmailBySystem));
     }

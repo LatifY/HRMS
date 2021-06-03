@@ -11,7 +11,7 @@ import java.util.List;
 public interface JobAdvertisementDao extends JpaRepository<JobAdvertisement, Integer> {
     List<JobAdvertisement> getByActiveTrue();
     List<JobAdvertisement> getByActiveTrueOrderByReleaseDate();
-    List<JobAdvertisement> getByActiveTrueAndEmployerId(int employerId);
+    List<JobAdvertisement> getByActiveTrueAndEmployer_UserId(int employerId);
 
     @Transactional
     @Modifying

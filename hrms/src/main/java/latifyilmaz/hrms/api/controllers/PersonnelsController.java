@@ -2,13 +2,13 @@ package latifyilmaz.hrms.api.controllers;
 
 import latifyilmaz.hrms.business.abstracts.PersonnelService;
 import latifyilmaz.hrms.core.utilities.results.DataResult;
+import latifyilmaz.hrms.core.utilities.results.Result;
 import latifyilmaz.hrms.entities.concretes.Personnel;
+import latifyilmaz.hrms.entities.dtos.personnel.PersonnelSaveDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -30,5 +30,11 @@ public class PersonnelsController {
     @GetMapping("/{id}")
     public DataResult<Personnel> getById(@PathVariable(value = "id") int id){
         return this.personnelService.getById(id);
+    }
+
+
+    @PostMapping("")
+    public Result save(@Valid @RequestBody PersonnelSaveDto personnel){
+        return this.personnelService.save(personnel);
     }
 }

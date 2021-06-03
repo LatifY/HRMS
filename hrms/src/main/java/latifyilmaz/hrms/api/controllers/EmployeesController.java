@@ -8,11 +8,12 @@ import latifyilmaz.hrms.entities.dtos.employee.EmployeeSaveDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/employees")
-public class EmployeesController implements EmployeeService {
+public class EmployeesController {
     private EmployeeService employeeService;
 
     @Autowired
@@ -43,7 +44,7 @@ public class EmployeesController implements EmployeeService {
 
     //Post
     @PostMapping("")
-    public Result save(@RequestBody EmployeeSaveDto employee) {
+    public Result save(@Valid @RequestBody EmployeeSaveDto employee) {
         return this.employeeService.save(employee);
     }
 }

@@ -1,6 +1,5 @@
 package latifyilmaz.hrms.entities.concretes;
 
-import latifyilmaz.hrms.entities.abstracts.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,8 +11,18 @@ import javax.persistence.*;
 @Table(name="employees")
 @AllArgsConstructor
 @NoArgsConstructor
-@PrimaryKeyJoinColumn(name = "user_id")
-public class Employee extends User {
+public class Employee{
+
+    @Id
+    @Column(name = "user_id", nullable = false)
+    private int userId;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="user_id")
+    private User user;
+
+    @OneToOne(mappedBy = "employee")
+    private Resume resume;
 
     @ManyToOne()
     @JoinColumn(name = "position_id")
@@ -31,11 +40,12 @@ public class Employee extends User {
     @Column(name="birth_year", nullable = false)
     private int birthYear;
 
-    public Employee(String email, String password, boolean verified, String firstName, String lastName, String identityNo, int birthYear) {
-        super(email, password, verified);
+    public Employee(int userId, String firstName, String lastName, String identityNo, int birthYear, Position position) {
+        this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.identityNo = identityNo;
         this.birthYear = birthYear;
+        this.position = position;
     }
 }

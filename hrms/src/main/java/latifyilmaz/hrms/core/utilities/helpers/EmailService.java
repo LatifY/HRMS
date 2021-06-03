@@ -1,7 +1,7 @@
 package latifyilmaz.hrms.core.utilities.helpers;
 
 import latifyilmaz.hrms.core.utilities.results.Result;
-import latifyilmaz.hrms.entities.abstracts.User;
+import latifyilmaz.hrms.entities.concretes.User;
 
 public interface EmailService {
     Result send(User user);
