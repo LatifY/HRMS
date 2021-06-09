@@ -1,5 +1,7 @@
 package latifyilmaz.hrms.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,6 +13,7 @@ import javax.persistence.*;
 @Table(name = "personnels")
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties
 public class Personnel{
     @Id
     @Column(name = "user_id", nullable = false)

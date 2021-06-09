@@ -10,7 +10,7 @@ public class MessageResults {
         models.put("email", "E-Posta");
         models.put("identityNo", "TC Kimlik NO");
         models.put("user", "Kullanıcı");
-        models.put("personnel", "Personnel");
+        models.put("personnel", "Personel");
         models.put("employer", "İşveren");
         models.put("employee", "Çalışan");
         models.put("position", "İş Pozisyonu");

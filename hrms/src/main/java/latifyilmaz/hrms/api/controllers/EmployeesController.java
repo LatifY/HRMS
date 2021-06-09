@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/employees")
+@CrossOrigin
 public class EmployeesController {
     private EmployeeService employeeService;
 
@@ -44,7 +45,7 @@ public class EmployeesController {
 
     //Post
     @PostMapping("")
-    public Result save(@Valid @RequestBody EmployeeSaveDto employee) {
+    public Result save(@RequestBody EmployeeSaveDto employee) {
         return this.employeeService.save(employee);
     }
 }

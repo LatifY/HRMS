@@ -12,7 +12,8 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/resumes")
+@RequestMapping("/api/resumees")
+@CrossOrigin
 public class ResumeesController {
     private ResumeService resumeService;
 

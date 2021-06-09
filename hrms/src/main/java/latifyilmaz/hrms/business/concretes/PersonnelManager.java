@@ -47,6 +47,10 @@ public class PersonnelManager implements PersonnelService {
             return new ErrorResult(MessageResults.emptyFields);
         }
 
+        if(personnel.getPassword().equals(personnel.getPasswordRetry())){
+            return new ErrorResult(MessageResults.passwordMatchFalse);
+        }
+
         User user = new User(
                 personnel.getEmail(),
                 personnel.getPassword(),
@@ -62,6 +66,6 @@ public class PersonnelManager implements PersonnelService {
 
         this.personnelDao.save(personnelObject);
 
-        return new SuccessResult(MessageResults.saved(FIELD, MessageResults.validateEmail));
+        return new SuccessResult(MessageResults.saved(FIELD));
     }
 }

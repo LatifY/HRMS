@@ -1,6 +1,7 @@
 package latifyilmaz.hrms.entities.concretes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -23,6 +24,7 @@ public class Resume {
 
     @ManyToOne()
     @JoinColumn(name = "employee_id")
+    @JsonIgnoreProperties
     private Employee employee;
 
     @Column(name = "github_url")
@@ -37,18 +39,23 @@ public class Resume {
 
 
     @OneToMany(mappedBy = "resume")
+    @JsonIgnoreProperties
     private List<Ability> abilities;
 
     @OneToMany(mappedBy = "resume")
+    @JsonIgnoreProperties
     private List<Image> images;
 
     @OneToMany(mappedBy = "resume")
+    @JsonIgnoreProperties
     private List<School> schools;
 
     @OneToMany(mappedBy = "resume")
+    @JsonIgnoreProperties
     private List<JobExperience> jobExperiences;
 
     @OneToMany(mappedBy = "resume")
+    @JsonIgnoreProperties
     private List<Language> languages;
 
 

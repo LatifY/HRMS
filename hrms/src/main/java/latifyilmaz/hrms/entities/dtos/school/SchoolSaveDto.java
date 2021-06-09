@@ -15,11 +15,11 @@ public class SchoolSaveDto {
 
     @NotEmpty
     @NotBlank
-    private String school_name;
+    private String schoolName;
 
     @NotEmpty
     @NotBlank
-    private String school_department;
+    private String schoolDepartment;
 
     @NotEmpty
     @NotBlank

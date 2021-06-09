@@ -2,10 +2,7 @@ package latifyilmaz.hrms.business.concretes;
 
 import latifyilmaz.hrms.business.abstracts.*;
 import latifyilmaz.hrms.business.constants.MessageResults;
-import latifyilmaz.hrms.core.utilities.results.DataResult;
-import latifyilmaz.hrms.core.utilities.results.Result;
-import latifyilmaz.hrms.core.utilities.results.SuccessDataResult;
-import latifyilmaz.hrms.core.utilities.results.SuccessResult;
+import latifyilmaz.hrms.core.utilities.results.*;
 import latifyilmaz.hrms.dataAccess.abstracts.ResumeDao;
 import latifyilmaz.hrms.entities.concretes.*;
 import latifyilmaz.hrms.entities.dtos.resume.ResumeSaveDto;
@@ -70,6 +67,7 @@ public class ResumeManager implements ResumeService {
         );
 
         this.resumeDao.save(resumeObject);
+
         return new SuccessResult(MessageResults.saved(FIELD));
     }
 }

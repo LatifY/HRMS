@@ -50,8 +50,8 @@ public class SchoolManager implements SchoolService {
     }
 
     public Result save(SchoolSaveDto school) {
-        if(StringTools.isStringNullOrEmpty(school.getSchool_name()) ||
-                StringTools.isStringNullOrEmpty(school.getSchool_department()) ||
+        if(StringTools.isStringNullOrEmpty(school.getSchoolName()) ||
+                StringTools.isStringNullOrEmpty(school.getSchoolDepartment()) ||
                 StringTools.isStringNullOrEmpty(String.valueOf(school.getStartYear()))){
             return new ErrorResult(MessageResults.emptyFields);
         }
@@ -59,8 +59,8 @@ public class SchoolManager implements SchoolService {
 
         School schoolObject = new School(
                 resume,
-                school.getSchool_name(),
-                school.getSchool_department(),
+                school.getSchoolName(),
+                school.getSchoolDepartment(),
                 school.getStartYear(),
                 school.getEndYear()
         );

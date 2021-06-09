@@ -11,35 +11,19 @@ import javax.validation.constraints.NotEmpty;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EmployeeSaveDto {
-    @NotEmpty
-    @NotBlank
     private String firstName;
 
-    @NotEmpty
-    @NotBlank
     private String lastName;
 
-    @NotEmpty
-    @NotBlank
     private String identityNo;
 
-    @NotEmpty
-    @NotBlank
     private int birthYear;
 
-    @NotEmpty
-    @NotBlank
     private String email;
 
-    @NotEmpty
-    @NotBlank
     private String password;
 
-    @NotEmpty
-    @NotBlank
     private String passwordRetry;
 
-    @NotEmpty
-    @NotBlank
     private int positionId;
 }

@@ -1,5 +1,7 @@
 package latifyilmaz.hrms.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,13 +21,16 @@ public class Employee{
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id")
+    @JsonIgnoreProperties
     private User user;
 
     @OneToOne(mappedBy = "employee")
+    @JsonIgnore
     private Resume resume;
 
     @ManyToOne()
     @JoinColumn(name = "position_id")
+    @JsonIgnoreProperties
     private Position position;
 
     @Column(name="first_name", nullable = false)
