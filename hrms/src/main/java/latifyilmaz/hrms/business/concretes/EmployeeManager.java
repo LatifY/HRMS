@@ -15,26 +15,22 @@ import latifyilmaz.hrms.entities.concretes.Employee;
 import latifyilmaz.hrms.entities.concretes.Position;
 import latifyilmaz.hrms.entities.concretes.User;
 import latifyilmaz.hrms.entities.dtos.employee.EmployeeSaveDto;
-import latifyilmaz.hrms.entities.dtos.resume.ResumeSaveDto;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class EmployeeManager implements EmployeeService {
     private final EmployeeDao employeeDao;
-    private final ResumeService resumeService;
+    //private final ResumeService resumeService;
     private final UserService userService;
     private final PositionService positionService;
     private final UserCheckService userCheckService = new FakeMernisServiceAdapter();
     private final EmailService emailService;
     private final String FIELD = "employee";
 
-    public EmployeeManager(EmployeeDao employeeDao, ResumeService resumeService, PositionService positionService, UserService userService, EmailService emailService){
+    public EmployeeManager(EmployeeDao employeeDao, PositionService positionService, UserService userService, EmailService emailService){
         super();
         this.employeeDao = employeeDao;
-        this.resumeService = resumeService;
         this.positionService = positionService;
         this.userService = userService;
         this.emailService = emailService;
@@ -105,19 +101,6 @@ public class EmployeeManager implements EmployeeService {
         userService.save(user);
 
         Position position = positionService.getById(employee.getPositionId()).getData();
-
-        ResumeSaveDto resumeSaveDto = new ResumeSaveDto(
-                user.getId(),
-                "",
-                "",
-                "",
-                new ArrayList<>(),
-                new ArrayList<>(),
-                new ArrayList<>(),
-                new ArrayList<>(),
-                new ArrayList<>()
-        );
-        resumeService.save(resumeSaveDto);
 
         Employee employeeObject = new Employee(
                 user.getId(),
