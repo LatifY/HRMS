@@ -2,8 +2,10 @@ package latifyilmaz.hrms.api.controllers;
 
 import latifyilmaz.hrms.business.abstracts.PositionService;
 import latifyilmaz.hrms.core.utilities.results.DataResult;
+import latifyilmaz.hrms.core.utilities.results.Result;
 import latifyilmaz.hrms.entities.concretes.Position;
 
+import latifyilmaz.hrms.entities.dtos.position.PositionSaveDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +15,7 @@ import java.util.List;
 @RequestMapping("/api/positions")
 @CrossOrigin
 public class PositionsController {
-    private PositionService positionService;
+    private final PositionService positionService;
 
     @Autowired
     public PositionsController(PositionService positionService){
@@ -34,18 +36,18 @@ public class PositionsController {
 
     //Save
     @PostMapping("")
-    public DataResult<Position> save(@RequestParam String positionName){
-        return this.positionService.save(new Position(positionName));
+    public Result save(@RequestBody PositionSaveDto position){
+        return this.positionService.save(position);
     }
 
     //Delete
     @DeleteMapping("")
-    public DataResult<Position> delete(@RequestBody Position position){
+    public Result delete(@RequestBody Position position){
         return this.positionService.delete(position);
     }
 
     @DeleteMapping("/{id}")
-    public DataResult<Integer> deleteById(@PathVariable(value = "id") int id){
+    public Result deleteById(@PathVariable(value = "id") int id){
         return this.positionService.deleteById(id);
     }
 

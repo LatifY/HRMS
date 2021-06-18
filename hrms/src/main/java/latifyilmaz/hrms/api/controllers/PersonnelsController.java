@@ -33,9 +33,21 @@ public class PersonnelsController {
         return this.personnelService.getById(id);
     }
 
-
+    //Post
     @PostMapping("")
     public Result save(@Valid @RequestBody PersonnelSaveDto personnel){
         return this.personnelService.save(personnel);
     }
+
+    //Delete
+    @DeleteMapping("")
+    public Result delete(@RequestBody Personnel personnel){
+        return this.personnelService.delete(personnel);
+    }
+
+    @DeleteMapping("/{id}")
+    public Result deleteById(@PathVariable(value = "id") int id){
+        return this.personnelService.deleteById(id);
+    }
+
 }

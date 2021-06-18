@@ -54,10 +54,14 @@ public class JobExperienceManager implements JobExperienceService {
                 StringTools.isStringNullOrEmpty(String.valueOf(jobExperience.getStartYear()))){
             return new ErrorResult(MessageResults.emptyField);
         }
-        Resume resume = resumeService.getById(jobExperience.getResumeId()).getData();
+        DataResult<Resume> resume = resumeService.getById(jobExperience.getResumeId());
+
+        if(!resume.isSuccess()){
+            return new ErrorResult(MessageResults.notFound(FIELD));
+        }
 
         JobExperience jobExperienceObject = new JobExperience(
-                resume,
+                resume.getData(),
                 jobExperience.getCompanyName(),
                 jobExperience.getPositionName(),
                 jobExperience.getStartYear(),
@@ -68,5 +72,27 @@ public class JobExperienceManager implements JobExperienceService {
         return new SuccessResult(MessageResults.saved(FIELD));
     }
 
+    public Result delete(JobExperience jobExperience) {
+        this.jobExperienceDao.delete(jobExperience);
+        return new SuccessResult(MessageResults.deleted(FIELD));
+    }
 
+    public Result deleteById(int id) {
+        this.jobExperienceDao.deleteById(id);
+        return new SuccessResult(MessageResults.deleted(FIELD));
+    }
+
+    public Result deleteByIds(List<Integer> ids) {
+        for(int id: ids){
+            this.jobExperienceDao.deleteById(id);
+        }
+        return new SuccessResult(MessageResults.deleteds(FIELD));
+    }
+
+    public Result deleteAll(List<JobExperience> jobExperiences) {
+        for(var jobExperince: jobExperiences){
+            this.jobExperienceDao.deleteById(jobExperince.getId());
+        }
+        return new SuccessResult(MessageResults.deleteds(FIELD));
+    }
 }

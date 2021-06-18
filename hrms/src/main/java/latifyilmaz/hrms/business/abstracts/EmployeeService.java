@@ -8,11 +8,16 @@ import latifyilmaz.hrms.entities.dtos.employee.EmployeeSaveDto;
 import java.util.List;
 
 public interface EmployeeService {
-    //Get (GET)
+    //Get
     DataResult<List<Employee>> getAll();
     DataResult<Employee> getById(int id);
     DataResult<Employee> getByEmail(String email);
     DataResult<Employee> getByIdentityNo(String tcNo);
 
+    //Post
     Result save(EmployeeSaveDto employee);
+
+    //Delete
+    Result delete(Employee employee);
+    Result deleteById(int id);
 }

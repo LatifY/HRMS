@@ -42,4 +42,15 @@ public class EmployersController {
     public Result save(@RequestBody EmployerSaveDto employer) {
         return this.employerService.save(employer);
     }
+
+    //Delete
+    @DeleteMapping("")
+    public Result delete(@RequestBody Employer employer){
+        return this.employerService.delete(employer);
+    }
+
+    @DeleteMapping("/{id}")
+    public Result deleteById(@PathVariable(value = "id") int id){
+        return this.employerService.deleteById(id);
+    }
 }

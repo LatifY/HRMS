@@ -33,8 +33,22 @@ public class AbilitiesController {
         return this.abilityService.getById(id);
     }
 
+
+    //Post
     @PostMapping("")
-    public Result save(@Valid @RequestBody AbilitySaveDto language){
-        return this.abilityService.save(language);
+    public Result save(@Valid @RequestBody AbilitySaveDto ability){
+        return this.abilityService.save(ability);
+    }
+
+
+    //Delete
+    @DeleteMapping("")
+    public Result delete(@RequestBody Ability ability){
+        return this.abilityService.delete(ability);
+    }
+
+    @DeleteMapping("/{id}")
+    public Result deleteById(@PathVariable(value = "id") int id){
+        return this.abilityService.deleteById(id);
     }
 }

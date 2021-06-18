@@ -45,30 +45,48 @@ public class ResumeManager implements ResumeService {
         return new SuccessDataResult<Resume>(this.resumeDao.findById(id).get(), MessageResults.dataListed(FIELD));
     }
 
-    public Result save(ResumeSaveDto resume) {
-        List<Ability> abilitiesToAdd = abilityService.getByIds(resume.getAbilities()).getData();
-        List<Image> imagesToAdd = imageService.getByIds(resume.getImages()).getData();
-        List<School> schoolsToAdd = schoolService.getByIds(resume.getSchools()).getData();
-        List<JobExperience> jobExperiencesToAdd = jobExperienceService.getByIds(resume.getJobExperiences()).getData();
-        List<Language> languagesToAdd = languageService.getByIds(resume.getLanguages()).getData();
+    public DataResult<List<Resume>> getByEmployeeId(int employeeId) {
+        return new SuccessDataResult<List<Resume>>(this.resumeDao.getByEmployee_UserId(employeeId), MessageResults.allDataListed(FIELD));
+    }
 
+    public Result save(ResumeSaveDto resume) {
         DataResult<Employee> employee = employeeService.getById(resume.getEmployeeId());
 
         Resume resumeObject = new Resume(
                 employee.getData(),
                 resume.getGithubUrl(),
                 resume.getLinkedinUrl(),
-                resume.getDescription(),
-                abilitiesToAdd,
-                imagesToAdd,
-                schoolsToAdd,
-                jobExperiencesToAdd,
-                languagesToAdd
+                resume.getDescription()
         );
 
         this.resumeDao.save(resumeObject);
 
         return new SuccessResult(MessageResults.saved(FIELD));
+    }
+
+    public Result delete(Resume resume) {
+        this.resumeDao.delete(resume);
+        this.abilityService.deleteAll(resume.getAbilities());
+        this.imageService.deleteAll(resume.getImages());
+        this.schoolService.deleteAll(resume.getSchools());
+        this.jobExperienceService.deleteAll(resume.getJobExperiences());
+        this.languageService.deleteAll(resume.getLanguages());
+        return new SuccessResult(MessageResults.deleted(FIELD));
+    }
+
+    public Result deleteById(int id) {
+        DataResult<Resume> resume = getById(id);
+        if(!resume.isSuccess()){
+            return new ErrorResult(MessageResults.notFound(FIELD));
+        }
+
+        this.abilityService.deleteAll(resume.getData().getAbilities());
+        this.imageService.deleteAll(resume.getData().getImages());
+        this.schoolService.deleteAll(resume.getData().getSchools());
+        this.jobExperienceService.deleteAll(resume.getData().getJobExperiences());
+        this.languageService.deleteAll(resume.getData().getLanguages());
+        this.resumeDao.delete(resume.getData());
+        return new SuccessResult(MessageResults.deleted(FIELD));
     }
 }
 

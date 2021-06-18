@@ -21,7 +21,6 @@ import java.util.List;
 @Service
 public class EmployeeManager implements EmployeeService {
     private final EmployeeDao employeeDao;
-    //private final ResumeService resumeService;
     private final UserService userService;
     private final PositionService positionService;
     private final UserCheckService userCheckService = new FakeMernisServiceAdapter();
@@ -113,5 +112,17 @@ public class EmployeeManager implements EmployeeService {
         this.employeeDao.save(employeeObject);
 
         return new SuccessResult(MessageResults.saved(FIELD, MessageResults.validateEmail));
+    }
+
+    public Result delete(Employee employee) {
+        this.employeeDao.delete(employee);
+        this.userService.delete(employee.getUser());
+        return new SuccessResult(MessageResults.deleted(FIELD));
+    }
+
+    public Result deleteById(int id) {
+        this.employeeDao.deleteById(id);
+        this.userService.deleteById(id);
+        return new SuccessResult(MessageResults.deleted(FIELD));
     }
 }

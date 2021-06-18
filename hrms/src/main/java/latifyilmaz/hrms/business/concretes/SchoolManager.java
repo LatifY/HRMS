@@ -55,10 +55,14 @@ public class SchoolManager implements SchoolService {
                 StringTools.isStringNullOrEmpty(String.valueOf(school.getStartYear()))){
             return new ErrorResult(MessageResults.emptyFields);
         }
-        Resume resume = resumeService.getById(school.getResumeId()).getData();
+        DataResult<Resume> resume = resumeService.getById(school.getResumeId());
+
+        if(!resume.isSuccess()){
+            return new ErrorResult(MessageResults.notFound(FIELD));
+        }
 
         School schoolObject = new School(
-                resume,
+                resume.getData(),
                 school.getSchoolName(),
                 school.getSchoolDepartment(),
                 school.getStartYear(),
@@ -66,5 +70,29 @@ public class SchoolManager implements SchoolService {
         );
         this.schoolDao.save(schoolObject);
         return new SuccessResult(MessageResults.saved(FIELD));
+    }
+
+    public Result delete(School school) {
+        this.schoolDao.delete(school);
+        return new SuccessResult(MessageResults.deleteds(FIELD));
+    }
+
+    public Result deleteById(int id) {
+        this.schoolDao.deleteById(id);
+        return new SuccessResult(MessageResults.deleteds(FIELD));
+    }
+
+    public Result deleteByIds(List<Integer> ids) {
+        for (int id : ids){
+            this.schoolDao.deleteById(id);
+        }
+        return new SuccessResult(MessageResults.deleteds(FIELD));
+    }
+
+    public Result deleteAll(List<School> schools) {
+        for (var school : schools){
+            this.schoolDao.deleteById(school.getId());
+        }
+        return new SuccessResult(MessageResults.deleteds(FIELD));
     }
 }

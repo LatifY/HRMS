@@ -1,5 +1,6 @@
 package latifyilmaz.hrms.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,16 +22,20 @@ public class JobAdvertisement {
     @Column(name="description",nullable=false)
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade={ CascadeType.PERSIST, CascadeType.MERGE })
-    @JoinColumn(name="city_id")
+    @ManyToOne()
+    @JoinColumn(name = "city_id")
     private City city;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade={ CascadeType.PERSIST, CascadeType.MERGE })
-    @JoinColumn(name="position_id")
+    @ManyToOne()
+    @JoinColumn(name = "working_time_id")
+    private WorkingTime workingTime;
+
+    @ManyToOne()
+    @JoinColumn(name = "position_id")
     private Position position;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade={ CascadeType.PERSIST, CascadeType.MERGE })
-    @JoinColumn(name="employer_id")
+    @ManyToOne()
+    @JoinColumn(name = "employer_id")
     private Employer employer;
 
     @Column(name="release_date",nullable=false)
@@ -51,7 +56,10 @@ public class JobAdvertisement {
     @Column(name="active",nullable=false)
     private boolean active;
 
-    public JobAdvertisement(String description, Date releaseDate, Date deadline, int minSalary, int maxSalary, int openPositionsAmount, boolean active) {
+    @Column(name="confirmed",nullable=false)
+    private boolean confirmed;
+
+    public JobAdvertisement(String description, Date releaseDate, Date deadline, int minSalary, int maxSalary, int openPositionsAmount, boolean active, boolean confirmed) {
         this.description = description;
         this.releaseDate = releaseDate;
         this.deadline = deadline;
@@ -59,5 +67,6 @@ public class JobAdvertisement {
         this.maxSalary = maxSalary;
         this.openPositionsAmount = openPositionsAmount;
         this.active = active;
+        this.confirmed = confirmed;
     }
 }

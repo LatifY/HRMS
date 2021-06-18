@@ -9,10 +9,17 @@ import latifyilmaz.hrms.entities.dtos.jobExperience.JobExperienceSaveDto;
 import java.util.List;
 
 public interface JobExperienceService {
+    //Get
     DataResult<List<JobExperience>> getAll();
     DataResult<JobExperience> getById(int id);
     DataResult<List<JobExperience>> getByIds(List<Integer> ids);
 
-
+    //Post
     Result save(JobExperienceSaveDto jobExperience);
+
+    //Delete
+    Result delete(JobExperience jobExperience);
+    Result deleteById(int id);
+    Result deleteByIds(List<Integer> ids);
+    Result deleteAll(List<JobExperience> jobExperiences);
 }

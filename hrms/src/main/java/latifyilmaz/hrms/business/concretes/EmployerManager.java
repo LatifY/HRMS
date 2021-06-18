@@ -87,4 +87,16 @@ public class EmployerManager implements EmployerService {
         this.employerDao.save(employerObject);
         return new SuccessResult(MessageResults.saved(FIELD, MessageResults.validateEmailBySystem));
     }
+
+    public Result delete(Employer employer) {
+        this.employerDao.delete(employer);
+        this.userService.delete(employer.getUser());
+        return new SuccessResult(MessageResults.deleted(FIELD));
+    }
+
+    public Result deleteById(int id) {
+        this.employerDao.deleteById(id);
+        this.userService.deleteById(id);
+        return new SuccessResult(MessageResults.deleted(FIELD));
+    }
 }

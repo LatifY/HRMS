@@ -10,6 +10,8 @@ import java.util.List;
 
 public interface JobAdvertisementDao extends JpaRepository<JobAdvertisement, Integer> {
     List<JobAdvertisement> getByActiveTrue();
+    List<JobAdvertisement> getByConfirmedTrue();
+    List<JobAdvertisement> getByActiveTrueAndConfirmedTrue();
     List<JobAdvertisement> getByActiveTrueOrderByReleaseDate();
     List<JobAdvertisement> getByActiveTrueAndEmployer_UserId(int employerId);
 
@@ -17,4 +19,9 @@ public interface JobAdvertisementDao extends JpaRepository<JobAdvertisement, Int
     @Modifying
     @Query("update JobAdvertisement j set j.active=:active where j.id=:id")
     void updateActive(boolean active, int id);
+
+    @Transactional
+    @Modifying
+    @Query("update JobAdvertisement j set j.confirmed=:confirmed where j.id=:id")
+    void updateConfirmed(boolean confirmed, int id);
 }

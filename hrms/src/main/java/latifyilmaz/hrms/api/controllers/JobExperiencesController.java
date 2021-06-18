@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/api/jobExperiences")
 @CrossOrigin
 public class JobExperiencesController {
-    private JobExperienceService jobExperienceService;
+    private final JobExperienceService jobExperienceService;
 
     @Autowired
     public JobExperiencesController(JobExperienceService jobExperienceService){
@@ -32,8 +32,20 @@ public class JobExperiencesController {
         return this.jobExperienceService.getById(id);
     }
 
+    //Post
     @PostMapping("")
     public Result save(@RequestBody JobExperienceSaveDto jobExperience){
         return this.jobExperienceService.save(jobExperience);
+    }
+
+    //Delete
+    @DeleteMapping("")
+    public Result delete(@RequestBody JobExperience jobExperience){
+        return this.jobExperienceService.delete(jobExperience);
+    }
+
+    @DeleteMapping("/{id}")
+    public Result deleteById(@PathVariable(value = "id") int id){
+        return this.jobExperienceService.deleteById(id);
     }
 }

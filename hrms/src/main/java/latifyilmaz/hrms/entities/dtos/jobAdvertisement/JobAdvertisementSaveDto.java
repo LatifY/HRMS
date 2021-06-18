@@ -12,6 +12,7 @@ import java.util.Date;
 public class JobAdvertisementSaveDto {
     private String description;
     private int cityId;
+    private int workingTimeId;
     private int positionId;
     private int employerId;
     private Date deadline;

@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/api/schools")
 @CrossOrigin
 public class SchoolsController {
-    private SchoolService schoolService;
+    private final SchoolService schoolService;
 
     @Autowired
     public SchoolsController(SchoolService schoolService){
@@ -32,8 +32,20 @@ public class SchoolsController {
         return this.schoolService.getById(id);
     }
 
+    //Post
     @PostMapping("")
     public Result save(@RequestBody SchoolSaveDto school){
         return this.schoolService.save(school);
+    }
+
+    //Delete
+    @DeleteMapping("")
+    public Result delete(@RequestBody School school){
+        return this.schoolService.delete(school);
+    }
+
+    @DeleteMapping("/{id}")
+    public Result deleteById(@PathVariable(value = "id") int id){
+        return this.schoolService.deleteById(id);
     }
 }

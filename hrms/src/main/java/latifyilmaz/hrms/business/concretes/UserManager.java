@@ -65,4 +65,14 @@ public class UserManager implements UserService {
         this.userDao.save(user);
         return new SuccessResult(MessageResults.verificationSuccessTrue);
     }
+
+    public Result delete(User user) {
+        this.userDao.delete(user);
+        return new SuccessResult(MessageResults.deleted(FIELD));
+    }
+
+    public Result deleteById(int id) {
+        this.userDao.deleteById(id);
+        return new SuccessResult(MessageResults.deleted(FIELD));
+    }
 }

@@ -29,10 +29,15 @@ public class JobAdvertisementsController {
         return this.jobAdvertisementService.save(jobAdvertisement);
     }
 
-    //Post
-    @PutMapping("/changeActive")
-    public Result changeActive(@RequestParam(value = "active") boolean active, @RequestParam(value = "id") int id){
+    //Put
+    @PutMapping("/updateActive")
+    public Result updateActive(@RequestParam(value = "active") boolean active, @RequestParam(value = "id") int id){
         return this.jobAdvertisementService.updateActive(active,id);
+    }
+
+    @PutMapping("/updateConfirmed")
+    public Result updateConfirmed(@RequestParam(value = "confirmed") boolean confirmed, @RequestParam(value = "id") int id){
+        return this.jobAdvertisementService.updateConfirmed(confirmed,id);
     }
 
     //Get
@@ -51,6 +56,16 @@ public class JobAdvertisementsController {
         return this.jobAdvertisementService.getByActiveTrue();
     }
 
+    @GetMapping("/getByConfirmedTrue")
+    public DataResult<List<JobAdvertisement>> getByConfirmedTrue(){
+        return this.jobAdvertisementService.getByConfirmedTrue();
+    }
+
+    @GetMapping("/getByActiveTrueAndConfirmedTrue")
+    public DataResult<List<JobAdvertisement>> getByActiveTrueAndConfirmedTrue(){
+        return this.jobAdvertisementService.getByActiveTrueAndConfirmedTrue();
+    }
+
     @GetMapping("/getByActiveTrueOrderByReleaseDate")
     public DataResult<List<JobAdvertisement>> getByActiveTrueOrderByReleaseDate(){
         return this.jobAdvertisementService.getByActiveTrueOrderByReleaseDate();
@@ -59,6 +74,17 @@ public class JobAdvertisementsController {
     @GetMapping("/getByActiveTrueAndEmployerId")
     public DataResult<List<JobAdvertisement>> getByActiveTrueAndEmployerId(@RequestParam(value = "employerId") int employerId){
         return this.jobAdvertisementService.getByActiveTrueAndEmployerId(employerId);
+    }
+
+    //Delete
+    @DeleteMapping("")
+    public Result delete(@RequestBody JobAdvertisement jobAdvertisement){
+        return this.jobAdvertisementService.delete(jobAdvertisement);
+    }
+
+    @DeleteMapping("/{id}")
+    public Result deleteById(@PathVariable(value = "id") int id){
+        return this.jobAdvertisementService.deleteById(id);
     }
 
 }

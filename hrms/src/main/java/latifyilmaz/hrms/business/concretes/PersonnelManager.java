@@ -68,4 +68,16 @@ public class PersonnelManager implements PersonnelService {
 
         return new SuccessResult(MessageResults.saved(FIELD));
     }
+
+    public Result delete(Personnel personnel) {
+        this.personnelDao.delete(personnel);
+        this.userService.delete(personnel.getUser());
+        return new SuccessResult(MessageResults.deleted(FIELD));
+    }
+
+    public Result deleteById(int id) {
+        this.personnelDao.deleteById(id);
+        this.userService.deleteById(id);
+        return new SuccessResult(MessageResults.deleted(FIELD));
+    }
 }

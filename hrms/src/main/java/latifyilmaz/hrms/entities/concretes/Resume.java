@@ -59,15 +59,10 @@ public class Resume {
     private List<Language> languages;
 
 
-    public Resume(Employee employee, String githubUrl, String linkedinUrl, String description, List<Ability> abilities, List<Image> images, List<School> schools, List<JobExperience> jobExperiences, List<Language> languages) {
+    public Resume(Employee employee, String githubUrl, String linkedinUrl, String description) {
         this.employee = employee;
         this.githubUrl = githubUrl;
         this.linkedinUrl = linkedinUrl;
         this.description = description;
-        this.abilities = abilities;
-        this.images = images;
-        this.schools = schools;
-        this.jobExperiences = jobExperiences;
-        this.languages = languages;
     }
 }

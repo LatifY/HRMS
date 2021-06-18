@@ -1,9 +1,6 @@
 package latifyilmaz.hrms.business.concretes;
 
-import latifyilmaz.hrms.business.abstracts.CityService;
-import latifyilmaz.hrms.business.abstracts.EmployerService;
-import latifyilmaz.hrms.business.abstracts.JobAdvertisementService;
-import latifyilmaz.hrms.business.abstracts.PositionService;
+import latifyilmaz.hrms.business.abstracts.*;
 import latifyilmaz.hrms.business.constants.MessageResults;
 import latifyilmaz.hrms.core.utilities.results.*;
 import latifyilmaz.hrms.core.utilities.tools.StringTools;
@@ -22,14 +19,18 @@ public class JobAdvertisementManager implements JobAdvertisementService {
     private final JobAdvertisementDao jobAdvertisementDao;
     private final PositionService positionService;
     private final CityService cityService;
+    private final WorkingTimeService workingTimeService;
     private final EmployerService employerService;
+
+
     private final String FIELD = "jobAdvertisement";
 
     @Autowired
-    public JobAdvertisementManager(JobAdvertisementDao jobAdvertisementDao, PositionService positionService, CityService cityService, EmployerService employerService){
+    public JobAdvertisementManager(JobAdvertisementDao jobAdvertisementDao, PositionService positionService, CityService cityService, WorkingTimeService workingTimeService, EmployerService employerService){
         this.jobAdvertisementDao = jobAdvertisementDao;
         this.positionService = positionService;
         this.cityService = cityService;
+        this.workingTimeService = workingTimeService;
         this.employerService = employerService;
     }
 
@@ -50,10 +51,12 @@ public class JobAdvertisementManager implements JobAdvertisementService {
                 jobAdvertisement.getMinSalary(),
                 jobAdvertisement.getMaxSalary(),
                 jobAdvertisement.getOpenPositionsAmount(),
-                true
+                true,
+                false
         );
 
         jobAdvertisementObject.setCity(cityService.getById(jobAdvertisement.getCityId()).getData());
+        jobAdvertisementObject.setWorkingTime(workingTimeService.getById(jobAdvertisement.getWorkingTimeId()).getData());
         jobAdvertisementObject.setPosition(positionService.getById(jobAdvertisement.getPositionId()).getData());
         jobAdvertisementObject.setEmployer(employerService.getById(jobAdvertisement.getEmployerId()).getData());
 
@@ -68,6 +71,11 @@ public class JobAdvertisementManager implements JobAdvertisementService {
         return new SuccessResult(MessageResults.updated(FIELD));
     }
 
+    public Result updateConfirmed(boolean confirmed, int id) {
+        this.jobAdvertisementDao.updateConfirmed(confirmed, id);
+        return new SuccessResult(MessageResults.updated(FIELD));
+    }
+
 
     //Get
     public DataResult<List<JobAdvertisement>> getAll() {
@@ -76,6 +84,14 @@ public class JobAdvertisementManager implements JobAdvertisementService {
 
     public DataResult<List<JobAdvertisement>> getByActiveTrue() {
         return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getByActiveTrue(), MessageResults.allDataListed(FIELD));
+    }
+
+    public DataResult<List<JobAdvertisement>> getByConfirmedTrue() {
+        return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getByConfirmedTrue(), MessageResults.allDataListed(FIELD));
+    }
+
+    public DataResult<List<JobAdvertisement>> getByActiveTrueAndConfirmedTrue() {
+        return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getByActiveTrueAndConfirmedTrue(), MessageResults.allDataListed(FIELD));
     }
 
     public DataResult<List<JobAdvertisement>> getByActiveTrueOrderByReleaseDate() {
@@ -88,5 +104,15 @@ public class JobAdvertisementManager implements JobAdvertisementService {
 
     public DataResult<JobAdvertisement> getById(int id) {
         return new SuccessDataResult<JobAdvertisement>(this.jobAdvertisementDao.findById(id).get(), MessageResults.dataListed(FIELD));
+    }
+
+    public Result delete(JobAdvertisement jobAdvertisement) {
+        this.jobAdvertisementDao.delete(jobAdvertisement);
+        return new SuccessResult(MessageResults.deleted(FIELD));
+    }
+
+    public Result deleteById(int id) {
+        this.jobAdvertisementDao.deleteById(id);
+        return new SuccessResult(MessageResults.deleted(FIELD));
     }
 }

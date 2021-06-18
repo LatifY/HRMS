@@ -14,7 +14,12 @@ public interface UserService {
     DataResult<User> getById(int id);
     DataResult<User> getByEmail(String email);
 
+    //Post
     Result save(User user);
     Result verifyById(int id);
     Result verifyByEmail(String email);
+
+    //Delete
+    Result delete(User user);
+    Result deleteById(int id);
 }

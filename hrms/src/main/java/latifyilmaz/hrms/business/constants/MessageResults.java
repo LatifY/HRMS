@@ -15,6 +15,7 @@ public class MessageResults {
         models.put("employee", "Çalışan");
         models.put("position", "İş Pozisyonu");
         models.put("city", "Şehir");
+        models.put("workingTime", "Çalışma Şekli");
         models.put("jobAdvertisement", "İş İlanı");
         models.put("resume", "Özgeçmiş");
         models.put("school", "Okul");
@@ -65,6 +66,10 @@ public class MessageResults {
 
     public static String deleted(String model){
         return String.format("%s sistemden başarıyla silindi.", models.get(model));
+    }
+
+    public static String deleteds(String model){
+        return String.format("%s verileri sistemden başarıyla silindi.", models.get(model));
     }
 
     public static String updated(String model){

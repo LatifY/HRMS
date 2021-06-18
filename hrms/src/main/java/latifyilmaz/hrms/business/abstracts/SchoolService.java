@@ -8,9 +8,17 @@ import latifyilmaz.hrms.entities.dtos.school.SchoolSaveDto;
 import java.util.List;
 
 public interface SchoolService {
+    //Get
     DataResult<List<School>> getAll();
     DataResult<School> getById(int id);
     DataResult<List<School>> getByIds(List<Integer> ids);
 
+    //Post
     Result save(SchoolSaveDto school);
+
+    //Delete
+    Result delete(School school);
+    Result deleteById(int id);
+    Result deleteByIds(List<Integer> ids);
+    Result deleteAll(List<School> schools);
 }

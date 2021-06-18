@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/api/users")
 @CrossOrigin
 public class UsersController{
-    private UserService userService;
+    private final UserService userService;
 
     @Autowired
     public UsersController(UserService userService){
@@ -42,11 +42,26 @@ public class UsersController{
         return this.userService.save(user);
     }
 
+
+    //Put
+    @PutMapping("/verifyById")
     public Result verifyById(int id) {
         return this.userService.verifyById(id);
     }
 
+    @PutMapping("/verifyByEmail")
     public Result verifyByEmail(String email) {
         return this.userService.verifyByEmail(email);
+    }
+
+    //Delete
+    @DeleteMapping("")
+    public Result delete(@RequestBody User user){
+        return this.userService.delete(user);
+    }
+
+    @DeleteMapping("/{id}")
+    public Result deleteById(@PathVariable(value = "id") int id){
+        return this.userService.deleteById(id);
     }
 }

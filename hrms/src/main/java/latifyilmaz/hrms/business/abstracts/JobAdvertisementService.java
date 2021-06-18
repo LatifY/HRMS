@@ -14,11 +14,18 @@ public interface JobAdvertisementService {
 
     //Put
     Result updateActive(boolean active, int id);
+    Result updateConfirmed(boolean confirmed, int id);
 
     //Get
     DataResult<List<JobAdvertisement>> getAll();
     DataResult<List<JobAdvertisement>> getByActiveTrue();
+    DataResult<List<JobAdvertisement>> getByConfirmedTrue();
+    DataResult<List<JobAdvertisement>> getByActiveTrueAndConfirmedTrue();
     DataResult<List<JobAdvertisement>> getByActiveTrueOrderByReleaseDate();
     DataResult<List<JobAdvertisement>> getByActiveTrueAndEmployerId(int employerId);
     DataResult<JobAdvertisement> getById(int id);
+
+    //Delete
+    Result delete(JobAdvertisement jobAdvertisement);
+    Result deleteById(int id);
 }

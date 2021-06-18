@@ -55,15 +55,43 @@ public class LanguageManager implements LanguageService {
             return new ErrorResult(MessageResults.emptyFields);
         }
 
-        //Resume resume = resumeService.getById(language.getResumeId()).getData();
+        DataResult<Resume> resume = resumeService.getById(language.getResumeId());
+
+        if(!resume.isSuccess()){
+            return new ErrorResult(MessageResults.notFound(FIELD));
+        }
 
         Language languageObject = new Language(
-                new Resume(),
+                resume.getData(),
                 language.getLanguageName(),
                 language.getLanguageLevel()
         );
 
         this.languageDao.save(languageObject);
         return new SuccessResult(MessageResults.saved(FIELD));
+    }
+
+    public Result delete(Language language) {
+        this.languageDao.delete(language);
+        return new SuccessResult(MessageResults.deleted(FIELD));
+    }
+
+    public Result deleteById(int id) {
+        this.languageDao.deleteById(id);
+        return new SuccessResult(MessageResults.deleted(FIELD));
+    }
+
+    public Result deleteByIds(List<Integer> ids) {
+        for (int id : ids){
+            this.languageDao.deleteById(id);
+        }
+        return new SuccessResult(MessageResults.deleteds(FIELD));
+    }
+
+    public Result deleteAll(List<Language> languages) {
+        for (var language : languages){
+            this.languageDao.deleteById(language.getId());
+        }
+        return new SuccessResult(MessageResults.deleteds(FIELD));
     }
 }

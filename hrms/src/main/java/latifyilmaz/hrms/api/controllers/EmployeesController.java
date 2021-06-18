@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("/api/employees")
 @CrossOrigin
 public class EmployeesController {
-    private EmployeeService employeeService;
+    private final EmployeeService employeeService;
 
     @Autowired
     public EmployeesController(EmployeeService employeeService){
@@ -47,5 +47,16 @@ public class EmployeesController {
     @PostMapping("")
     public Result save(@RequestBody EmployeeSaveDto employee) {
         return this.employeeService.save(employee);
+    }
+
+    //Delete
+    @DeleteMapping("")
+    public Result delete(@RequestBody Employee employee){
+        return this.employeeService.delete(employee);
+    }
+
+    @DeleteMapping("/{id}")
+    public Result deleteById(@PathVariable(value = "") int id){
+        return this.employeeService.deleteById(id);
     }
 }

@@ -33,8 +33,20 @@ public class LanguagesController {
         return this.languageService.getById(id);
     }
 
+    //Post
     @PostMapping("")
     public Result save(@RequestBody LanguageSaveDto language){
         return this.languageService.save(language);
+    }
+
+    //Delete
+    @DeleteMapping("")
+    public Result delete(@RequestBody Language language){
+        return this.languageService.delete(language);
+    }
+
+    @DeleteMapping("/{id}")
+    public Result deleteById(@PathVariable(value = "id") int id){
+        return this.languageService.deleteById(id);
     }
 }

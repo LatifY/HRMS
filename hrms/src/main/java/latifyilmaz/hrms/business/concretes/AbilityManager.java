@@ -64,4 +64,28 @@ public class AbilityManager implements AbilityService {
         this.abilityDao.save(abilityObject);
         return new SuccessResult(MessageResults.saved(FIELD));
     }
+
+    public Result delete(Ability ability) {
+        this.abilityDao.delete(ability);
+        return new SuccessResult(MessageResults.deleted(FIELD));
+    }
+
+    public Result deleteById(int id) {
+        this.abilityDao.deleteById(id);
+        return new SuccessResult(MessageResults.deleted(FIELD));
+    }
+
+    public Result deleteByIds(List<Integer> ids) {
+        for (int id : ids){
+            this.abilityDao.deleteById(id);
+        }
+        return new SuccessResult(MessageResults.deleteds(FIELD));
+    }
+
+    public Result deleteAll(List<Ability> abilities) {
+        for (var ability : abilities){
+            this.abilityDao.deleteById(ability.getId());
+        }
+        return new SuccessResult(MessageResults.deleteds(FIELD));
+    }
 }

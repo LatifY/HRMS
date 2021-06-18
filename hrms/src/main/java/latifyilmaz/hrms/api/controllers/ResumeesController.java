@@ -33,8 +33,25 @@ public class ResumeesController {
         return this.resumeService.getById(id);
     }
 
+    @GetMapping("/getByEmployeeId")
+    public DataResult<List<Resume>> getByEmployeeId(@RequestParam(value = "employeeId") int employeeId) {
+        return this.resumeService.getByEmployeeId(employeeId);
+    }
+
+    //Post
     @PostMapping("")
     public Result save(@Valid @RequestBody ResumeSaveDto resume){
         return this.resumeService.save(resume);
+    }
+
+    //Delete
+    @DeleteMapping("")
+    public Result delete(@RequestBody Resume resume){
+        return this.resumeService.delete(resume);
+    }
+
+    @DeleteMapping("/{id}")
+    public Result deleteById(@PathVariable(value = "id") int id){
+        return this.resumeService.deleteById(id);
     }
 }

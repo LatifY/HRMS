@@ -8,9 +8,14 @@ import latifyilmaz.hrms.entities.dtos.personnel.PersonnelSaveDto;
 import java.util.List;
 
 public interface PersonnelService {
-    //Get (GET)
+    //Get
     DataResult<List<Personnel>> getAll();
     DataResult<Personnel> getById(int id);
 
+    //Post
     Result save(PersonnelSaveDto personnel);
+
+    //Delete
+    Result delete(Personnel personnel);
+    Result deleteById(int id);
 }
