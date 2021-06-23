@@ -1,4 +1,4 @@
-![ERDiagram](https://github.com/LatifY/HRMS/blob/master/images/logo.png)
+![Logo](https://github.com/LatifY/HRMS/blob/master/files/logo.png)
 
 ### Controllers
 
@@ -70,4 +70,4 @@
 </details>
 
 ### Postgresql Diagram
-![ERDiagram](https://github.com/LatifY/HRMS/blob/master/images/ERDiagram.jpg)
+![ERDiagram](https://github.com/LatifY/HRMS/blob/master/files/ERDiagram.jpg)
