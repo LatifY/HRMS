@@ -10,7 +10,6 @@ import latifyilmaz.hrms.dataAccess.abstracts.PersonnelDao;
 import latifyilmaz.hrms.entities.concretes.Personnel;
 import latifyilmaz.hrms.entities.concretes.User;
 import latifyilmaz.hrms.entities.dtos.personnel.PersonnelSaveDto;
-import org.apache.james.mime4j.dom.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
