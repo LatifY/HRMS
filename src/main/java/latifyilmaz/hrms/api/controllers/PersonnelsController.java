@@ -41,6 +41,11 @@ public class PersonnelsController {
         return ResponseEntity.ok(this.personnelService.getById(id));
     }
 
+    @GetMapping("/getByEmail")
+    public DataResult<Personnel> getByEmail(@PathVariable(value = "email") String email){
+        return this.personnelService.getByEmail(email);
+    }
+
     //Post
     @PostMapping("")
     public Result save(@Valid @RequestBody PersonnelSaveDto personnel){

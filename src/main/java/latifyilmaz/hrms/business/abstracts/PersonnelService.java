@@ -11,6 +11,7 @@ public interface PersonnelService {
     //Get
     DataResult<List<Personnel>> getAll();
     DataResult<Personnel> getById(int id);
+    DataResult<Personnel> getByEmail(String email);
 
     //Post
     Result save(PersonnelSaveDto personnel);

@@ -41,6 +41,10 @@ public class PersonnelManager implements PersonnelService {
         return new SuccessDataResult<Personnel>(this.personnelDao.findById(id).get(), MessageResults.dataListed(FIELD));
     }
 
+    public DataResult<Personnel> getByEmail(String email) {
+        return new SuccessDataResult<Personnel>(this.personnelDao.getByUser_Email(email), MessageResults.dataListed(FIELD));
+    }
+
     public Result save(PersonnelSaveDto personnel) {
         if (StringTools.isStringNullOrEmpty(personnel.getFirstName()) ||
                 StringTools.isStringNullOrEmpty(personnel.getLastName()) ||

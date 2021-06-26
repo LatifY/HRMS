@@ -99,17 +99,17 @@ public class UserManager implements UserService {
             return new ErrorDataResult<>(MessageResults.errorLogin);
         }
 
-        DataResult<Employee> findEmployee = employeeService.getById(findUser.getData().getId());
+        DataResult<Employee> findEmployee = employeeService.getByEmail(user.getEmail());
         if(findEmployee.getData() != null){
             return new SuccessDataResult<Employee>(findEmployee.getData(), MessageResults.successLogin);
         }
 
-        DataResult<Employer> findEmployer = employerService.getById(findUser.getData().getId());
+        DataResult<Employer> findEmployer = employerService.getByEmail(user.getEmail());
         if(findEmployer.getData() != null){
             return new SuccessDataResult<Employer>(findEmployer.getData(), MessageResults.successLogin);
         }
 
-        DataResult<Personnel> findPersonnel = personnelService.getById(findUser.getData().getId());
+        DataResult<Personnel> findPersonnel = personnelService.getByEmail(user.getEmail());
         if(findPersonnel.getData() != null){
             return new SuccessDataResult<Personnel>(findPersonnel.getData(), MessageResults.successLogin);
         }
