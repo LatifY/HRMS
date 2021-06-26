@@ -96,14 +96,25 @@ public class UserManager implements UserService {
     public DataResult<?> login(UserLoginDto user) {
         DataResult<User> findUser = getByEmailAndPassword(user.getEmail(), user.getPassword());
         if(!findUser.isSuccess()){
-            return new ErrorDataResult<>(MessageResults.emailOrPasswordWrong);
+            return new ErrorDataResult<>(MessageResults.errorLogin);
         }
 
-        //DataResult<Employee> findEmployee = employeeService.getById(findUser.getData().getId());
-        //DataResult<Employer> findEmployer = employerService.getById(findUser.getData().getId());
-        //DataResult<Personnel> findPersonnel = personnelService.getById(findUser.getData().getId());
+        DataResult<Employee> findEmployee = employeeService.getById(findUser.getData().getId());
+        if(findEmployee.getData() != null){
+            return new SuccessDataResult<Employee>(findEmployee.getData(), MessageResults.successLogin);
+        }
 
-        return null;
+        DataResult<Employer> findEmployer = employerService.getById(findUser.getData().getId());
+        if(findEmployer.getData() != null){
+            return new SuccessDataResult<Employer>(findEmployer.getData(), MessageResults.successLogin);
+        }
+
+        DataResult<Personnel> findPersonnel = personnelService.getById(findUser.getData().getId());
+        if(findPersonnel.getData() != null){
+            return new SuccessDataResult<Personnel>(findPersonnel.getData(), MessageResults.successLogin);
+        }
+
+        return new ErrorDataResult<>(MessageResults.errorLogin);
     }
 
     public Result delete(User user) {

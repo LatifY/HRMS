@@ -28,7 +28,8 @@ public class MessageResults {
     public static final String emptyField = "Lütfen bu alanı boş bırakmayın!";
     public static final String emptyFields = "Lütfen bu alanları boş bırakmayın!";
     public static final String passwordMatchFalse = "Parolalar eşleşmiyor!";
-    public static final String emailOrPasswordWrong = "Email veya Şifre doğru değil. Tekrardan deneyin!";
+    public static final String errorLogin = "Email veya Şifre doğru değil. Tekrardan deneyin!";
+    public static final String successLogin = "Giriş başarılı! Anasayfaya yönlendiriliyorsunuz.";
     public static final String verificationSuccessFalse = "Doğrulama işlemi başarısız!";
     public static final String verificationSuccessTrue = "Doğrulama işlemi başarılı!";
     public static final String isRealPersonFalse = "Kimlik doğrulanamadı! Lütfen bilgilerinizi doğru girdiğinizden emin olunuz.";

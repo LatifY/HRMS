@@ -4,6 +4,7 @@ import latifyilmaz.hrms.business.abstracts.UserService;
 import latifyilmaz.hrms.core.utilities.results.DataResult;
 import latifyilmaz.hrms.core.utilities.results.Result;
 import latifyilmaz.hrms.entities.concretes.User;
+import latifyilmaz.hrms.entities.dtos.user.UserLoginDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,6 +46,11 @@ public class UsersController{
     @PostMapping("")
     public Result save(@RequestBody User user) {
         return this.userService.save(user);
+    }
+
+    @PostMapping("/login")
+    public DataResult<?> login(@RequestBody UserLoginDto user){
+        return this.userService.login(user);
     }
 
 
