@@ -34,6 +34,11 @@ public class PositionsController {
         return this.positionService.getById(id);
     }
 
+    @GetMapping("/getByPositionName")
+    public DataResult<Position> getByPositionName(@RequestParam(value = "positionName") String positionName){
+        return this.positionService.getByPositionName(positionName);
+    }
+
     //Save
     @PostMapping("")
     public Result save(@RequestBody PositionSaveDto position){

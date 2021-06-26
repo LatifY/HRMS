@@ -34,6 +34,11 @@ public class WorkingTimesController {
         return this.workingTimeService.getById(id);
     }
 
+    @GetMapping("/getByWorkingTimeName")
+    public DataResult<WorkingTime> getByWorkingTimeName(@PathVariable(value = "workingTimeName") String workingTimeName){
+        return this.workingTimeService.getByWorkingTimeName(workingTimeName);
+    }
+
     //Post
     @PostMapping("")
     public Result save(@RequestBody WorkingTimeSaveDto workingTime){

@@ -35,6 +35,10 @@ public class CitiesController {
         return this.cityService.getById(id);
     }
 
+    @GetMapping("/getByCityName")
+    public DataResult<City> getByCityName(@RequestParam(value = "cityName") String cityName){
+        return this.cityService.getByCityName(cityName);
+    }
     //Post
     @PostMapping("")
     public Result save(@Valid @RequestBody CitySaveDto city){

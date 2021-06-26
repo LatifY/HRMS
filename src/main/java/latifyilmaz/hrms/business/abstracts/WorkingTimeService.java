@@ -11,6 +11,7 @@ public interface WorkingTimeService {
     //Get
     DataResult<List<WorkingTime>> getAll();
     DataResult<WorkingTime> getById(int id);
+    DataResult<WorkingTime> getByWorkingTimeName(String workingTimeName);
 
     //Save
     Result save(WorkingTimeSaveDto workingTime);

@@ -2,13 +2,11 @@ package latifyilmaz.hrms.business.concretes;
 
 import latifyilmaz.hrms.business.abstracts.WorkingTimeService;
 import latifyilmaz.hrms.business.constants.MessageResults;
-import latifyilmaz.hrms.core.utilities.results.DataResult;
-import latifyilmaz.hrms.core.utilities.results.Result;
-import latifyilmaz.hrms.core.utilities.results.SuccessDataResult;
-import latifyilmaz.hrms.core.utilities.results.SuccessResult;
+import latifyilmaz.hrms.core.utilities.results.*;
 import latifyilmaz.hrms.dataAccess.abstracts.WorkingTimeDao;
 import latifyilmaz.hrms.entities.concretes.WorkingTime;
 import latifyilmaz.hrms.entities.dtos.workingTime.WorkingTimeSaveDto;
+import org.hibernate.jdbc.Work;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +29,15 @@ public class WorkingTimeManager implements WorkingTimeService {
         return new SuccessDataResult<WorkingTime>(workingTimeDao.findById(id).get(), MessageResults.dataListed(FIELD));
     }
 
+    public DataResult<WorkingTime> getByWorkingTimeName(String workingTimeName) {
+        return new SuccessDataResult<WorkingTime>(workingTimeDao.getByWorkingTimeName(workingTimeName), MessageResults.dataListed(FIELD));
+    }
+
     public Result save(WorkingTimeSaveDto workingTime) {
+        if(getByWorkingTimeName(workingTime.getWorkingTimeName()).getData() != null){
+            return new ErrorResult(MessageResults.alreadyExists(FIELD));
+        }
+
         WorkingTime workingTimeObject = new WorkingTime(workingTime.getWorkingTimeName());
 
         this.workingTimeDao.save(workingTimeObject);

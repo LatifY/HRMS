@@ -4,9 +4,11 @@ package latifyilmaz.hrms.business.concretes;
 import latifyilmaz.hrms.business.abstracts.PersonnelService;
 import latifyilmaz.hrms.business.abstracts.UserService;
 import latifyilmaz.hrms.business.constants.MessageResults;
+import latifyilmaz.hrms.core.utilities.helpers.EmailService;
 import latifyilmaz.hrms.core.utilities.results.*;
 import latifyilmaz.hrms.core.utilities.tools.StringTools;
 import latifyilmaz.hrms.dataAccess.abstracts.PersonnelDao;
+import latifyilmaz.hrms.entities.concretes.Employee;
 import latifyilmaz.hrms.entities.concretes.Personnel;
 import latifyilmaz.hrms.entities.concretes.User;
 import latifyilmaz.hrms.entities.dtos.personnel.PersonnelSaveDto;
@@ -19,12 +21,14 @@ import java.util.List;
 public class PersonnelManager implements PersonnelService {
     private final PersonnelDao personnelDao;
     private final UserService userService;
+    private final EmailService emailService;
     private final String FIELD = "personnel";
 
     @Autowired
-    public PersonnelManager(PersonnelDao personnelDao, UserService userService){
+    public PersonnelManager(PersonnelDao personnelDao, UserService userService, EmailService emailService){
         this.personnelDao = personnelDao;
         this.userService = userService;
+        this.emailService = emailService;
     }
 
 
@@ -48,6 +52,17 @@ public class PersonnelManager implements PersonnelService {
 
         if(personnel.getPassword().equals(personnel.getPasswordRetry())){
             return new ErrorResult(MessageResults.passwordMatchFalse);
+        }
+
+        boolean checkEmail = emailService.check(personnel.getEmail()).isSuccess();
+        if(!checkEmail){
+            return new ErrorResult(MessageResults.isEmailFormatFalse);
+        }
+
+        User byEmail = userService.getByEmail(personnel.getEmail()).getData();
+
+        if(byEmail != null){
+            return new ErrorResult(MessageResults.alreadyExists("email"));
         }
 
         User user = new User(

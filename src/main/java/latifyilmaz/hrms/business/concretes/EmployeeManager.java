@@ -81,7 +81,7 @@ public class EmployeeManager implements EmployeeService {
             return new ErrorResult(MessageResults.isEmailFormatFalse);
         }
 
-        Employee byEmail = getByEmail(employee.getEmail()).getData();
+        User byEmail = userService.getByEmail(employee.getEmail()).getData();
         Employee byIdentityNo = getByIdentityNo(employee.getIdentityNo()).getData();
 
         if(byEmail != null){

@@ -11,6 +11,7 @@ public interface CityService {
     //Get
     DataResult<List<City>> getAll();
     DataResult<City> getById(int id);
+    DataResult<City> getByCityName(String cityName);
 
     //Post
     Result save(CitySaveDto city);

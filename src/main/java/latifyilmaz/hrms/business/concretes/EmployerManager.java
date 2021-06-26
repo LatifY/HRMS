@@ -64,7 +64,7 @@ public class EmployerManager implements EmployerService {
             return new ErrorResult(MessageResults.isEmailFormatFalse);
         }
 
-       Employer byEmail = getByEmail(employer.getEmail()).getData();
+       User byEmail = userService.getByEmail(employer.getEmail()).getData();
 
         if(byEmail != null){
             return new ErrorResult(MessageResults.alreadyExists("email"));
