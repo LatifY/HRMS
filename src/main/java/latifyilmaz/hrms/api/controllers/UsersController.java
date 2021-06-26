@@ -36,6 +36,11 @@ public class UsersController{
         return this.userService.getByEmail(email);
     }
 
+    @GetMapping("/getByEmailAndPassword")
+    public DataResult<User> getByEmailAndPassword(@RequestParam(value = "email") String email, @RequestParam(value = "password") String password) {
+        return this.userService.getByEmailAndPassword(email, password);
+    }
+
     //Post
     @PostMapping("")
     public Result save(@RequestBody User user) {

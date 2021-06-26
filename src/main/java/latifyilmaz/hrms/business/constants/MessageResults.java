@@ -28,6 +28,7 @@ public class MessageResults {
     public static final String emptyField = "Lütfen bu alanı boş bırakmayın!";
     public static final String emptyFields = "Lütfen bu alanları boş bırakmayın!";
     public static final String passwordMatchFalse = "Parolalar eşleşmiyor!";
+    public static final String emailOrPasswordWrong = "Email veya Şifre doğru değil. Tekrardan deneyin!";
     public static final String verificationSuccessFalse = "Doğrulama işlemi başarısız!";
     public static final String verificationSuccessTrue = "Doğrulama işlemi başarılı!";
     public static final String isRealPersonFalse = "Kimlik doğrulanamadı! Lütfen bilgilerinizi doğru girdiğinizden emin olunuz.";
@@ -35,7 +36,7 @@ public class MessageResults {
     public static final String validateEmail = "Kaydınızın tamamlanması için E-Postanıza gelecek olan aktivasyonu gerçekleştirmeniz gerek.";
     public static final String validateEmailBySystem = "Kaydınız sistemimiz tarafından en kısa sürede onaylanacaktır. Sabrınız için teşekkür ederiz.";
     public static final String errorWhileUploadingFile = "Dosya yüklenirken bir sorunla karşılaşıldı!";
-
+    public static final String error = "Maalesef bir hata oluştu.";
     public static String alreadyExists(String model){
         return String.format("Bu %s zaten kayıtlı. Başka birini deneyiniz.", models.get(model)); //
     }

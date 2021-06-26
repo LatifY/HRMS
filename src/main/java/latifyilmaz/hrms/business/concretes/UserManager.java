@@ -1,12 +1,20 @@
 package latifyilmaz.hrms.business.concretes;
 
+import latifyilmaz.hrms.business.abstracts.EmployeeService;
+import latifyilmaz.hrms.business.abstracts.EmployerService;
+import latifyilmaz.hrms.business.abstracts.PersonnelService;
 import latifyilmaz.hrms.business.abstracts.UserService;
 import latifyilmaz.hrms.business.constants.MessageResults;
 import latifyilmaz.hrms.core.utilities.results.*;
 import latifyilmaz.hrms.core.utilities.tools.StringTools;
 import latifyilmaz.hrms.dataAccess.abstracts.UserDao;
+import latifyilmaz.hrms.entities.concretes.Employee;
+import latifyilmaz.hrms.entities.concretes.Employer;
+import latifyilmaz.hrms.entities.concretes.Personnel;
 import latifyilmaz.hrms.entities.concretes.User;
+import latifyilmaz.hrms.entities.dtos.user.UserLoginDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,11 +22,17 @@ import java.util.List;
 @Service
 public class UserManager implements UserService {
     private final UserDao userDao;
+    private final EmployeeService employeeService;
+    private final EmployerService employerService;
+    private final PersonnelService personnelService;
     private final String FIELD = "user";
 
     @Autowired
-    public UserManager(UserDao userDao){
+    public UserManager(UserDao userDao, @Lazy EmployeeService employeeService, @Lazy EmployerService employerService, @Lazy PersonnelService personnelService){
         this.userDao = userDao;
+        this.employeeService = employeeService;
+        this.employerService = employerService;
+        this.personnelService = personnelService;
     }
 
 
@@ -31,7 +45,20 @@ public class UserManager implements UserService {
     }
 
     public DataResult<User> getByEmail(String email) {
-        return new SuccessDataResult<User>(this.userDao.getByEmail(email), MessageResults.dataListed(FIELD));
+        User user = this.userDao.getByEmail(email);
+        if(user == null){
+            return new ErrorDataResult<User>(MessageResults.notFound(FIELD));
+        }
+        return new SuccessDataResult<User>(user, MessageResults.dataListed(FIELD));
+    }
+
+    public DataResult<User> getByEmailAndPassword(String email, String password) {
+        User user = this.userDao.getByEmailAndPassword(email, password);
+        if(user == null){
+            return new ErrorDataResult<User>(MessageResults.notFound(FIELD));
+        }
+        return new SuccessDataResult<User>(user, MessageResults.dataListed(FIELD));
+
     }
 
     public Result save(User user) {
@@ -64,6 +91,19 @@ public class UserManager implements UserService {
         user.setVerified(true);
         this.userDao.save(user);
         return new SuccessResult(MessageResults.verificationSuccessTrue);
+    }
+
+    public DataResult<?> login(UserLoginDto user) {
+        DataResult<User> findUser = getByEmailAndPassword(user.getEmail(), user.getPassword());
+        if(!findUser.isSuccess()){
+            return new ErrorDataResult<>(MessageResults.emailOrPasswordWrong);
+        }
+
+        //DataResult<Employee> findEmployee = employeeService.getById(findUser.getData().getId());
+        //DataResult<Employer> findEmployer = employerService.getById(findUser.getData().getId());
+        //DataResult<Personnel> findPersonnel = personnelService.getById(findUser.getData().getId());
+
+        return null;
     }
 
     public Result delete(User user) {
