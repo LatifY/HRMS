@@ -8,13 +8,15 @@ import latifyilmaz.hrms.dataAccess.abstracts.JobAdvertisementDao;
 import latifyilmaz.hrms.entities.concretes.JobAdvertisement;
 import latifyilmaz.hrms.entities.dtos.jobAdvertisement.JobAdvertisementSaveDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import springfox.documentation.swagger2.mappers.ModelMapper;
 
 import java.util.Date;
 import java.util.List;
 
 @Service
+
 public class JobAdvertisementManager implements JobAdvertisementService {
     private final JobAdvertisementDao jobAdvertisementDao;
     private final PositionService positionService;
@@ -80,6 +82,11 @@ public class JobAdvertisementManager implements JobAdvertisementService {
     //Get
     public DataResult<List<JobAdvertisement>> getAll() {
         return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.findAll(), MessageResults.allDataListed(FIELD));
+    }
+
+    public DataResult<List<JobAdvertisement>> getAll(int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+        return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.findAll(pageable).getContent(), MessageResults.allDataListed(FIELD));
     }
 
     public DataResult<List<JobAdvertisement>> getByActiveTrue() {

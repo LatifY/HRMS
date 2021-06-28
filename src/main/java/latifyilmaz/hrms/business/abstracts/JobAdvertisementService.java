@@ -18,6 +18,8 @@ public interface JobAdvertisementService {
 
     //Get
     DataResult<List<JobAdvertisement>> getAll();
+    DataResult<List<JobAdvertisement>> getAll(int pageNo, int pageSize);
+
     DataResult<List<JobAdvertisement>> getByActiveTrue();
     DataResult<List<JobAdvertisement>> getByConfirmedTrue();
     DataResult<List<JobAdvertisement>> getByActiveTrueAndConfirmedTrue();

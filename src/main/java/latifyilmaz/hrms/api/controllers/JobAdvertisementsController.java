@@ -46,6 +46,11 @@ public class JobAdvertisementsController {
         return this.jobAdvertisementService.getAll();
     }
 
+    @GetMapping("/getAllByPage")
+    public DataResult<List<JobAdvertisement>> getAll(@RequestParam(value = "pageNo") int pageNo, @RequestParam(value = "pageSize") int pageSize)  {
+        return this.jobAdvertisementService.getAll(pageNo, pageSize);
+    }
+
     @GetMapping("/{id}")
     public DataResult<JobAdvertisement> getById(@PathVariable(value = "id") int id){
         return this.jobAdvertisementService.getById(id);
