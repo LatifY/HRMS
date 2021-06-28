@@ -12,6 +12,7 @@ import java.util.List;
 public interface ImageService {
     //Get
     DataResult<List<Image>> getAll();
+    DataResult<List<Image>> getAllByResumeId(int resumeId);
     DataResult<Image> getById(int id);
     DataResult<List<Image>> getByIds(List<Integer> ids);
 

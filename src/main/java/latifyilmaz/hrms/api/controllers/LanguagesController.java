@@ -28,6 +28,11 @@ public class LanguagesController {
         return this.languageService.getAll();
     }
 
+    @GetMapping("/getAllByResumeId")
+    public DataResult<List<Language>> getAllByResumeId(int resumeId) {
+        return this.languageService.getAllByResumeId(resumeId);
+    }
+
     @GetMapping("/{id}")
     public DataResult<Language> getById(@PathVariable(value = "id") int id) {
         return this.languageService.getById(id);

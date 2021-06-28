@@ -37,6 +37,10 @@ public class ImageManager implements ImageService {
         return new SuccessDataResult<List<Image>>(this.imageDao.findAll(), MessageResults.allDataListed(FIELD));
     }
 
+    public DataResult<List<Image>> getAllByResumeId(int resumeId) {
+        return new SuccessDataResult<List<Image>>(this.imageDao.getAllByResume_Id(resumeId), MessageResults.allDataListed(FIELD));
+    }
+
     public DataResult<Image> getById(int id) {
         return new SuccessDataResult<Image>(this.imageDao.findById(id).get(), MessageResults.dataListed(FIELD));
     }

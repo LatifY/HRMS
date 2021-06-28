@@ -27,6 +27,11 @@ public class JobExperiencesController {
         return this.jobExperienceService.getAll();
     }
 
+    @GetMapping("/getAllByResumeId")
+    public DataResult<List<JobExperience>> getAllByResumeId(int resumeId) {
+        return this.jobExperienceService.getAllByResumeId(resumeId);
+    }
+
     @GetMapping("/{id}")
     public DataResult<JobExperience> getById(@PathVariable(value = "id") int id) {
         return this.jobExperienceService.getById(id);

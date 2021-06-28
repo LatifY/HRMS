@@ -32,6 +32,10 @@ public class SchoolManager implements SchoolService {
         return new SuccessDataResult<List<School>>(this.schoolDao.findAll(), MessageResults.allDataListed(FIELD));
     }
 
+    public DataResult<List<School>> getAllByResumeId(int resumeId) {
+        return new SuccessDataResult<List<School>>(this.schoolDao.getAllByResume_Id(resumeId), MessageResults.allDataListed(FIELD));
+    }
+
     public DataResult<School> getById(int id) {
         return new SuccessDataResult<School>(this.schoolDao.findById(id).get(), MessageResults.dataListed(FIELD));
     }

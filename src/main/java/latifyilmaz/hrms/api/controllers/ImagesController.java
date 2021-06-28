@@ -29,6 +29,11 @@ public class ImagesController {
         return this.imageService.getAll();
     }
 
+    @GetMapping("/getAllByResumeId")
+    public DataResult<List<Image>> getAllByResumeId(int resumeId) {
+        return this.imageService.getAllByResumeId(resumeId);
+    }
+
     @GetMapping("/{id}")
     public DataResult<Image> getById(@PathVariable(value = "id") int id) {
         return this.imageService.getById(id);

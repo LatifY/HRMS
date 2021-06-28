@@ -31,6 +31,10 @@ public class JobExperienceManager implements JobExperienceService {
         return new SuccessDataResult<List<JobExperience>>(this.jobExperienceDao.findAll(), MessageResults.allDataListed(FIELD));
     }
 
+    public DataResult<List<JobExperience>> getAllByResumeId(int resumeId) {
+        return new SuccessDataResult<List<JobExperience>>(this.jobExperienceDao.getAllByResume_Id(resumeId), MessageResults.allDataListed(FIELD));
+    }
+
     public DataResult<JobExperience> getById(int id) {
         return new SuccessDataResult<JobExperience>(this.jobExperienceDao.findById(id).get(), MessageResults.dataListed(FIELD));
     }

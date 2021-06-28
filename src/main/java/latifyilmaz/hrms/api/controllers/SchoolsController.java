@@ -27,6 +27,11 @@ public class SchoolsController {
         return this.schoolService.getAll();
     }
 
+    @GetMapping("/getAllResumeId")
+    public DataResult<List<School>> getAllResumeId(int resumeId) {
+        return this.schoolService.getAllByResumeId(resumeId);
+    }
+
     @GetMapping("/{id}")
     public DataResult<School> getById(@PathVariable(value = "id") int id) {
         return this.schoolService.getById(id);

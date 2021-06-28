@@ -10,6 +10,7 @@ import java.util.List;
 public interface LanguageService {
     //Get
     DataResult<List<Language>> getAll();
+    DataResult<List<Language>> getAllByResumeId(int resumeId);
     DataResult<Language> getById(int id);
     DataResult<List<Language>> getByIds(List<Integer> ids);
 

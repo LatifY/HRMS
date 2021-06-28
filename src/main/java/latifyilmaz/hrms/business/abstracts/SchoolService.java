@@ -10,6 +10,7 @@ import java.util.List;
 public interface SchoolService {
     //Get
     DataResult<List<School>> getAll();
+    DataResult<List<School>> getAllByResumeId(int resumeId);
     DataResult<School> getById(int id);
     DataResult<List<School>> getByIds(List<Integer> ids);
 

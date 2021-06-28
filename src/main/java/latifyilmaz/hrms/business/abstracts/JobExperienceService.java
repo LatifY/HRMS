@@ -11,6 +11,7 @@ import java.util.List;
 public interface JobExperienceService {
     //Get
     DataResult<List<JobExperience>> getAll();
+    DataResult<List<JobExperience>> getAllByResumeId(int resumeId);
     DataResult<JobExperience> getById(int id);
     DataResult<List<JobExperience>> getByIds(List<Integer> ids);
 

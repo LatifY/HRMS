@@ -32,6 +32,10 @@ public class LanguageManager implements LanguageService {
         return new SuccessDataResult<List<Language>>(this.languageDao.findAll(), MessageResults.allDataListed(FIELD));
     }
 
+    public DataResult<List<Language>> getAllByResumeId(int resumeId) {
+        return new SuccessDataResult<List<Language>>(this.languageDao.getAllByResume_Id(resumeId), MessageResults.allDataListed(FIELD));
+    }
+
     public DataResult<Language> getById(int id) {
         return new SuccessDataResult<Language>(this.languageDao.findById(id).get(), MessageResults.dataListed(FIELD));
     }
