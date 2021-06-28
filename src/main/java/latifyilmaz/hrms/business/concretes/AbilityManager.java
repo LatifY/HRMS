@@ -32,6 +32,10 @@ public class AbilityManager implements AbilityService {
         return new SuccessDataResult<List<Ability>>(this.abilityDao.findAll(), MessageResults.allDataListed(FIELD));
     }
 
+    public DataResult<List<Ability>> getAllByResumeId(int resumeId) {
+        return new SuccessDataResult<List<Ability>>(this.abilityDao.getAllByResume_Id(resumeId), MessageResults.allDataListed(FIELD));
+    }
+
     public DataResult<Ability> getById(int id) {
         return new SuccessDataResult<Ability>(this.abilityDao.findById(id).get(), MessageResults.dataListed(FIELD));
     }

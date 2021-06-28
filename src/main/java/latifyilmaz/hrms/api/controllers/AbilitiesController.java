@@ -28,6 +28,11 @@ public class AbilitiesController {
         return this.abilityService.getAll();
     }
 
+    @GetMapping("/getAllByResumeId")
+    public DataResult<List<Ability>> getAllByResumeId(int resumeId) {
+        return this.abilityService.getAllByResumeId(resumeId);
+    }
+
     @GetMapping("/{id}")
     public DataResult<Ability> getById(@PathVariable(value = "id") int id) {
         return this.abilityService.getById(id);

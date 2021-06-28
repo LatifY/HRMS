@@ -10,6 +10,7 @@ import java.util.List;
 public interface AbilityService {
     //Get
     DataResult<List<Ability>> getAll();
+    DataResult<List<Ability>> getAllByResumeId(int resumeId);
     DataResult<Ability> getById(int id);
     DataResult<List<Ability>> getByIds(List<Integer> ids);
 
