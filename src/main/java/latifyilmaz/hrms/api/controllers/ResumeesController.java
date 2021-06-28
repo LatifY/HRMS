@@ -34,7 +34,7 @@ public class ResumeesController {
     }
 
     @GetMapping("/getByEmployeeId")
-    public DataResult<List<Resume>> getByEmployeeId(@RequestParam(value = "employeeId") int employeeId) {
+    public DataResult<Resume> getByEmployeeId(@RequestParam(value = "employeeId") int employeeId) {
         return this.resumeService.getByEmployeeId(employeeId);
     }
 

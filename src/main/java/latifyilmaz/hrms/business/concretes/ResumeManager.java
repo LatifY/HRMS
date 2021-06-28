@@ -45,8 +45,8 @@ public class ResumeManager implements ResumeService {
         return new SuccessDataResult<Resume>(this.resumeDao.findById(id).get(), MessageResults.dataListed(FIELD));
     }
 
-    public DataResult<List<Resume>> getByEmployeeId(int employeeId) {
-        return new SuccessDataResult<List<Resume>>(this.resumeDao.getByEmployee_UserId(employeeId), MessageResults.allDataListed(FIELD));
+    public DataResult<Resume> getByEmployeeId(int employeeId) {
+        return new SuccessDataResult<Resume>(this.resumeDao.getByEmployee_UserId(employeeId), MessageResults.dataListed(FIELD));
     }
 
     public Result save(ResumeSaveDto resume) {

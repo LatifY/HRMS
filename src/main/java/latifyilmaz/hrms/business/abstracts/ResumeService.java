@@ -11,7 +11,7 @@ public interface ResumeService {
     //Get
     DataResult<List<Resume>> getAll();
     DataResult<Resume> getById(int id);
-    DataResult<List<Resume>> getByEmployeeId(int employeeId);
+    DataResult<Resume> getByEmployeeId(int employeeId);
 
     //Post
     Result save(ResumeSaveDto resume);
