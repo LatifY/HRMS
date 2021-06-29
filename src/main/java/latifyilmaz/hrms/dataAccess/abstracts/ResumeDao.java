@@ -14,6 +14,6 @@ public interface ResumeDao extends JpaRepository<Resume, Integer> {
 
     @Transactional
     @Modifying
-    @Query("update Resume r set r.description=:resume.getDescription(), r.githubUrl:resume.getGithubUrl() , r.linkedinUrl:resume.getLinkedinUrl() where r.id=:resume.getId()")
-    void updateById(ResumeUpdateDto resume);
+    @Query("update Resume r set r.description=:description, r.githubUrl:githubUrl, r.linkedinUrl:linkedinUrl where r.id=:id")
+    void updateById(int id, String description, String githubUrl, String linkedinUrl);
 }

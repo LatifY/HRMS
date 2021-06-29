@@ -66,7 +66,7 @@ public class ResumeManager implements ResumeService {
     }
 
     public Result updateById(ResumeUpdateDto resume) {
-        this.resumeDao.updateById(resume);
+        this.resumeDao.updateById(resume.getId(), resume.getDescription(), resume.getGithubUrl(), resume.getLinkedinUrl());
         return new SuccessResult(MessageResults.updated(FIELD));
     }
 
