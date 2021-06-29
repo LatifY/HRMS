@@ -8,6 +8,7 @@ import latifyilmaz.hrms.dataAccess.abstracts.AbilityDao;
 import latifyilmaz.hrms.entities.concretes.Ability;
 import latifyilmaz.hrms.entities.concretes.Resume;
 import latifyilmaz.hrms.entities.dtos.ability.AbilitySaveDto;
+import latifyilmaz.hrms.entities.dtos.ability.AbilityUpdateDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -67,6 +68,11 @@ public class AbilityManager implements AbilityService {
 
         this.abilityDao.save(abilityObject);
         return new SuccessResult(MessageResults.saved(FIELD));
+    }
+
+    public Result updateById(AbilityUpdateDto ability) {
+        this.abilityDao.updateById(ability.getId(), ability.getAbilityName());
+        return new SuccessResult(MessageResults.updated(FIELD));
     }
 
     public Result delete(Ability ability) {

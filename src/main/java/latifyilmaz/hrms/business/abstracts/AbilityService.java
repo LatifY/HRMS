@@ -4,6 +4,7 @@ import latifyilmaz.hrms.core.utilities.results.DataResult;
 import latifyilmaz.hrms.core.utilities.results.Result;
 import latifyilmaz.hrms.entities.concretes.Ability;
 import latifyilmaz.hrms.entities.dtos.ability.AbilitySaveDto;
+import latifyilmaz.hrms.entities.dtos.ability.AbilityUpdateDto;
 
 import java.util.List;
 
@@ -16,6 +17,9 @@ public interface AbilityService {
 
     //Post
     Result save(AbilitySaveDto ability);
+
+    //Put
+    Result updateById(AbilityUpdateDto ability);
 
     //Delete
     Result delete(Ability ability);
