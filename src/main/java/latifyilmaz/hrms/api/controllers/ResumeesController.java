@@ -5,6 +5,7 @@ import latifyilmaz.hrms.core.utilities.results.DataResult;
 import latifyilmaz.hrms.core.utilities.results.Result;
 import latifyilmaz.hrms.entities.concretes.Resume;
 import latifyilmaz.hrms.entities.dtos.resume.ResumeSaveDto;
+import latifyilmaz.hrms.entities.dtos.resume.ResumeUpdateDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,6 +43,12 @@ public class ResumeesController {
     @PostMapping("")
     public Result save(@Valid @RequestBody ResumeSaveDto resume){
         return this.resumeService.save(resume);
+    }
+
+    //Put
+    @PutMapping("")
+    public Result updateById(@RequestBody ResumeUpdateDto resume){
+        return this.resumeService.updateById(resume);
     }
 
     //Delete

@@ -6,6 +6,7 @@ import latifyilmaz.hrms.core.utilities.results.*;
 import latifyilmaz.hrms.dataAccess.abstracts.ResumeDao;
 import latifyilmaz.hrms.entities.concretes.*;
 import latifyilmaz.hrms.entities.dtos.resume.ResumeSaveDto;
+import latifyilmaz.hrms.entities.dtos.resume.ResumeUpdateDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
@@ -62,6 +63,11 @@ public class ResumeManager implements ResumeService {
         this.resumeDao.save(resumeObject);
 
         return new SuccessResult(MessageResults.saved(FIELD));
+    }
+
+    public Result updateById(ResumeUpdateDto resume) {
+        this.resumeDao.updateById(resume);
+        return new SuccessResult(MessageResults.updated(FIELD));
     }
 
     public Result delete(Resume resume) {
