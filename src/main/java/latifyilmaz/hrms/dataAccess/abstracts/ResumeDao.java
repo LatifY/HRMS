@@ -5,8 +5,8 @@ import latifyilmaz.hrms.entities.dtos.resume.ResumeUpdateDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 public interface ResumeDao extends JpaRepository<Resume, Integer> {
@@ -14,6 +14,6 @@ public interface ResumeDao extends JpaRepository<Resume, Integer> {
 
     @Transactional
     @Modifying
-    @Query("update Resume r set r.description=:description, r.githubUrl:githubUrl, r.linkedinUrl:linkedinUrl where r.id=:id")
-    void updateById(int id, String description, String githubUrl, String linkedinUrl);
+    @Query("update Resume r set r.description=:resume.getDescription(), r.githubUrl:resume.getGithubUrl(), r.linkedinUrl:resume.getLinkedinUrl() where r.id=:resume.getId()")
+    void updateById(ResumeUpdateDto resume);
 }
