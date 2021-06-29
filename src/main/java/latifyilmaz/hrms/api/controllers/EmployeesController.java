@@ -60,7 +60,7 @@ public class EmployeesController {
 
     //Put
     @PutMapping("")
-    public Result save(@RequestBody EmployeeUpdateDto employee) {
+    public Result updateById(@RequestBody EmployeeUpdateDto employee) {
         return this.employeeService.updateById(employee);
     }
 

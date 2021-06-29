@@ -7,6 +7,7 @@ import latifyilmaz.hrms.core.utilities.results.ErrorDataResult;
 import latifyilmaz.hrms.core.utilities.results.Result;
 import latifyilmaz.hrms.entities.concretes.Personnel;
 import latifyilmaz.hrms.entities.dtos.personnel.PersonnelSaveDto;
+import latifyilmaz.hrms.entities.dtos.personnel.PersonnelUpdateDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,6 +51,12 @@ public class PersonnelsController {
     @PostMapping("")
     public Result save(@Valid @RequestBody PersonnelSaveDto personnel){
         return this.personnelService.save(personnel);
+    }
+
+    //Put
+    @PutMapping("")
+    public Result updateById(@RequestBody PersonnelUpdateDto personnel){
+        return this.personnelService.updateById(personnel);
     }
 
     //Delete

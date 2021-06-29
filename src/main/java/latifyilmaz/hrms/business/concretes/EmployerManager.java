@@ -10,6 +10,7 @@ import latifyilmaz.hrms.dataAccess.abstracts.EmployerDao;
 import latifyilmaz.hrms.entities.concretes.Employer;
 import latifyilmaz.hrms.entities.concretes.User;
 import latifyilmaz.hrms.entities.dtos.employer.EmployerSaveDto;
+import latifyilmaz.hrms.entities.dtos.employer.EmployerUpdateDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -86,6 +87,11 @@ public class EmployerManager implements EmployerService {
         );
         this.employerDao.save(employerObject);
         return new SuccessResult(MessageResults.saved(FIELD, MessageResults.validateEmailBySystem));
+    }
+
+    public Result updateById(EmployerUpdateDto employer) {
+        this.employerDao.updateById(employer.getUserId(), employer.getCompanyName(), employer.getWebsite(), employer.getPhone());
+        return new SuccessResult(MessageResults.updated(FIELD));
     }
 
     public Result delete(Employer employer) {

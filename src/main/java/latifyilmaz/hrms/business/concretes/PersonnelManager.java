@@ -12,6 +12,7 @@ import latifyilmaz.hrms.entities.concretes.Employee;
 import latifyilmaz.hrms.entities.concretes.Personnel;
 import latifyilmaz.hrms.entities.concretes.User;
 import latifyilmaz.hrms.entities.dtos.personnel.PersonnelSaveDto;
+import latifyilmaz.hrms.entities.dtos.personnel.PersonnelUpdateDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -85,6 +86,11 @@ public class PersonnelManager implements PersonnelService {
         this.personnelDao.save(personnelObject);
 
         return new SuccessResult(MessageResults.saved(FIELD));
+    }
+
+    public Result updateById(PersonnelUpdateDto personnel) {
+        this.personnelDao.updateById(personnel.getUserId(), personnel.getFirstName(), personnel.getLastName());
+        return new SuccessResult(MessageResults.updated(FIELD));
     }
 
     public Result delete(Personnel personnel) {
