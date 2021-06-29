@@ -15,6 +15,7 @@ import latifyilmaz.hrms.entities.concretes.Employee;
 import latifyilmaz.hrms.entities.concretes.Position;
 import latifyilmaz.hrms.entities.concretes.User;
 import latifyilmaz.hrms.entities.dtos.employee.EmployeeSaveDto;
+import latifyilmaz.hrms.entities.dtos.employee.EmployeeUpdateDto;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -112,6 +113,12 @@ public class EmployeeManager implements EmployeeService {
         this.employeeDao.save(employeeObject);
 
         return new SuccessResult(MessageResults.saved(FIELD, MessageResults.validateEmail));
+    }
+
+    public Result updateById(EmployeeUpdateDto employee) {
+        Position position = positionService.getById(employee.getPositionId()).getData();
+        this.employeeDao.updateById(employee.getUserId(), employee.getFirstName(), employee.getLastName(), employee.getBirthYear(), position);
+        return new SuccessResult(MessageResults.updated(FIELD));
     }
 
     public Result delete(Employee employee) {

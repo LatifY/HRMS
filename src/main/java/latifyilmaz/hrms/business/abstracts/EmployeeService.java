@@ -4,6 +4,7 @@ import latifyilmaz.hrms.core.utilities.results.DataResult;
 import latifyilmaz.hrms.core.utilities.results.Result;
 import latifyilmaz.hrms.entities.concretes.Employee;
 import latifyilmaz.hrms.entities.dtos.employee.EmployeeSaveDto;
+import latifyilmaz.hrms.entities.dtos.employee.EmployeeUpdateDto;
 
 import java.util.List;
 
@@ -16,6 +17,9 @@ public interface EmployeeService {
 
     //Post
     Result save(EmployeeSaveDto employee);
+
+    //Put
+    Result updateById(EmployeeUpdateDto employee);
 
     //Delete
     Result delete(Employee employee);
