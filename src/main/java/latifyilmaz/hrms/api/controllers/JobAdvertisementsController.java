@@ -6,6 +6,7 @@ import latifyilmaz.hrms.core.utilities.results.DataResult;
 import latifyilmaz.hrms.core.utilities.results.Result;
 import latifyilmaz.hrms.entities.concretes.JobAdvertisement;
 import latifyilmaz.hrms.entities.dtos.jobAdvertisement.JobAdvertisementSaveDto;
+import latifyilmaz.hrms.entities.dtos.jobAdvertisement.JobAdvertisementUpdateDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,6 +31,11 @@ public class JobAdvertisementsController {
     }
 
     //Put
+    @PutMapping("")
+    public Result updateById(@RequestBody JobAdvertisementUpdateDto jobAdvertisement){
+        return this.jobAdvertisementService.updateById(jobAdvertisement);
+    }
+
     @PutMapping("/updateActive")
     public Result updateActive(@RequestParam(value = "active") boolean active, @RequestParam(value = "id") int id){
         return this.jobAdvertisementService.updateActive(active,id);
@@ -44,6 +50,11 @@ public class JobAdvertisementsController {
     @GetMapping("")
     public DataResult<List<JobAdvertisement>> getAll()  {
         return this.jobAdvertisementService.getAll();
+    }
+
+    @GetMapping("/getAllByEmployerId")
+    public DataResult<List<JobAdvertisement>> getAllByEmployerId(int employerId)  {
+        return this.jobAdvertisementService.getAllByEmployerId(employerId);
     }
 
     @GetMapping("/getAllByPage")

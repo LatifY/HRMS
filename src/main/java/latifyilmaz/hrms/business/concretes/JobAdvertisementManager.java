@@ -5,8 +5,12 @@ import latifyilmaz.hrms.business.constants.MessageResults;
 import latifyilmaz.hrms.core.utilities.results.*;
 import latifyilmaz.hrms.core.utilities.tools.StringTools;
 import latifyilmaz.hrms.dataAccess.abstracts.JobAdvertisementDao;
+import latifyilmaz.hrms.entities.concretes.City;
 import latifyilmaz.hrms.entities.concretes.JobAdvertisement;
+import latifyilmaz.hrms.entities.concretes.Position;
+import latifyilmaz.hrms.entities.concretes.WorkingTime;
 import latifyilmaz.hrms.entities.dtos.jobAdvertisement.JobAdvertisementSaveDto;
+import latifyilmaz.hrms.entities.dtos.jobAdvertisement.JobAdvertisementUpdateDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -78,6 +82,18 @@ public class JobAdvertisementManager implements JobAdvertisementService {
         return new SuccessResult(MessageResults.updated(FIELD));
     }
 
+    public Result updateById(JobAdvertisementUpdateDto jobAdvertisement) {
+        City city = cityService.getById(jobAdvertisement.getCityId()).getData();
+        WorkingTime workingTime = workingTimeService.getById(jobAdvertisement.getWorkingTimeId()).getData();
+        Position position = positionService.getById(jobAdvertisement.getPositionId()).getData();
+
+        this.jobAdvertisementDao.updateById(jobAdvertisement.getId(), jobAdvertisement.getDescription(),
+                city, workingTime, position, jobAdvertisement.getDeadline(),
+                jobAdvertisement.getMinSalary(), jobAdvertisement.getMaxSalary(),
+                jobAdvertisement.getOpenPositionsAmount());
+        return new SuccessResult(MessageResults.updated(FIELD));
+    }
+
 
     //Get
     public DataResult<List<JobAdvertisement>> getAll() {
@@ -87,6 +103,10 @@ public class JobAdvertisementManager implements JobAdvertisementService {
     public DataResult<List<JobAdvertisement>> getAll(int pageNo, int pageSize) {
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
         return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.findAll(pageable).getContent(), MessageResults.allDataListed(FIELD));
+    }
+
+    public DataResult<List<JobAdvertisement>> getAllByEmployerId(int employerId) {
+        return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getAllByEmployer_UserId(employerId), MessageResults.allDataListed(FIELD));
     }
 
     public DataResult<List<JobAdvertisement>> getByActiveTrue() {
