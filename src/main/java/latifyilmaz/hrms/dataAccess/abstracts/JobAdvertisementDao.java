@@ -14,12 +14,12 @@ import java.util.List;
 
 public interface JobAdvertisementDao extends JpaRepository<JobAdvertisement, Integer> {
     List<JobAdvertisement> getAllByEmployer_UserId(int employerId);
-    List<JobAdvertisement> getAllByEmployer_UserIdOrderByReleaseDate(int employerId);
+    List<JobAdvertisement> getAllByEmployer_UserIdOrderByReleaseDateDESC(int employerId);
     List<JobAdvertisement> getByActiveTrue();
     List<JobAdvertisement> getByConfirmedTrue();
     List<JobAdvertisement> getByActiveTrueAndConfirmedTrue();
-    List<JobAdvertisement> getByActiveTrueOrderByReleaseDate();
-    List<JobAdvertisement> getByActiveTrueAndEmployer_UserIdOrderByReleaseDate(int employerId);
+    List<JobAdvertisement> getByActiveTrueOrderByReleaseDateDESC();
+    List<JobAdvertisement> getByActiveTrueAndEmployer_UserIdOrderByReleaseDateDESC(int employerId);
     List<JobAdvertisement> getByActiveTrueAndEmployer_UserId(int employerId);
 
     @Transactional
