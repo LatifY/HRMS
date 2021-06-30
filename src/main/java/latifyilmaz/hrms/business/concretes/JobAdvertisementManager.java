@@ -124,8 +124,8 @@ public class JobAdvertisementManager implements JobAdvertisementService {
         return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getByActiveTrueOrderByReleaseDate(), MessageResults.allDataListed(FIELD));
     }
 
-    public DataResult<List<JobAdvertisement>> getByActiveTrueAndEmployerIdOrderByReleaseDate(int employerId) {
-        return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getByActiveTrueAndEmployer_UserId(employerId), MessageResults.allDataListed(FIELD));
+    public DataResult<List<JobAdvertisement>> getAllByActiveTrueAndEmployerIdOrderByReleaseDate(int employerId) {
+        return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getAllByActiveTrueAndEmployer_UserIdOrderByReleaseDate(employerId), MessageResults.allDataListed(FIELD));
     }
 
     public DataResult<List<JobAdvertisement>> getByActiveTrueAndEmployerId(int employerId) {

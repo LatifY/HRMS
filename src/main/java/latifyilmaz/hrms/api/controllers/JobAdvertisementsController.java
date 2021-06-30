@@ -87,9 +87,9 @@ public class JobAdvertisementsController {
         return this.jobAdvertisementService.getByActiveTrueOrderByReleaseDate();
     }
 
-    @GetMapping("/getByActiveTrueAndEmployerIdOrderByReleaseDate")
-    public DataResult<List<JobAdvertisement>> getByActiveTrueAndEmployerIdOrderByReleaseDate(int employerId){
-        return this.jobAdvertisementService.getByActiveTrueAndEmployerIdOrderByReleaseDate(employerId);
+    @GetMapping("/getAllByActiveTrueAndEmployerIdOrderByReleaseDate")
+    public DataResult<List<JobAdvertisement>> getAllByActiveTrueAndEmployerIdOrderByReleaseDate(int employerId){
+        return this.jobAdvertisementService.getAllByActiveTrueAndEmployerIdOrderByReleaseDate(employerId);
     }
 
     @GetMapping("/getByActiveTrueAndEmployerId")
