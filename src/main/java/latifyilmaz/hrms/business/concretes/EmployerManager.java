@@ -74,7 +74,8 @@ public class EmployerManager implements EmployerService {
         User user = new User(
                 employer.getEmail(),
                 employer.getPassword(),
-                false
+                false,
+                "employer"
         );
         userService.save(user);
 

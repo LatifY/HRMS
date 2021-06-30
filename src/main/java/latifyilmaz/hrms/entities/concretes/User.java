@@ -28,10 +28,14 @@ public class User{
     @Column(name="verified", nullable = false)
     private boolean verified;
 
-    public User(String email, String password, boolean verified){
+    @Column(name="userType", nullable = false, length = 60)
+    private String userType;
+
+    public User(String email, String password, boolean verified, String userType){
         this.email = email;
         this.password = password;
         this.verified = verified;
+        this.userType = userType;
     }
 
 }

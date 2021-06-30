@@ -73,7 +73,8 @@ public class PersonnelManager implements PersonnelService {
         User user = new User(
                 personnel.getEmail(),
                 personnel.getPassword(),
-                true
+                true,
+                "personnel"
         );
         userService.save(user);
 

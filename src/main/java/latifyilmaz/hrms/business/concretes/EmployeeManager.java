@@ -96,7 +96,8 @@ public class EmployeeManager implements EmployeeService {
         User user = new User(
                 employee.getEmail(),
                 employee.getPassword(),
-                false
+                false,
+                "employee"
         );
         userService.save(user);
 
