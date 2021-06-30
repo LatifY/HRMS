@@ -22,12 +22,13 @@ public interface JobAdvertisementService {
     DataResult<List<JobAdvertisement>> getAll();
     DataResult<List<JobAdvertisement>> getAll(int pageNo, int pageSize);
     DataResult<List<JobAdvertisement>> getAllByEmployerId(int employerId);
+    DataResult<List<JobAdvertisement>> getAllByEmployerIdOrderByReleaseDate(int employerId);
 
     DataResult<List<JobAdvertisement>> getByActiveTrue();
     DataResult<List<JobAdvertisement>> getByConfirmedTrue();
     DataResult<List<JobAdvertisement>> getByActiveTrueAndConfirmedTrue();
     DataResult<List<JobAdvertisement>> getByActiveTrueOrderByReleaseDate();
-    DataResult<List<JobAdvertisement>> getAllByEmployerIdAndActiveTrueOrderByReleaseDate(int employerId);
+    DataResult<List<JobAdvertisement>> getByActiveTrueAndEmployerIdOrderByReleaseDate(int employerId);
     DataResult<List<JobAdvertisement>> getByActiveTrueAndEmployerId(int employerId);
     DataResult<JobAdvertisement> getById(int id);
 

@@ -52,15 +52,22 @@ public class JobAdvertisementsController {
         return this.jobAdvertisementService.getAll();
     }
 
+    @GetMapping("/getAllByPage")
+    public DataResult<List<JobAdvertisement>> getAll(@RequestParam(value = "pageNo") int pageNo, @RequestParam(value = "pageSize") int pageSize)  {
+        return this.jobAdvertisementService.getAll(pageNo, pageSize);
+    }
+
     @GetMapping("/getAllByEmployerId")
     public DataResult<List<JobAdvertisement>> getAllByEmployerId(int employerId)  {
         return this.jobAdvertisementService.getAllByEmployerId(employerId);
     }
 
-    @GetMapping("/getAllByPage")
-    public DataResult<List<JobAdvertisement>> getAll(@RequestParam(value = "pageNo") int pageNo, @RequestParam(value = "pageSize") int pageSize)  {
-        return this.jobAdvertisementService.getAll(pageNo, pageSize);
+    @GetMapping("/getAllByEmployerIdOrderByReleaseDate")
+    public DataResult<List<JobAdvertisement>> getAllByEmployerIdOrderByReleaseDate(int employerId)  {
+        return this.jobAdvertisementService.getAllByEmployerIdOrderByReleaseDate(employerId);
     }
+
+
 
     @GetMapping("/{id}")
     public DataResult<JobAdvertisement> getById(@PathVariable(value = "id") int id){
@@ -87,9 +94,9 @@ public class JobAdvertisementsController {
         return this.jobAdvertisementService.getByActiveTrueOrderByReleaseDate();
     }
 
-    @GetMapping("/getAllByEmployerIdAndActiveTrueOrderByReleaseDate")
-    public DataResult<List<JobAdvertisement>> getAllByEmployerIdAndActiveTrueOrderByReleaseDate(int employerId){
-        return this.jobAdvertisementService.getAllByEmployerIdAndActiveTrueOrderByReleaseDate(employerId);
+    @GetMapping("/getByActiveTrueAndEmployerIdOrderByReleaseDate")
+    public DataResult<List<JobAdvertisement>> getByActiveTrueAndEmployerIdOrderByReleaseDate(int employerId){
+        return this.jobAdvertisementService.getByActiveTrueAndEmployerIdOrderByReleaseDate(employerId);
     }
 
     @GetMapping("/getByActiveTrueAndEmployerId")
