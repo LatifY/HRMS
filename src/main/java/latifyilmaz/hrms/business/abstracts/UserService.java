@@ -14,6 +14,7 @@ public interface UserService {
     DataResult<List<User>> getAll();
     DataResult<User> getById(int id);
     DataResult<User> getByEmail(String email);
+    DataResult<?> getUserTypeByEmail(String email);
     DataResult<User> getByEmailAndPassword(String email, String password);
 
     //Post

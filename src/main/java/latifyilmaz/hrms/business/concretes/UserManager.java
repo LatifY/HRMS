@@ -52,6 +52,25 @@ public class UserManager implements UserService {
         return new SuccessDataResult<User>(user, MessageResults.dataListed(FIELD));
     }
 
+    public DataResult<?> getUserTypeByEmail(String email) {
+        DataResult<Employee> findEmployee = employeeService.getByEmail(email);
+        if(findEmployee.getData() != null){
+            return new SuccessDataResult<Employee>(findEmployee.getData(), MessageResults.dataListed(FIELD));
+        }
+
+        DataResult<Employer> findEmployer = employerService.getByEmail(email);
+        if(findEmployer.getData() != null){
+            return new SuccessDataResult<Employer>(findEmployer.getData(), MessageResults.dataListed(FIELD));
+        }
+
+        DataResult<Personnel> findPersonnel = personnelService.getByEmail(email);
+        if(findPersonnel.getData() != null){
+            return new SuccessDataResult<Personnel>(findPersonnel.getData(), MessageResults.dataListed(FIELD));
+        }
+
+        return new ErrorDataResult<>(MessageResults.notFound(FIELD));
+    }
+
     public DataResult<User> getByEmailAndPassword(String email, String password) {
         User user = this.userDao.getByEmailAndPassword(email, password);
         if(user == null){
