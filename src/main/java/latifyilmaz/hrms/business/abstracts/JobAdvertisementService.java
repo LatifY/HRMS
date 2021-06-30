@@ -27,6 +27,7 @@ public interface JobAdvertisementService {
     DataResult<List<JobAdvertisement>> getByConfirmedTrue();
     DataResult<List<JobAdvertisement>> getByActiveTrueAndConfirmedTrue();
     DataResult<List<JobAdvertisement>> getByActiveTrueOrderByReleaseDate();
+    DataResult<List<JobAdvertisement>> getByActiveTrueAndEmployerIdOrderByReleaseDate(int employerId);
     DataResult<List<JobAdvertisement>> getByActiveTrueAndEmployerId(int employerId);
     DataResult<JobAdvertisement> getById(int id);
 

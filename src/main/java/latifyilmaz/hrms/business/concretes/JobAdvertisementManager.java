@@ -20,7 +20,6 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-
 public class JobAdvertisementManager implements JobAdvertisementService {
     private final JobAdvertisementDao jobAdvertisementDao;
     private final PositionService positionService;
@@ -123,6 +122,10 @@ public class JobAdvertisementManager implements JobAdvertisementService {
 
     public DataResult<List<JobAdvertisement>> getByActiveTrueOrderByReleaseDate() {
         return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getByActiveTrueOrderByReleaseDate(), MessageResults.allDataListed(FIELD));
+    }
+
+    public DataResult<List<JobAdvertisement>> getByActiveTrueAndEmployerIdOrderByReleaseDate(int employerId) {
+        return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getByActiveTrueAndEmployer_UserId(employerId), MessageResults.allDataListed(FIELD));
     }
 
     public DataResult<List<JobAdvertisement>> getByActiveTrueAndEmployerId(int employerId) {
