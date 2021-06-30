@@ -109,7 +109,7 @@ public class JobAdvertisementManager implements JobAdvertisementService {
     }
 
     public DataResult<List<JobAdvertisement>> getAllByEmployerIdOrderByReleaseDate(int employerId) {
-        return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getAllByEmployer_UserIdOrderByReleaseDateDESC(employerId), MessageResults.allDataListed(FIELD));
+        return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getAllByEmployer_UserIdOrderByReleaseDate(employerId), MessageResults.allDataListed(FIELD));
     }
 
     public DataResult<List<JobAdvertisement>> getByActiveTrue() {
@@ -125,11 +125,11 @@ public class JobAdvertisementManager implements JobAdvertisementService {
     }
 
     public DataResult<List<JobAdvertisement>> getByActiveTrueOrderByReleaseDate() {
-        return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getByActiveTrueOrderByReleaseDateDESC(), MessageResults.allDataListed(FIELD));
+        return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getByActiveTrueOrderByReleaseDate(), MessageResults.allDataListed(FIELD));
     }
 
     public DataResult<List<JobAdvertisement>> getByActiveTrueAndEmployerIdOrderByReleaseDate(int employerId) {
-        return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getByActiveTrueAndEmployer_UserIdOrderByReleaseDateDESC(employerId), MessageResults.allDataListed(FIELD));
+        return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getByActiveTrueAndEmployer_UserIdOrderByReleaseDate(employerId), MessageResults.allDataListed(FIELD));
     }
 
     public DataResult<List<JobAdvertisement>> getByActiveTrueAndEmployerId(int employerId) {
