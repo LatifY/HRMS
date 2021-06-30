@@ -11,6 +11,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class JobAdvertisementUpdateDto {
     private int id;
+    private boolean active;
     private String description;
     private int cityId;
     private int workingTimeId;

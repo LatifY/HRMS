@@ -87,7 +87,7 @@ public class JobAdvertisementManager implements JobAdvertisementService {
         WorkingTime workingTime = workingTimeService.getById(jobAdvertisement.getWorkingTimeId()).getData();
         Position position = positionService.getById(jobAdvertisement.getPositionId()).getData();
 
-        this.jobAdvertisementDao.updateById(jobAdvertisement.getId(), jobAdvertisement.getDescription(),
+        this.jobAdvertisementDao.updateById(jobAdvertisement.getId(), jobAdvertisement.isActive() ,jobAdvertisement.getDescription(),
                 city, workingTime, position, jobAdvertisement.getDeadline(),
                 jobAdvertisement.getMinSalary(), jobAdvertisement.getMaxSalary(),
                 jobAdvertisement.getOpenPositionsAmount());

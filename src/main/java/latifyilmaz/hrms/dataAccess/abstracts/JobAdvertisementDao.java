@@ -32,9 +32,9 @@ public interface JobAdvertisementDao extends JpaRepository<JobAdvertisement, Int
 
     @Transactional
     @Modifying
-    @Query("update JobAdvertisement j set j.description=:description, j.city=:city, " +
+    @Query("update JobAdvertisement j set j.active=:active, j.description=:description, j.city=:city, " +
             "j.workingTime=:workingTime, j.position=:position, j.deadline=:deadline, " +
             "j.minSalary=:minSalary, j.maxSalary=:maxSalary, j.openPositionsAmount=:openPositionsAmount " +
             "where j.id=:id")
-    void updateById(int id, String description, City city, WorkingTime workingTime, Position position, Date deadline, int minSalary, int maxSalary, int openPositionsAmount);
+    void updateById(int id, boolean active, String description, City city, WorkingTime workingTime, Position position, Date deadline, int minSalary, int maxSalary, int openPositionsAmount);
 }
