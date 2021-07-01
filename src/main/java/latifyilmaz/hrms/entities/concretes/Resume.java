@@ -33,7 +33,7 @@ public class Resume {
     @Column(name = "linkedin_url")
     private String linkedinUrl;
 
-    @Column(name = "description")
+    @Column(name = "description", length = 1000)
     private String description;
 
 

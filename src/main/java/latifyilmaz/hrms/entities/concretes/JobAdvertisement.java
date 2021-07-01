@@ -19,7 +19,7 @@ public class JobAdvertisement {
     @Column(name="id", nullable = false, unique = true)
     private int id;
 
-    @Column(name="description",nullable=false)
+    @Column(name="description",nullable=false, length = 1000)
     private String description;
 
     @ManyToOne()
