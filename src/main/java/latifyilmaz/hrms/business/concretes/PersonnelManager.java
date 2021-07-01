@@ -55,7 +55,7 @@ public class PersonnelManager implements PersonnelService {
             return new ErrorResult(MessageResults.emptyFields);
         }
 
-        if(personnel.getPassword().equals(personnel.getPasswordRetry())){
+        if(!personnel.getPassword().equals(personnel.getPasswordRetry())){
             return new ErrorResult(MessageResults.passwordMatchFalse);
         }
 
