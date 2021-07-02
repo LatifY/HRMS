@@ -145,7 +145,8 @@ public class JobAdvertisementManager implements JobAdvertisementService {
 
     public DataResult<List<JobAdvertisement>> getByFilter(JobAdvertisementFilterDto filter, int pageNo, int pageSize) {
         Pageable pageable = PageRequest.of(pageNo -1, pageSize);
-        return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getByFilter(filter, pageable).getContent(), MessageResults.allDataListed(FIELD));
+        var data = this.jobAdvertisementDao.getByFilter(filter, pageable);
+        return new SuccessDataResult<List<JobAdvertisement>>(data.getContent(), String.valueOf(data.getTotalPages()));
     }
 
 
