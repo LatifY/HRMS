@@ -30,12 +30,7 @@ public interface JobAdvertisementDao extends JpaRepository<JobAdvertisement, Int
     List<JobAdvertisement> getByActiveTrueAndEmployer_UserId(int employerId);
     List<JobAdvertisement> getByActiveTrueAndEmployer_UserIdOrderByReleaseDateDesc(int employerId);
 
-    @Query("Select j from latifyilmaz.hrms.entities.concretes.JobAdvertisement j where " +
-            "filter.positionId is null or j.position.id=:filter.positionId and " +
-            "filter.cityId is null or j.city.id=:filter.cityId and " +
-            "filter.workingTimeId is null or j.workingTime.id=:filter.workingTimeId and " +
-            "j.active=true and " +
-            "j.confirmed=true")
+    @Query("")
     public Page<JobAdvertisement> getByFilter(@Param("filter") JobAdvertisementFilterDto filter, Pageable pageable);
 
     @Transactional
