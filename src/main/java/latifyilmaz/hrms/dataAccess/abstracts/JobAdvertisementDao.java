@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
@@ -29,13 +30,13 @@ public interface JobAdvertisementDao extends JpaRepository<JobAdvertisement, Int
     List<JobAdvertisement> getByActiveTrueAndEmployer_UserId(int employerId);
     List<JobAdvertisement> getByActiveTrueAndEmployer_UserIdOrderByReleaseDateDesc(int employerId);
 
-    @Query("Select j from JobAdvertisement j where " +
+    @Query("Select j from latifyilmaz.hrms.entities.concretes.JobAdvertisement j where " +
             "filter.positionId is null or j.position.id=:filter.positionId and " +
             "filter.cityId is null or j.city.id=:filter.cityId and " +
             "filter.workingTimeId is null or j.workingTime.id=:filter.workingTimeId and " +
-            "j.active= true and " +
-            "j.confirmed= true")
-    Page<JobAdvertisement> getByFilter(JobAdvertisementFilterDto filter, Pageable pageable);
+            "j.active=true and " +
+            "j.confirmed=true")
+    public Page<JobAdvertisement> getByFilter(@Param("filter") JobAdvertisementFilterDto filter, Pageable pageable);
 
     @Transactional
     @Modifying
