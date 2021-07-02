@@ -9,6 +9,7 @@ import latifyilmaz.hrms.entities.concretes.City;
 import latifyilmaz.hrms.entities.concretes.JobAdvertisement;
 import latifyilmaz.hrms.entities.concretes.Position;
 import latifyilmaz.hrms.entities.concretes.WorkingTime;
+import latifyilmaz.hrms.entities.dtos.jobAdvertisement.JobAdvertisementFilterDto;
 import latifyilmaz.hrms.entities.dtos.jobAdvertisement.JobAdvertisementSaveDto;
 import latifyilmaz.hrms.entities.dtos.jobAdvertisement.JobAdvertisementUpdateDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,7 +110,7 @@ public class JobAdvertisementManager implements JobAdvertisementService {
     }
 
     public DataResult<List<JobAdvertisement>> getAllByEmployerIdOrderByReleaseDate(int employerId) {
-        return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getAllByEmployer_UserIdOrderByReleaseDate(employerId), MessageResults.allDataListed(FIELD));
+        return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getAllByEmployer_UserIdOrderByReleaseDateDesc(employerId), MessageResults.allDataListed(FIELD));
     }
 
     public DataResult<List<JobAdvertisement>> getByActiveTrue() {
@@ -125,16 +126,28 @@ public class JobAdvertisementManager implements JobAdvertisementService {
     }
 
     public DataResult<List<JobAdvertisement>> getByActiveTrueOrderByReleaseDate() {
-        return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getByActiveTrueOrderByReleaseDate(), MessageResults.allDataListed(FIELD));
+        return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getByActiveTrueOrderByReleaseDateDesc(), MessageResults.allDataListed(FIELD));
     }
 
+    public DataResult<List<JobAdvertisement>> getByActiveTrueAndConfirmedTrueOrderByReleaseDate() {
+        return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getByActiveTrueAndConfirmedTrueOrderByReleaseDateDesc(), MessageResults.allDataListed(FIELD));
+    }
+
+
+
     public DataResult<List<JobAdvertisement>> getByActiveTrueAndEmployerIdOrderByReleaseDate(int employerId) {
-        return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getByActiveTrueAndEmployer_UserIdOrderByReleaseDate(employerId), MessageResults.allDataListed(FIELD));
+        return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getByActiveTrueAndEmployer_UserIdOrderByReleaseDateDesc(employerId), MessageResults.allDataListed(FIELD));
     }
 
     public DataResult<List<JobAdvertisement>> getByActiveTrueAndEmployerId(int employerId) {
         return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getByActiveTrueAndEmployer_UserId(employerId), MessageResults.allDataListed(FIELD));
     }
+
+    public DataResult<List<JobAdvertisement>> getByFilter(JobAdvertisementFilterDto filter, int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo -1, pageSize);
+        return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getByFilter(filter, pageable).getContent(), MessageResults.allDataListed(FIELD));
+    }
+
 
     public DataResult<JobAdvertisement> getById(int id) {
         return new SuccessDataResult<JobAdvertisement>(this.jobAdvertisementDao.findById(id).get(), MessageResults.dataListed(FIELD));

@@ -3,6 +3,7 @@ package latifyilmaz.hrms.business.abstracts;
 import latifyilmaz.hrms.core.utilities.results.DataResult;
 import latifyilmaz.hrms.core.utilities.results.Result;
 import latifyilmaz.hrms.entities.concretes.JobAdvertisement;
+import latifyilmaz.hrms.entities.dtos.jobAdvertisement.JobAdvertisementFilterDto;
 import latifyilmaz.hrms.entities.dtos.jobAdvertisement.JobAdvertisementSaveDto;
 import latifyilmaz.hrms.entities.dtos.jobAdvertisement.JobAdvertisementUpdateDto;
 
@@ -28,8 +29,10 @@ public interface JobAdvertisementService {
     DataResult<List<JobAdvertisement>> getByConfirmedTrue();
     DataResult<List<JobAdvertisement>> getByActiveTrueAndConfirmedTrue();
     DataResult<List<JobAdvertisement>> getByActiveTrueOrderByReleaseDate();
+    DataResult<List<JobAdvertisement>> getByActiveTrueAndConfirmedTrueOrderByReleaseDate();
     DataResult<List<JobAdvertisement>> getByActiveTrueAndEmployerIdOrderByReleaseDate(int employerId);
     DataResult<List<JobAdvertisement>> getByActiveTrueAndEmployerId(int employerId);
+    DataResult<List<JobAdvertisement>> getByFilter(JobAdvertisementFilterDto filter, int pageNo, int pageSize);
     DataResult<JobAdvertisement> getById(int id);
 
     //Delete

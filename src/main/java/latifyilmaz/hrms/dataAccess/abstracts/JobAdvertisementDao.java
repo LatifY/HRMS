@@ -4,6 +4,9 @@ import latifyilmaz.hrms.entities.concretes.City;
 import latifyilmaz.hrms.entities.concretes.JobAdvertisement;
 import latifyilmaz.hrms.entities.concretes.Position;
 import latifyilmaz.hrms.entities.concretes.WorkingTime;
+import latifyilmaz.hrms.entities.dtos.jobAdvertisement.JobAdvertisementFilterDto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -14,13 +17,25 @@ import java.util.List;
 
 public interface JobAdvertisementDao extends JpaRepository<JobAdvertisement, Integer> {
     List<JobAdvertisement> getAllByEmployer_UserId(int employerId);
-    List<JobAdvertisement> getAllByEmployer_UserIdOrderByReleaseDate(int employerId);
+    List<JobAdvertisement> getAllByEmployer_UserIdOrderByReleaseDateDesc(int employerId);
+
     List<JobAdvertisement> getByActiveTrue();
     List<JobAdvertisement> getByConfirmedTrue();
     List<JobAdvertisement> getByActiveTrueAndConfirmedTrue();
-    List<JobAdvertisement> getByActiveTrueOrderByReleaseDate();
-    List<JobAdvertisement> getByActiveTrueAndEmployer_UserIdOrderByReleaseDate(int employerId);
+    List<JobAdvertisement> getByActiveTrueOrderByReleaseDateDesc();
+    List<JobAdvertisement> getByActiveTrueAndConfirmedTrueOrderByReleaseDateDesc();
+
+
     List<JobAdvertisement> getByActiveTrueAndEmployer_UserId(int employerId);
+    List<JobAdvertisement> getByActiveTrueAndEmployer_UserIdOrderByReleaseDateDesc(int employerId);
+
+    @Query("Select j from com.latifyilmaz.hrms.entities.concretes.JobAdvertisement j where " +
+            "filter.positionId is null or j.position.id=:filter.positionId and " +
+            "filter.cityId is null or j.city.id=:filter.cityId and " +
+            "filter.workingTimeId is null or j.workingTime.id=:filter.workingTimeId and " +
+            "j.active= true and " +
+            "j.confirmed= true")
+    Page<JobAdvertisement> getByFilter(JobAdvertisementFilterDto filter, Pageable pageable);
 
     @Transactional
     @Modifying

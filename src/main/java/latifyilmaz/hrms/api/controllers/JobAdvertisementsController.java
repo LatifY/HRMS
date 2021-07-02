@@ -5,6 +5,7 @@ import latifyilmaz.hrms.core.utilities.results.DataResult;
 
 import latifyilmaz.hrms.core.utilities.results.Result;
 import latifyilmaz.hrms.entities.concretes.JobAdvertisement;
+import latifyilmaz.hrms.entities.dtos.jobAdvertisement.JobAdvertisementFilterDto;
 import latifyilmaz.hrms.entities.dtos.jobAdvertisement.JobAdvertisementSaveDto;
 import latifyilmaz.hrms.entities.dtos.jobAdvertisement.JobAdvertisementUpdateDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,6 +95,12 @@ public class JobAdvertisementsController {
         return this.jobAdvertisementService.getByActiveTrueOrderByReleaseDate();
     }
 
+    @GetMapping("/getByActiveTrueAndConfirmedTrueOrderByReleaseDate")
+    public DataResult<List<JobAdvertisement>> getByActiveTrueAndConfirmedTrueOrderByReleaseDate(){
+        return this.jobAdvertisementService.getByActiveTrueAndConfirmedTrueOrderByReleaseDate();
+    }
+
+
     @GetMapping("/getByActiveTrueAndEmployerIdOrderByReleaseDate")
     public DataResult<List<JobAdvertisement>> getByActiveTrueAndEmployerIdOrderByReleaseDate(int employerId){
         return this.jobAdvertisementService.getByActiveTrueAndEmployerIdOrderByReleaseDate(employerId);
@@ -102,6 +109,11 @@ public class JobAdvertisementsController {
     @GetMapping("/getByActiveTrueAndEmployerId")
     public DataResult<List<JobAdvertisement>> getByActiveTrueAndEmployerId(@RequestParam(value = "employerId") int employerId){
         return this.jobAdvertisementService.getByActiveTrueAndEmployerId(employerId);
+    }
+
+    @GetMapping("/getByFilter")
+    public DataResult<List<JobAdvertisement>> getByFilter(@RequestBody JobAdvertisementFilterDto filter, int pageNo, int pageSize){
+        return this.jobAdvertisementService.getByFilter(filter, pageNo, pageSize);
     }
 
     //Delete
