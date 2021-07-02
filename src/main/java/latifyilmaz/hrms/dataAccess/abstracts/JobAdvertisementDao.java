@@ -30,7 +30,7 @@ public interface JobAdvertisementDao extends JpaRepository<JobAdvertisement, Int
     List<JobAdvertisement> getByActiveTrueAndEmployer_UserId(int employerId);
     List<JobAdvertisement> getByActiveTrueAndEmployer_UserIdOrderByReleaseDateDesc(int employerId);
 
-    @Query("")
+    @Query("update JobAdvertisement j set j.active=true")
     public Page<JobAdvertisement> getByFilter(@Param("filter") JobAdvertisementFilterDto filter, Pageable pageable);
 
     @Transactional
