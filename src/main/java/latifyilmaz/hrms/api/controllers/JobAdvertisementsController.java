@@ -111,7 +111,7 @@ public class JobAdvertisementsController {
         return this.jobAdvertisementService.getByActiveTrueAndEmployerId(employerId);
     }
 
-    @GetMapping("/getByFilter")
+    @PostMapping("/getByFilter")
     public DataResult<List<JobAdvertisement>> getByFilter(@RequestBody JobAdvertisementFilterDto filter, int pageNo, int pageSize){
         return this.jobAdvertisementService.getByFilter(filter, pageNo, pageSize);
     }
