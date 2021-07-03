@@ -19,8 +19,8 @@ public interface UserService {
 
     //Post
     Result save(User user);
-    Result verifyById(int id);
-    Result verifyByEmail(String email);
+    Result updateVerifiedById(boolean verified, int id);
+    Result updateVerifiedByEmail(boolean verified, String email);
     DataResult<?> login(UserLoginDto user);
 
     //Delete

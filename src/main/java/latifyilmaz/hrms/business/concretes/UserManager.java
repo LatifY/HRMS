@@ -90,26 +90,26 @@ public class UserManager implements UserService {
         return new SuccessResult(MessageResults.saved(FIELD));
     }
 
-    public Result verifyById(int id) {
+    public Result updateVerifiedById(boolean verified, int id) {
         User user = getById(id).getData();
         if(user == null){
-            return new ErrorResult(MessageResults.verificationSuccessFalse);
+            return new ErrorResult(verified ? MessageResults.verificationSuccessFalse : MessageResults.unverificationSuccessFalse);
         }
 
         user.setVerified(true);
         this.userDao.save(user);
-        return new SuccessResult(MessageResults.verificationSuccessTrue);
+        return new SuccessResult(verified ? MessageResults.verificationSuccessTrue: MessageResults.unverificationSuccessTrue);
     }
 
-    public Result verifyByEmail(String email) {
+    public Result updateVerifiedByEmail(boolean verified, String email) {
         User user = getByEmail(email).getData();
         if(user == null){
-            return new ErrorResult(MessageResults.verificationSuccessFalse);
+            return new ErrorResult(verified ? MessageResults.verificationSuccessFalse : MessageResults.unverificationSuccessFalse);
         }
 
         user.setVerified(true);
         this.userDao.save(user);
-        return new SuccessResult(MessageResults.verificationSuccessTrue);
+        return new SuccessResult(verified ? MessageResults.verificationSuccessTrue: MessageResults.unverificationSuccessTrue);
     }
 
     public DataResult<?> login(UserLoginDto user) {

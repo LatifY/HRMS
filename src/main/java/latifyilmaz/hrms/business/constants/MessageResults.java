@@ -31,7 +31,9 @@ public class MessageResults {
     public static final String errorLogin = "Email veya Şifre doğru değil. Tekrardan deneyin!";
     public static final String successLogin = "Giriş başarılı! Anasayfaya yönlendiriliyorsunuz.";
     public static final String verificationSuccessFalse = "Doğrulama işlemi başarısız!";
+    public static final String unverificationSuccessFalse = "Doğrulama kaldırma işlemi başarısız!";
     public static final String verificationSuccessTrue = "Doğrulama işlemi başarılı!";
+    public static final String unverificationSuccessTrue = "Doğrulama kaldırma işlemi başarılı!";
     public static final String isRealPersonFalse = "Kimlik doğrulanamadı! Lütfen bilgilerinizi doğru girdiğinizden emin olunuz.";
     public static final String isEmailFormatFalse = "E-Posta formatı yanlış. Lütfen 'ornek@ornek.com' formatına uygun bir e-posta giriniz.";
     public static final String validateEmail = "Kaydınızın tamamlanması için E-Postanıza gelecek olan aktivasyonu gerçekleştirmeniz gerek.";

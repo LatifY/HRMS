@@ -60,14 +60,14 @@ public class UsersController{
 
 
     //Put
-    @PutMapping("/verifyById")
-    public Result verifyById(int id) {
-        return this.userService.verifyById(id);
+    @PutMapping("/updateVerifiedById")
+    public Result updateVerifiedById(boolean verified, int id) {
+        return this.userService.updateVerifiedById(verified, id);
     }
 
-    @PutMapping("/verifyByEmail")
-    public Result verifyByEmail(String email) {
-        return this.userService.verifyByEmail(email);
+    @PutMapping("/updateVerifiedByEmail")
+    public Result updateVerifiedByEmail(boolean verified, String email) {
+        return this.userService.updateVerifiedByEmail(verified, email);
     }
 
     //Delete
