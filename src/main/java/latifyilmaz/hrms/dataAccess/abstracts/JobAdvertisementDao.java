@@ -35,7 +35,7 @@ public interface JobAdvertisementDao extends JpaRepository<JobAdvertisement, Int
             "((:#{#filter.positionIds}) IS NULL OR j.position.id IN (:#{#filter.positionIds})) and " +
             "((:#{#filter.workingTimeIds}) IS NULL OR j.workingTime.id IN (:#{#filter.workingTimeIds})) and " +
             "j.active=true and j.confirmed=true and " +
-            "filter.search IS NULL OR j.description like %:filter.search%")
+            "((:#{#filter.search}) IS NULL OR j.description like %(:#{#filter.search}))%")
     public Page<JobAdvertisement> getByFilter(@Param("filter") JobAdvertisementFilterDto filter, Pageable pageable);
 
     @Transactional
