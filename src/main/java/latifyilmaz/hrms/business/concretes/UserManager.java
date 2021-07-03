@@ -96,8 +96,7 @@ public class UserManager implements UserService {
             return new ErrorResult(verified ? MessageResults.verificationSuccessFalse : MessageResults.unverificationSuccessFalse);
         }
 
-        user.setVerified(true);
-        this.userDao.save(user);
+        this.userDao.updateVerifiedById(verified,id);
         return new SuccessResult(verified ? MessageResults.verificationSuccessTrue: MessageResults.unverificationSuccessTrue);
     }
 
@@ -107,8 +106,7 @@ public class UserManager implements UserService {
             return new ErrorResult(verified ? MessageResults.verificationSuccessFalse : MessageResults.unverificationSuccessFalse);
         }
 
-        user.setVerified(true);
-        this.userDao.save(user);
+        this.userDao.updateVerifiedByEmail(verified,email);
         return new SuccessResult(verified ? MessageResults.verificationSuccessTrue: MessageResults.unverificationSuccessTrue);
     }
 
