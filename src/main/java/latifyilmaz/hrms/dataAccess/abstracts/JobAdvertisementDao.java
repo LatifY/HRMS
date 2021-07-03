@@ -18,12 +18,14 @@ import java.util.List;
 
 public interface JobAdvertisementDao extends JpaRepository<JobAdvertisement, Integer> {
     List<JobAdvertisement> getAllByEmployer_UserId(int employerId);
+    List<JobAdvertisement> getAllByEmployer_UserIdOrderByReleaseDateAsc(int employerId);
     List<JobAdvertisement> getAllByEmployer_UserIdOrderByReleaseDateDesc(int employerId);
 
     List<JobAdvertisement> getByActiveTrue();
     List<JobAdvertisement> getByConfirmedTrue();
     List<JobAdvertisement> getByActiveTrueAndConfirmedTrue();
     List<JobAdvertisement> getByActiveTrueOrderByReleaseDateDesc();
+    List<JobAdvertisement> getByActiveTrueAndConfirmedTrueOrderByReleaseDateAsc();
     List<JobAdvertisement> getByActiveTrueAndConfirmedTrueOrderByReleaseDateDesc();
 
 
@@ -37,7 +39,8 @@ public interface JobAdvertisementDao extends JpaRepository<JobAdvertisement, Int
             "j.active=true and j.confirmed=true and " +
             "((:#{#filter.search}) IS NULL OR j.description like %:#{#filter.search}%) and " +
             "((:#{#filter.minSalary}) IS NULL OR (:#{#filter.minSalary}) = 0 OR j.minSalary >= (:#{#filter.minSalary})) and " +
-            "((:#{#filter.maxSalary}) IS NULL OR (:#{#filter.maxSalary}) = 0 OR j.maxSalary <= (:#{#filter.maxSalary}))")
+            "((:#{#filter.maxSalary}) IS NULL OR (:#{#filter.maxSalary}) = 0 OR j.maxSalary <= (:#{#filter.maxSalary}))" +
+            " ORDER BY j.releaseDate DESC")
     public Page<JobAdvertisement> getByFilter(@Param("filter") JobAdvertisementFilterDto filter, Pageable pageable);
 
     @Transactional

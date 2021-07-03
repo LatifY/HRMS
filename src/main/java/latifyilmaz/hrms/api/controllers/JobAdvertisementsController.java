@@ -63,9 +63,14 @@ public class JobAdvertisementsController {
         return this.jobAdvertisementService.getAllByEmployerId(employerId);
     }
 
-    @GetMapping("/getAllByEmployerIdOrderByReleaseDate")
-    public DataResult<List<JobAdvertisement>> getAllByEmployerIdOrderByReleaseDate(int employerId)  {
-        return this.jobAdvertisementService.getAllByEmployerIdOrderByReleaseDate(employerId);
+    @GetMapping("/getAllByEmployerIdOrderByReleaseDateAsc")
+    public DataResult<List<JobAdvertisement>> getAllByEmployerIdOrderByReleaseDateAsc(int employerId)  {
+        return this.jobAdvertisementService.getAllByEmployerIdOrderByReleaseDateAsc(employerId);
+    }
+
+    @GetMapping("/getAllByEmployerIdOrderByReleaseDateDesc")
+    public DataResult<List<JobAdvertisement>> getAllByEmployerIdOrderByReleaseDateDesc(int employerId)  {
+        return this.jobAdvertisementService.getAllByEmployerIdOrderByReleaseDateDesc(employerId);
     }
 
 
@@ -95,9 +100,14 @@ public class JobAdvertisementsController {
         return this.jobAdvertisementService.getByActiveTrueOrderByReleaseDate();
     }
 
-    @GetMapping("/getByActiveTrueAndConfirmedTrueOrderByReleaseDate")
-    public DataResult<List<JobAdvertisement>> getByActiveTrueAndConfirmedTrueOrderByReleaseDate(){
-        return this.jobAdvertisementService.getByActiveTrueAndConfirmedTrueOrderByReleaseDate();
+    @GetMapping("/getByActiveTrueAndConfirmedTrueOrderByReleaseDateAsc")
+    public DataResult<List<JobAdvertisement>> getByActiveTrueAndConfirmedTrueOrderByReleaseDateAsc(){
+        return this.jobAdvertisementService.getByActiveTrueAndConfirmedTrueOrderByReleaseDateAsc();
+    }
+
+    @GetMapping("/getByActiveTrueAndConfirmedTrueOrderByReleaseDateDesc")
+    public DataResult<List<JobAdvertisement>> getByActiveTrueAndConfirmedTrueOrderByReleaseDateDesc(){
+        return this.jobAdvertisementService.getByActiveTrueAndConfirmedTrueOrderByReleaseDateDesc();
     }
 
 
