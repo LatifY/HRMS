@@ -22,6 +22,7 @@ public interface JobAdvertisementService {
     //Get
     DataResult<List<JobAdvertisement>> getAll();
     DataResult<List<JobAdvertisement>> getAll(int pageNo, int pageSize);
+    DataResult<List<JobAdvertisement>> getAllOrderByReleaseDateDesc();
     DataResult<List<JobAdvertisement>> getAllByEmployerId(int employerId);
     DataResult<List<JobAdvertisement>> getAllByEmployerIdOrderByReleaseDateAsc(int employerId);
     DataResult<List<JobAdvertisement>> getAllByEmployerIdOrderByReleaseDateDesc(int employerId);

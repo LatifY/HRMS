@@ -58,6 +58,11 @@ public class JobAdvertisementsController {
         return this.jobAdvertisementService.getAll(pageNo, pageSize);
     }
 
+    @GetMapping("/getAllOrderByReleaseDateDesc")
+    public DataResult<List<JobAdvertisement>> getAllOrderByReleaseDateDesc(){
+        return this.jobAdvertisementService.getAllOrderByReleaseDateDesc();
+    }
+
     @GetMapping("/getAllByEmployerId")
     public DataResult<List<JobAdvertisement>> getAllByEmployerId(int employerId)  {
         return this.jobAdvertisementService.getAllByEmployerId(employerId);

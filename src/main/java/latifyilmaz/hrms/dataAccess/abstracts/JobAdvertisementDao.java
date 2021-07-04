@@ -17,6 +17,7 @@ import java.util.Date;
 import java.util.List;
 
 public interface JobAdvertisementDao extends JpaRepository<JobAdvertisement, Integer> {
+    List<JobAdvertisement> getAllOrderByReleaseDateDesc();
     List<JobAdvertisement> getAllByEmployer_UserId(int employerId);
     List<JobAdvertisement> getAllByEmployer_UserIdOrderByReleaseDateAsc(int employerId);
     List<JobAdvertisement> getAllByEmployer_UserIdOrderByReleaseDateDesc(int employerId);
