@@ -13,6 +13,7 @@ import latifyilmaz.hrms.core.utilities.tools.StringTools;
 import latifyilmaz.hrms.dataAccess.abstracts.EmployeeDao;
 import latifyilmaz.hrms.entities.concretes.Employee;
 import latifyilmaz.hrms.entities.concretes.Position;
+import latifyilmaz.hrms.entities.concretes.Resume;
 import latifyilmaz.hrms.entities.concretes.User;
 import latifyilmaz.hrms.entities.dtos.employee.EmployeeSaveDto;
 import latifyilmaz.hrms.entities.dtos.employee.EmployeeUpdateDto;
@@ -23,16 +24,18 @@ import java.util.List;
 public class EmployeeManager implements EmployeeService {
     private final EmployeeDao employeeDao;
     private final UserService userService;
+    private final ResumeService resumeService;
     private final PositionService positionService;
     private final UserCheckService userCheckService = new FakeMernisServiceAdapter();
     private final EmailService emailService;
     private final String FIELD = "employee";
 
-    public EmployeeManager(EmployeeDao employeeDao, PositionService positionService, UserService userService, EmailService emailService){
+    public EmployeeManager(EmployeeDao employeeDao, PositionService positionService, UserService userService, ResumeService resumeService, EmailService emailService){
         super();
         this.employeeDao = employeeDao;
         this.positionService = positionService;
         this.userService = userService;
+        this.resumeService = resumeService;
         this.emailService = emailService;
     }
 
@@ -125,12 +128,22 @@ public class EmployeeManager implements EmployeeService {
     public Result delete(Employee employee) {
         this.employeeDao.delete(employee);
         this.userService.delete(employee.getUser());
+        Resume resume = resumeService.getByEmployeeId(employee.getUserId()).getData();
+        if(resume != null){
+            resumeService.deleteById(resume.getId());
+        }
+
         return new SuccessResult(MessageResults.deleted(FIELD));
     }
 
     public Result deleteById(int id) {
         this.employeeDao.deleteById(id);
         this.userService.deleteById(id);
+        Resume resume = resumeService.getByEmployeeId(id).getData();
+        if(resume != null){
+            resumeService.deleteById(resume.getId());
+        }
+
         return new SuccessResult(MessageResults.deleted(FIELD));
     }
 }

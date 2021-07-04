@@ -13,6 +13,7 @@ import latifyilmaz.hrms.entities.dtos.jobAdvertisement.JobAdvertisementFilterDto
 import latifyilmaz.hrms.entities.dtos.jobAdvertisement.JobAdvertisementSaveDto;
 import latifyilmaz.hrms.entities.dtos.jobAdvertisement.JobAdvertisementUpdateDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -32,7 +33,7 @@ public class JobAdvertisementManager implements JobAdvertisementService {
     private final String FIELD = "jobAdvertisement";
 
     @Autowired
-    public JobAdvertisementManager(JobAdvertisementDao jobAdvertisementDao, PositionService positionService, CityService cityService, WorkingTimeService workingTimeService, EmployerService employerService){
+    public JobAdvertisementManager(JobAdvertisementDao jobAdvertisementDao, PositionService positionService, CityService cityService, WorkingTimeService workingTimeService, @Lazy EmployerService employerService){
         this.jobAdvertisementDao = jobAdvertisementDao;
         this.positionService = positionService;
         this.cityService = cityService;

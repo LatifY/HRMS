@@ -1,6 +1,7 @@
 package latifyilmaz.hrms.business.concretes;
 
 import latifyilmaz.hrms.business.abstracts.EmployerService;
+import latifyilmaz.hrms.business.abstracts.JobAdvertisementService;
 import latifyilmaz.hrms.business.abstracts.UserService;
 import latifyilmaz.hrms.business.constants.MessageResults;
 import latifyilmaz.hrms.core.utilities.helpers.EmailService;
@@ -8,6 +9,7 @@ import latifyilmaz.hrms.core.utilities.results.*;
 import latifyilmaz.hrms.core.utilities.tools.StringTools;
 import latifyilmaz.hrms.dataAccess.abstracts.EmployerDao;
 import latifyilmaz.hrms.entities.concretes.Employer;
+import latifyilmaz.hrms.entities.concretes.JobAdvertisement;
 import latifyilmaz.hrms.entities.concretes.User;
 import latifyilmaz.hrms.entities.dtos.employer.EmployerSaveDto;
 import latifyilmaz.hrms.entities.dtos.employer.EmployerUpdateDto;
@@ -20,14 +22,16 @@ import java.util.List;
 public class EmployerManager implements EmployerService {
     private final EmployerDao employerDao;
     private final UserService userService;
+    private final JobAdvertisementService jobAdvertisementService;
     private final EmailService emailService;
     private final String FIELD = "employer";
 
     @Autowired
-    public EmployerManager(EmployerDao employerDao, UserService userService, EmailService emailService){
+    public EmployerManager(EmployerDao employerDao, UserService userService, JobAdvertisementService jobAdvertisementService, EmailService emailService){
         super();
         this.employerDao = employerDao;
         this.userService = userService;
+        this.jobAdvertisementService = jobAdvertisementService;
         this.emailService = emailService;
     }
 
@@ -98,12 +102,25 @@ public class EmployerManager implements EmployerService {
     public Result delete(Employer employer) {
         this.employerDao.delete(employer);
         this.userService.delete(employer.getUser());
+        List<JobAdvertisement> jobAdvertisements = jobAdvertisementService.getAllByEmployerId(employer.getUserId()).getData();
+        if(jobAdvertisements != null || jobAdvertisements.size() > 0){
+            for(JobAdvertisement j : jobAdvertisements){
+                jobAdvertisementService.deleteById(j.getId());
+            }
+        }
+
         return new SuccessResult(MessageResults.deleted(FIELD));
     }
 
     public Result deleteById(int id) {
         this.employerDao.deleteById(id);
         this.userService.deleteById(id);
+        List<JobAdvertisement> jobAdvertisements = jobAdvertisementService.getAllByEmployerId(id).getData();
+        if(jobAdvertisements != null || jobAdvertisements.size() > 0){
+            for(JobAdvertisement j : jobAdvertisements){
+                jobAdvertisementService.deleteById(j.getId());
+            }
+        }
         return new SuccessResult(MessageResults.deleted(FIELD));
     }
 }
