@@ -126,23 +126,26 @@ public class EmployeeManager implements EmployeeService {
     }
 
     public Result delete(Employee employee) {
-        this.employeeDao.delete(employee);
-        this.userService.delete(employee.getUser());
         Resume resume = resumeService.getByEmployeeId(employee.getUserId()).getData();
         if(resume != null){
             resumeService.deleteById(resume.getId());
         }
 
+        this.employeeDao.delete(employee);
+        this.userService.delete(employee.getUser());
+
         return new SuccessResult(MessageResults.deleted(FIELD));
     }
 
     public Result deleteById(int id) {
-        this.employeeDao.deleteById(id);
-        this.userService.deleteById(id);
         Resume resume = resumeService.getByEmployeeId(id).getData();
         if(resume != null){
             resumeService.deleteById(resume.getId());
         }
+
+        this.employeeDao.deleteById(id);
+        this.userService.deleteById(id);
+
 
         return new SuccessResult(MessageResults.deleted(FIELD));
     }

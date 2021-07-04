@@ -100,8 +100,6 @@ public class EmployerManager implements EmployerService {
     }
 
     public Result delete(Employer employer) {
-        this.employerDao.delete(employer);
-        this.userService.delete(employer.getUser());
         List<JobAdvertisement> jobAdvertisements = jobAdvertisementService.getAllByEmployerId(employer.getUserId()).getData();
         if(jobAdvertisements != null || jobAdvertisements.size() > 0){
             for(JobAdvertisement j : jobAdvertisements){
@@ -109,18 +107,23 @@ public class EmployerManager implements EmployerService {
             }
         }
 
+        this.employerDao.delete(employer);
+        this.userService.delete(employer.getUser());
+
         return new SuccessResult(MessageResults.deleted(FIELD));
     }
 
     public Result deleteById(int id) {
-        this.employerDao.deleteById(id);
-        this.userService.deleteById(id);
         List<JobAdvertisement> jobAdvertisements = jobAdvertisementService.getAllByEmployerId(id).getData();
         if(jobAdvertisements != null || jobAdvertisements.size() > 0){
             for(JobAdvertisement j : jobAdvertisements){
                 jobAdvertisementService.deleteById(j.getId());
             }
         }
+        
+        this.employerDao.deleteById(id);
+        this.userService.deleteById(id);
+
         return new SuccessResult(MessageResults.deleted(FIELD));
     }
 }
