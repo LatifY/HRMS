@@ -106,7 +106,7 @@ public class JobAdvertisementManager implements JobAdvertisementService {
     }
 
     public DataResult<List<JobAdvertisement>> getAllOrderByReleaseDateDesc() {
-        return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getAllOrderByReleaseDateDesc(), MessageResults.allDataListed(FIELD));
+        return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getAllByOrderByReleaseDateDesc(), MessageResults.allDataListed(FIELD));
     }
 
     public DataResult<List<JobAdvertisement>> getAllByEmployerId(int employerId) {
