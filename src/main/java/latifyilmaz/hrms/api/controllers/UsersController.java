@@ -78,7 +78,7 @@ public class UsersController{
     }
 
     @PutMapping("/updatePassword")
-    public Result updatePassword(UserUpdatePasswordDto dto){
+    public Result updatePassword(@RequestBody UserUpdatePasswordDto dto){
         return this.userService.updatePassword(dto);
     }
 
