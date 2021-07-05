@@ -120,7 +120,7 @@ public class EmployerManager implements EmployerService {
                 jobAdvertisementService.deleteById(j.getId());
             }
         }
-        
+
         this.employerDao.deleteById(id);
         this.userService.deleteById(id);
 

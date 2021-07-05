@@ -5,6 +5,7 @@ import latifyilmaz.hrms.entities.concretes.JobAdvertisement;
 import latifyilmaz.hrms.entities.concretes.Position;
 import latifyilmaz.hrms.entities.concretes.WorkingTime;
 import latifyilmaz.hrms.entities.dtos.jobAdvertisement.JobAdvertisementFilterDto;
+import latifyilmaz.hrms.entities.dtos.jobAdvertisement.JobAdvertisementUpdateDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -56,9 +57,12 @@ public interface JobAdvertisementDao extends JpaRepository<JobAdvertisement, Int
 
     @Transactional
     @Modifying
-    @Query("update JobAdvertisement j set j.active=:active, j.description=:description, j.city=:city, " +
-            "j.workingTime=:workingTime, j.position=:position, j.deadline=:deadline, " +
-            "j.minSalary=:minSalary, j.maxSalary=:maxSalary, j.openPositionsAmount=:openPositionsAmount " +
-            "where j.id=:id")
-    void updateById(int id, boolean active, String description, City city, WorkingTime workingTime, Position position, Date deadline, int minSalary, int maxSalary, int openPositionsAmount);
+    @Query("update JobAdvertisement j set j.active=(:#{#job.active}), j.description=(:#{#job.description}), j.city.id=(:#{#job.cityId}), " +
+            "j.workingTime.id=(:#{#job.workingTimeId}), j.position.id=(:#{#job.positionId}), j.deadline=(:#{#job.deadline}), " +
+            "j.minSalary=(:#{#job.minSalary}), j.maxSalary=(:#{#job.maxSalary}), j.openPositionsAmount=(:#{#job.openPositionsAmount}) " +
+            "where j.id=(:#{#job.id})")
+    void updateById(JobAdvertisementUpdateDto job);
+
+    //int id, boolean active, String description, City city, WorkingTime workingTime,
+    // Position position, Date deadline, int minSalary, int maxSalary, int openPositionsAmount
 }

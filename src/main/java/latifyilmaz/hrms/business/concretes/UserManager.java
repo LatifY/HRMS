@@ -110,6 +110,15 @@ public class UserManager implements UserService {
         return new SuccessResult(verified ? MessageResults.verificationSuccessTrue: MessageResults.unverificationSuccessTrue);
     }
 
+    public Result updateEmail(int id, String email) {
+        User user = getById(id).getData();
+        return null;
+    }
+
+    public Result updatePassword(int id, String password) {
+        return null;
+    }
+
     public DataResult<?> login(UserLoginDto user) {
         DataResult<User> findUser = getByEmailAndPassword(user.getEmail(), user.getPassword());
         if(!findUser.isSuccess()){

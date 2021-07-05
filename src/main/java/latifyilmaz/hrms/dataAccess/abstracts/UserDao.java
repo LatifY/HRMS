@@ -19,4 +19,14 @@ public interface UserDao extends JpaRepository<User, Integer> {
     @Modifying
     @Query("update User u set u.verified=:verified where u.email=:email")
     void updateVerifiedByEmail(boolean verified, String email);
+
+    @Transactional
+    @Modifying
+    @Query("update User u set u.email=:email where u.id=:id")
+    void updateEmail(int id, String email);
+
+    @Transactional
+    @Modifying
+    @Query("update User u set u.password=:password where u.id=:id")
+    void updatePassword(int id, String password);
 }

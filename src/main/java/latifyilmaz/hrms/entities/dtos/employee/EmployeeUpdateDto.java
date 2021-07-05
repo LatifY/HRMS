@@ -14,6 +14,7 @@ public class EmployeeUpdateDto {
     private int userId;
     private String firstName;
     private String lastName;
+    private String email;
     private int birthYear;
     private int positionId;
 }

@@ -84,14 +84,11 @@ public class JobAdvertisementManager implements JobAdvertisementService {
     }
 
     public Result updateById(JobAdvertisementUpdateDto jobAdvertisement) {
-        City city = cityService.getById(jobAdvertisement.getCityId()).getData();
-        WorkingTime workingTime = workingTimeService.getById(jobAdvertisement.getWorkingTimeId()).getData();
-        Position position = positionService.getById(jobAdvertisement.getPositionId()).getData();
+        //City city = cityService.getById(jobAdvertisement.getCityId()).getData();
+        //WorkingTime workingTime = workingTimeService.getById(jobAdvertisement.getWorkingTimeId()).getData();
+        //Position position = positionService.getById(jobAdvertisement.getPositionId()).getData();
 
-        this.jobAdvertisementDao.updateById(jobAdvertisement.getId(), jobAdvertisement.isActive() ,jobAdvertisement.getDescription(),
-                city, workingTime, position, jobAdvertisement.getDeadline(),
-                jobAdvertisement.getMinSalary(), jobAdvertisement.getMaxSalary(),
-                jobAdvertisement.getOpenPositionsAmount());
+        this.jobAdvertisementDao.updateById(jobAdvertisement);
         return new SuccessResult(MessageResults.updated(FIELD));
     }
 
