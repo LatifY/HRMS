@@ -90,7 +90,11 @@ public class PersonnelManager implements PersonnelService {
     }
 
     public Result updateById(PersonnelUpdateDto personnel) {
-        this.personnelDao.updateById(personnel.getUserId(), personnel.getFirstName(), personnel.getLastName());
+        Result updateResult = userService.updateEmail(personnel.getUserId(), personnel.getEmail());
+        if(!updateResult.isSuccess()){
+            return new ErrorResult(updateResult.getMessage());
+        }
+        this.personnelDao.updateById(personnel);
         return new SuccessResult(MessageResults.updated(FIELD));
     }
 

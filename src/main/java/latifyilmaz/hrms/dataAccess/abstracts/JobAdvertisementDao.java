@@ -62,7 +62,4 @@ public interface JobAdvertisementDao extends JpaRepository<JobAdvertisement, Int
             "j.minSalary=(:#{#job.minSalary}), j.maxSalary=(:#{#job.maxSalary}), j.openPositionsAmount=(:#{#job.openPositionsAmount}) " +
             "where j.id=(:#{#job.id})")
     void updateById(JobAdvertisementUpdateDto job);
-
-    //int id, boolean active, String description, City city, WorkingTime workingTime,
-    // Position position, Date deadline, int minSalary, int maxSalary, int openPositionsAmount
 }

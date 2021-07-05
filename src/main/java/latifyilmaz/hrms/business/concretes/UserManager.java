@@ -13,6 +13,7 @@ import latifyilmaz.hrms.entities.concretes.Employer;
 import latifyilmaz.hrms.entities.concretes.Personnel;
 import latifyilmaz.hrms.entities.concretes.User;
 import latifyilmaz.hrms.entities.dtos.user.UserLoginDto;
+import latifyilmaz.hrms.entities.dtos.user.UserUpdatePasswordDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
@@ -112,11 +113,31 @@ public class UserManager implements UserService {
 
     public Result updateEmail(int id, String email) {
         User user = getById(id).getData();
-        return null;
+        if(user.getEmail().equals(email)){
+            return new SuccessResult();
+        }
+
+        User findEmail = getByEmail(email).getData();
+        if(findEmail != null){
+            return new ErrorResult(MessageResults.alreadyExists("email"));
+        }
+
+        this.userDao.updateEmail(id, email);
+        return new SuccessResult();
     }
 
-    public Result updatePassword(int id, String password) {
-        return null;
+    public Result updatePassword(UserUpdatePasswordDto dto) {
+        User user = getById(dto.getId()).getData();
+        if(!user.getPassword().equals(dto.getOldPassword())){
+            return new ErrorResult(MessageResults.oldPasswordMatchFalse);
+        }
+
+        if(!dto.getNewPassword().equals(dto.getNewPasswordRetry())){
+            return new ErrorResult(MessageResults.newPasswordMatchFalse);
+        }
+
+        this.userDao.updatePassword(dto);
+        return new SuccessResult(MessageResults.updated("password"));
     }
 
     public DataResult<?> login(UserLoginDto user) {

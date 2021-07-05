@@ -1,6 +1,7 @@
 package latifyilmaz.hrms.dataAccess.abstracts;
 
 import latifyilmaz.hrms.entities.concretes.Personnel;
+import latifyilmaz.hrms.entities.dtos.personnel.PersonnelUpdateDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -11,6 +12,6 @@ public interface PersonnelDao extends JpaRepository<Personnel, Integer> {
 
     @Transactional
     @Modifying
-    @Query("update Personnel p set p.firstName=:firstName, p.lastName=:lastName where p.userId=:userId")
-    void updateById(int userId, String firstName, String lastName);
+    @Query("update Personnel p set p.firstName=(:#{#dto.firstName}), p.lastName=(:#{#dto.lastName}) where p.userId=(:#{#dto.userId})")
+    void updateById(PersonnelUpdateDto dto);
 }

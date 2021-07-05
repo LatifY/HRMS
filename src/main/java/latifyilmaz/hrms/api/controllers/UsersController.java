@@ -5,6 +5,8 @@ import latifyilmaz.hrms.core.utilities.results.DataResult;
 import latifyilmaz.hrms.core.utilities.results.Result;
 import latifyilmaz.hrms.entities.concretes.User;
 import latifyilmaz.hrms.entities.dtos.user.UserLoginDto;
+import latifyilmaz.hrms.entities.dtos.user.UserUpdateEmailDto;
+import latifyilmaz.hrms.entities.dtos.user.UserUpdatePasswordDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -68,6 +70,16 @@ public class UsersController{
     @PutMapping("/updateVerifiedByEmail")
     public Result updateVerifiedByEmail(boolean verified, String email) {
         return this.userService.updateVerifiedByEmail(verified, email);
+    }
+
+    @PutMapping("/updateEmail")
+    public Result updateEmail(UserUpdateEmailDto dto){
+        return this.userService.updateEmail(dto.getId(), dto.getEmail());
+    }
+
+    @PutMapping("/updatePassword")
+    public Result updatePassword(UserUpdatePasswordDto dto){
+        return this.userService.updatePassword(dto);
     }
 
     //Delete

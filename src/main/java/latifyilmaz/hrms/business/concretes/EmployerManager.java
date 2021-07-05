@@ -95,7 +95,11 @@ public class EmployerManager implements EmployerService {
     }
 
     public Result updateById(EmployerUpdateDto employer) {
-        this.employerDao.updateById(employer.getUserId(), employer.getCompanyName(), employer.getWebsite(), employer.getPhone());
+        Result updateResult = userService.updateEmail(employer.getUserId(), employer.getEmail());
+        if(!updateResult.isSuccess()){
+            return new ErrorResult(updateResult.getMessage());
+        }
+        this.employerDao.updateById(employer);
         return new SuccessResult(MessageResults.updated(FIELD));
     }
 

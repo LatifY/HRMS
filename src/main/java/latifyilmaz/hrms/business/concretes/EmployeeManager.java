@@ -120,8 +120,11 @@ public class EmployeeManager implements EmployeeService {
     }
 
     public Result updateById(EmployeeUpdateDto employee) {
-        Position position = positionService.getById(employee.getPositionId()).getData();
-        this.employeeDao.updateById(employee.getUserId(), employee.getFirstName(), employee.getLastName(), employee.getBirthYear(), position);
+        Result updateResult = userService.updateEmail(employee.getUserId(), employee.getEmail());
+        if(!updateResult.isSuccess()){
+            return new ErrorResult(updateResult.getMessage());
+        }
+        this.employeeDao.updateById(employee);
         return new SuccessResult(MessageResults.updated(FIELD));
     }
 

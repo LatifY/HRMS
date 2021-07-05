@@ -1,6 +1,7 @@
 package latifyilmaz.hrms.dataAccess.abstracts;
 
 import latifyilmaz.hrms.entities.concretes.User;
+import latifyilmaz.hrms.entities.dtos.user.UserUpdatePasswordDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -27,6 +28,6 @@ public interface UserDao extends JpaRepository<User, Integer> {
 
     @Transactional
     @Modifying
-    @Query("update User u set u.password=:password where u.id=:id")
-    void updatePassword(int id, String password);
+    @Query("update User u set u.password=(:#{#dto.newPassword}) where u.id=(:#{#dto.id})")
+    void updatePassword(UserUpdatePasswordDto dto);
 }

@@ -5,6 +5,7 @@ import latifyilmaz.hrms.core.utilities.results.Result;
 import latifyilmaz.hrms.dataAccess.abstracts.UserDao;
 import latifyilmaz.hrms.entities.concretes.User;
 import latifyilmaz.hrms.entities.dtos.user.UserLoginDto;
+import latifyilmaz.hrms.entities.dtos.user.UserUpdatePasswordDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public interface UserService {
     Result updateVerifiedById(boolean verified, int id);
     Result updateVerifiedByEmail(boolean verified, String email);
     Result updateEmail(int id, String email);
-    Result updatePassword(int id, String password);
+    Result updatePassword(UserUpdatePasswordDto dto);
     DataResult<?> login(UserLoginDto user);
 
     //Delete

@@ -8,6 +8,7 @@ public class MessageResults {
 
     static {
         models.put("email", "E-Posta");
+        models.put("password", "Şifre");
         models.put("identityNo", "TC Kimlik NO");
         models.put("user", "Kullanıcı");
         models.put("personnel", "Personel");
@@ -27,7 +28,9 @@ public class MessageResults {
 
     public static final String emptyField = "Lütfen bu alanı boş bırakmayın!";
     public static final String emptyFields = "Lütfen bu alanları boş bırakmayın!";
-    public static final String passwordMatchFalse = "Parolalar eşleşmiyor!";
+    public static final String oldPasswordMatchFalse = "Eski Şifre doğru değil!";
+    public static final String passwordMatchFalse = "Şifreler eşleşmiyor!";
+    public static final String newPasswordMatchFalse = "Yeni Şifreler eşleşmiyor!";
     public static final String errorLogin = "Email veya Şifre doğru değil. Tekrardan deneyin!";
     public static final String successLogin = "Giriş başarılı! Anasayfaya yönlendiriliyorsunuz.";
     public static final String verificationSuccessFalse = "Doğrulama işlemi başarısız!";

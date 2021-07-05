@@ -13,6 +13,7 @@ import javax.validation.constraints.NotEmpty;
 public class EmployerUpdateDto {
     private int userId;
     private String companyName;
+    private String email;
     private String website;
     private String phone;
 }
