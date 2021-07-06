@@ -44,6 +44,11 @@ public class FavoriteJobsController {
         return this.favoriteJobService.getByUserId(id);
     }
 
+    @GetMapping("/getByUserEmail")
+    public DataResult<List<FavoriteJob>> getByUserEmail(String email) {
+        return this.favoriteJobService.getByUserEmail(email);
+    }
+
     //Post
     @PostMapping("")
     public Result save(@RequestBody FavoriteJobSaveDto dto){

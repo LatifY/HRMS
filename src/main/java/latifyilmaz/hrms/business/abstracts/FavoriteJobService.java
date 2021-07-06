@@ -17,6 +17,7 @@ public interface FavoriteJobService {
 
     DataResult<List<FavoriteJob>> getByJobAdvertisementId(int id);
     DataResult<List<FavoriteJob>> getByUserId(int id);
+    DataResult<List<FavoriteJob>> getByUserEmail(String email);
 
     //Post
     Result save(FavoriteJobSaveDto dto);

@@ -49,6 +49,10 @@ public class FavoriteJobManager implements FavoriteJobService {
         return new SuccessDataResult<List<FavoriteJob>>(this.favoriteJobDao.getByUser_Id(id), MessageResults.allDataListed(FIELD));
     }
 
+    public DataResult<List<FavoriteJob>> getByUserEmail(String email) {
+        return new SuccessDataResult<List<FavoriteJob>>(this.favoriteJobDao.getByUser_Email(email), MessageResults.allDataListed(FIELD));
+    }
+
     public Result save(FavoriteJobSaveDto dto) {
         User user = userService.getById(dto.getUserId()).getData();
         JobAdvertisement jobAdvertisement = jobAdvertisementService.getById(dto.getUserId()).getData();
