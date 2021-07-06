@@ -18,6 +18,7 @@ public class MessageResults {
         models.put("city", "Şehir");
         models.put("workingTime", "Çalışma Şekli");
         models.put("jobAdvertisement", "İş İlanı");
+        models.put("favoriteJob", "Favori İlan");
         models.put("resume", "Özgeçmiş");
         models.put("school", "Okul");
         models.put("jobExperience", "İş tecrübesi");
@@ -31,6 +32,8 @@ public class MessageResults {
     public static final String oldPasswordMatchFalse = "Eski Şifre doğru değil!";
     public static final String passwordMatchFalse = "Şifreler eşleşmiyor!";
     public static final String newPasswordMatchFalse = "Yeni Şifreler eşleşmiyor!";
+    public static final String jobAddedFavorite = "İlan favorilere eklendi.";
+    public static final String jobRemovedFavorite = "İlan favorilerden kaldırıldı.";
     public static final String errorLogin = "Email veya Şifre doğru değil. Tekrardan deneyin!";
     public static final String successLogin = "Giriş başarılı! Anasayfaya yönlendiriliyorsunuz.";
     public static final String verificationSuccessFalse = "Doğrulama işlemi başarısız!";

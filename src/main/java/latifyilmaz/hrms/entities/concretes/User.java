@@ -1,11 +1,13 @@
 package latifyilmaz.hrms.entities.concretes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -21,10 +23,6 @@ public class User{
     @Column(name="email", nullable = false, unique = true, length = 60)
     private String email;
 
-    @ManyToOne()
-    @JoinColumn(name = "city_id")
-    private Resume resume;
-
     //@JsonIgnore
     @Column(name="password", nullable = false, length = 60)
     private String password;
@@ -34,6 +32,10 @@ public class User{
 
     @Column(name="userType", nullable = false, length = 60)
     private String userType;
+
+    @OneToMany(mappedBy = "user")
+    @JsonIgnoreProperties
+    private List<FavoriteJob> favoriteJobs;
 
     public User(String email, String password, boolean verified, String userType){
         this.email = email;
