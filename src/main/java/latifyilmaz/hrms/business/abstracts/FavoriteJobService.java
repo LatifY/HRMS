@@ -23,5 +23,6 @@ public interface FavoriteJobService {
 
     //Delete
     Result delete(FavoriteJob favoriteJob);
+    Result deleteAll(List<FavoriteJob> favoriteJobs);
     Result deleteById(int id);
 }

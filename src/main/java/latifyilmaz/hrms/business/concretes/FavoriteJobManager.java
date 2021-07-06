@@ -61,6 +61,13 @@ public class FavoriteJobManager implements FavoriteJobService {
         return new SuccessResult(MessageResults.jobRemovedFavorite);
     }
 
+    public Result deleteAll(List<FavoriteJob> favoriteJobs) {
+        for(FavoriteJob favoriteJob : favoriteJobs){
+            delete(favoriteJob);
+        }
+        return new SuccessResult(MessageResults.deleteds(FIELD));
+    }
+
     public Result deleteById(int id) {
         this.favoriteJobDao.deleteById(id);
         return new SuccessResult(MessageResults.jobRemovedFavorite);

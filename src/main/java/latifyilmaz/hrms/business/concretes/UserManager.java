@@ -1,17 +1,11 @@
 package latifyilmaz.hrms.business.concretes;
 
-import latifyilmaz.hrms.business.abstracts.EmployeeService;
-import latifyilmaz.hrms.business.abstracts.EmployerService;
-import latifyilmaz.hrms.business.abstracts.PersonnelService;
-import latifyilmaz.hrms.business.abstracts.UserService;
+import latifyilmaz.hrms.business.abstracts.*;
 import latifyilmaz.hrms.business.constants.MessageResults;
 import latifyilmaz.hrms.core.utilities.results.*;
 import latifyilmaz.hrms.core.utilities.tools.StringTools;
 import latifyilmaz.hrms.dataAccess.abstracts.UserDao;
-import latifyilmaz.hrms.entities.concretes.Employee;
-import latifyilmaz.hrms.entities.concretes.Employer;
-import latifyilmaz.hrms.entities.concretes.Personnel;
-import latifyilmaz.hrms.entities.concretes.User;
+import latifyilmaz.hrms.entities.concretes.*;
 import latifyilmaz.hrms.entities.dtos.user.UserLoginDto;
 import latifyilmaz.hrms.entities.dtos.user.UserUpdatePasswordDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,14 +20,16 @@ public class UserManager implements UserService {
     private final EmployeeService employeeService;
     private final EmployerService employerService;
     private final PersonnelService personnelService;
+    private final FavoriteJobService favoriteJobService;
     private final String FIELD = "user";
 
     @Autowired
-    public UserManager(UserDao userDao, @Lazy EmployeeService employeeService, @Lazy EmployerService employerService, @Lazy PersonnelService personnelService){
+    public UserManager(UserDao userDao, @Lazy EmployeeService employeeService, @Lazy EmployerService employerService, @Lazy PersonnelService personnelService, @Lazy FavoriteJobService favoriteJobService){
         this.userDao = userDao;
         this.employeeService = employeeService;
         this.employerService = employerService;
         this.personnelService = personnelService;
+        this.favoriteJobService = favoriteJobService;
     }
 
 
@@ -165,11 +161,15 @@ public class UserManager implements UserService {
     }
 
     public Result delete(User user) {
+        List<FavoriteJob> favoriteJobs = favoriteJobService.getByUserId(user.getId()).getData();
+        favoriteJobService.deleteAll(favoriteJobs);
         this.userDao.delete(user);
         return new SuccessResult(MessageResults.deleted(FIELD));
     }
 
     public Result deleteById(int id) {
+        List<FavoriteJob> favoriteJobs = favoriteJobService.getByUserId(id).getData();
+        favoriteJobService.deleteAll(favoriteJobs);
         this.userDao.deleteById(id);
         return new SuccessResult(MessageResults.deleted(FIELD));
     }

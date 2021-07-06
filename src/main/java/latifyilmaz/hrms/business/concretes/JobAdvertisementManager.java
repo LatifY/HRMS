@@ -5,10 +5,7 @@ import latifyilmaz.hrms.business.constants.MessageResults;
 import latifyilmaz.hrms.core.utilities.results.*;
 import latifyilmaz.hrms.core.utilities.tools.StringTools;
 import latifyilmaz.hrms.dataAccess.abstracts.JobAdvertisementDao;
-import latifyilmaz.hrms.entities.concretes.City;
-import latifyilmaz.hrms.entities.concretes.JobAdvertisement;
-import latifyilmaz.hrms.entities.concretes.Position;
-import latifyilmaz.hrms.entities.concretes.WorkingTime;
+import latifyilmaz.hrms.entities.concretes.*;
 import latifyilmaz.hrms.entities.dtos.jobAdvertisement.JobAdvertisementFilterDto;
 import latifyilmaz.hrms.entities.dtos.jobAdvertisement.JobAdvertisementSaveDto;
 import latifyilmaz.hrms.entities.dtos.jobAdvertisement.JobAdvertisementUpdateDto;
@@ -28,17 +25,19 @@ public class JobAdvertisementManager implements JobAdvertisementService {
     private final CityService cityService;
     private final WorkingTimeService workingTimeService;
     private final EmployerService employerService;
+    private final FavoriteJobService favoriteJobService;
 
 
     private final String FIELD = "jobAdvertisement";
 
     @Autowired
-    public JobAdvertisementManager(JobAdvertisementDao jobAdvertisementDao, PositionService positionService, CityService cityService, WorkingTimeService workingTimeService, @Lazy EmployerService employerService){
+    public JobAdvertisementManager(JobAdvertisementDao jobAdvertisementDao, PositionService positionService, CityService cityService, WorkingTimeService workingTimeService, @Lazy EmployerService employerService, @Lazy FavoriteJobService favoriteJobService){
         this.jobAdvertisementDao = jobAdvertisementDao;
         this.positionService = positionService;
         this.cityService = cityService;
         this.workingTimeService = workingTimeService;
         this.employerService = employerService;
+        this.favoriteJobService = favoriteJobService;
     }
 
     //Post
@@ -165,11 +164,15 @@ public class JobAdvertisementManager implements JobAdvertisementService {
     }
 
     public Result delete(JobAdvertisement jobAdvertisement) {
+        List<FavoriteJob> favoriteJobs = favoriteJobService.getByJobAdvertisementId(jobAdvertisement.getId()).getData();
+        favoriteJobService.deleteAll(favoriteJobs);
         this.jobAdvertisementDao.delete(jobAdvertisement);
         return new SuccessResult(MessageResults.deleted(FIELD));
     }
 
     public Result deleteById(int id) {
+        List<FavoriteJob> favoriteJobs = favoriteJobService.getByJobAdvertisementId(id).getData();
+        favoriteJobService.deleteAll(favoriteJobs);
         this.jobAdvertisementDao.deleteById(id);
         return new SuccessResult(MessageResults.deleted(FIELD));
     }
