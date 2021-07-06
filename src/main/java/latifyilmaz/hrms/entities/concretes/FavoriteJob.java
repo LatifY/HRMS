@@ -1,6 +1,6 @@
 package latifyilmaz.hrms.entities.concretes;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,12 +20,12 @@ public class FavoriteJob {
 
     @ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
-    @JsonIgnore
+    @JsonIgnoreProperties
     private User user;
 
     @ManyToOne(targetEntity = JobAdvertisement.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "job_advertisement_id")
-    @JsonIgnore
+    @JsonIgnoreProperties
     private JobAdvertisement jobAdvertisement;
 
     public FavoriteJob(User user, JobAdvertisement jobAdvertisement) {
