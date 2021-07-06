@@ -53,6 +53,7 @@ public class FavoriteJobManager implements FavoriteJobService {
         User user = userService.getById(dto.getUserId()).getData();
         JobAdvertisement jobAdvertisement = jobAdvertisementService.getById(dto.getUserId()).getData();
         FavoriteJob favoriteJob = new FavoriteJob(user, jobAdvertisement);
+        this.favoriteJobDao.save(favoriteJob);
         return new SuccessResult(MessageResults.jobAddedFavorite);
     }
 
