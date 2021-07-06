@@ -33,10 +33,6 @@ public class User{
     @Column(name="userType", nullable = false, length = 60)
     private String userType;
 
-    @OneToMany(mappedBy = "user")
-    @JsonIgnoreProperties
-    private List<FavoriteJob> favoriteJobs;
-
     public User(String email, String password, boolean verified, String userType){
         this.email = email;
         this.password = password;
