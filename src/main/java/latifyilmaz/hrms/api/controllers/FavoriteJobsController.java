@@ -51,7 +51,7 @@ public class FavoriteJobsController {
 
     //Post
     @PostMapping("")
-    public Result save(@RequestBody FavoriteJobSaveDto dto){
+    public DataResult<FavoriteJob> save(@RequestBody FavoriteJobSaveDto dto){
         return this.favoriteJobService.save(dto);
     }
 

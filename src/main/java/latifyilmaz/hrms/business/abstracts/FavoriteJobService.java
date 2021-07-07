@@ -20,7 +20,7 @@ public interface FavoriteJobService {
     DataResult<List<FavoriteJob>> getByUserEmail(String email);
 
     //Post
-    Result save(FavoriteJobSaveDto dto);
+    DataResult<FavoriteJob> save(FavoriteJobSaveDto dto);
 
     //Delete
     Result delete(FavoriteJob favoriteJob);
