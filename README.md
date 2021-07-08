@@ -4,7 +4,8 @@
 (İnsan Kaynakları Yönetim Sistemi) <br><br>
 Bu sistem **Latif Yılmaz** tarafından **kodlama.io** yardımıyla yapılmıştır. <br>
 Sistemin Backend kısmı **Spring Boot** kullanılarak hazırlanmıştır. <br>
-Canlı projeye buradan ulaşabilirsiniz: *https://hrms-kodlamaio.herokuapp.com* <br><br>
+Canlı projeye buradan ulaşabilirsiniz: *https://hrms-kodlamaio.herokuapp.com* <br>
+Front-End kodlarına buradan ulaşabilirsiniz: *https://github.com/LatifY/hrms-frontend* <br><br>
 Tüm hakları saklı falan değildir. <br>
 💗 ve ☕ ile yapıldı!
 
