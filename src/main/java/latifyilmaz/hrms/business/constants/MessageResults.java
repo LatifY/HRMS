@@ -66,6 +66,10 @@ public class MessageResults {
         return String.format("%s sisteme başarıyla eklendi.", models.get(model));
     }
 
+    public static String saveds(String model){
+        return String.format("%s verileri sisteme başarıyla eklendi.", models.get(model));
+    }
+
     public static String successfullySaved(String model){
         return String.format("%s başarıyla kaydedildi.", models.get(model));
     }

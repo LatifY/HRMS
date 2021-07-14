@@ -6,6 +6,7 @@ import latifyilmaz.hrms.core.utilities.results.*;
 import latifyilmaz.hrms.dataAccess.abstracts.CityDao;
 import latifyilmaz.hrms.entities.concretes.City;
 import latifyilmaz.hrms.entities.dtos.city.CitySaveDto;
+import latifyilmaz.hrms.entities.dtos.city.CitySaveMultipleDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,6 +42,15 @@ public class CityManager implements CityService {
         City cityObject = new City(city.getCityName());
         this.cityDao.save(cityObject);
         return new SuccessResult(MessageResults.saved(FIELD));
+    }
+
+    public Result saveMultiple(CitySaveMultipleDto dto) {
+        for(var city : dto.getCityNames()){
+            CitySaveDto saveDto = new CitySaveDto();
+            saveDto.setCityName(city);
+            save(saveDto);
+        }
+        return new SuccessResult(MessageResults.saveds(FIELD));
     }
 
     public Result delete(City city) {

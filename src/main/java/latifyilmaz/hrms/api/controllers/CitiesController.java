@@ -6,6 +6,7 @@ import latifyilmaz.hrms.core.utilities.results.Result;
 import latifyilmaz.hrms.entities.concretes.City;
 
 import latifyilmaz.hrms.entities.dtos.city.CitySaveDto;
+import latifyilmaz.hrms.entities.dtos.city.CitySaveMultipleDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,6 +44,11 @@ public class CitiesController {
     @PostMapping("")
     public Result save(@Valid @RequestBody CitySaveDto city){
         return this.cityService.save(city);
+    }
+
+    @PostMapping("/saveMultiple")
+    public Result saveMultiple(@Valid @RequestBody CitySaveMultipleDto dto){
+        return this.cityService.saveMultiple(dto);
     }
 
     //Delete

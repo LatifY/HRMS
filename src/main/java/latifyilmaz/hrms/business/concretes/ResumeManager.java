@@ -80,6 +80,7 @@ public class ResumeManager implements ResumeService {
         return new SuccessResult(MessageResults.deleted(FIELD));
     }
 
+
     public Result deleteById(int id) {
         DataResult<Resume> resume = getById(id);
         if(!resume.isSuccess()){
