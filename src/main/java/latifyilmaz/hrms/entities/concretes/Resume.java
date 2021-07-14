@@ -22,7 +22,7 @@ public class Resume {
     @Column(name="id", nullable = false, unique = true)
     private int id;
 
-    @ManyToOne()
+    @OneToOne()
     @JoinColumn(name = "employee_id")
     @JsonIgnoreProperties
     private Employee employee;
